@@ -1,0 +1,9 @@
+total 28
+drwxrwxr-x 4 alfons alfons 4096 Oct  1 21:55 .
+drwxrwxr-x 3 alfons alfons 4096 Sep 30 23:47 ..
+-rw-rw-r-- 1 alfons alfons  116 Oct  1 21:46 akt
+drwxrwxr-x 8 alfons alfons 4096 Oct  1 21:54 .git
+drwxrwxr-x 2 alfons alfons 4096 Oct  1 16:57 HW2
+-rw-rw-r-- 1 alfons alfons   68 Sep 30 23:48 README.md
+-rw-rw-r-- 1 alfons alfons    0 Oct  1 21:55 test2.txt
+-rwxrwxr-x 1 alfons alfons   94 Oct  1 21:50 test.sh
