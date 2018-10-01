@@ -15,4 +15,21 @@ the #NF(number of fields) whill be 1 2 and 9, so we need the output field with 9
 ```sh
 awk {if(NF >= 9) print(%s)} # only output the result with filed >= 9 column from the piped data
 ```
-ls -A -R -l | awk '{if(NF >= 9) {print -zsh} }' |  sort -n -k 5 -r 
+
+* Sort accodrin
+```sh
+sort -n -k 5 -r 
+```
+
+* Processing the output, **exclude the directory itself** 
+```sh
+{
+    BEGIN
+    {
+        total_dir = 0 #num of dir count
+        total_size = 0
+        total_file = 0
+    }
+}
+
+```
