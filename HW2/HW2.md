@@ -15,3 +15,4 @@ the #NF(number of fields) whill be 1 2 and 9, so we need the output field with 9
 ```sh
 awk {if(NF >= 9) print(%s)} # only output the result with filed >= 9 column from the piped data
 ```
+ls -A -R -l | awk '{if(NF >= 9) {print -zsh} }' |  sort -n -k 5 -r 
