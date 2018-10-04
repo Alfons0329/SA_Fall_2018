@@ -18,11 +18,15 @@ function get_json_value()
     local c_ename="cos_ename"
     local c_time="cos_time"
 
-    local parsed_first="paserd_json.txt"
+    local parsed_first="parsed_json.txt"
+    local parsed_second="time_to_cos.txt"
 
     #use the  , : } as file delimitor
-    cat $json_file | awk ' BEGIN {FS="[,;}{:]"} { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_ename"/) { printf("course ename: %s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_time"/){ print " | time:  ", $(nf_cnt+1) } } }' > $parsed_first
+    cat $json_file | awk ' BEGIN {FS="[,;}{:]"} { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_time"/) { printf("%s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_ename"/){ print ",", $(nf_cnt+1) } } }' > $parsed_first
     #printf("course name %d, course time and location %d \n")
+
+    cat $parsed_first | sed 's/\"//g' > $parsed_second 
+    
 }
 
 get_json_value class.json
