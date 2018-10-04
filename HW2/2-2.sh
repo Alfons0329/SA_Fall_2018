@@ -16,12 +16,16 @@ fi
 json_file="class.json"
 parsed_first="parsed_json.txt"
 parsed_second="time_to_cos.txt"
+parsed_third="parsed_time.txt"
 data_base="db.txt"
 
 #use the  , : } as file delimitor
 cat $json_file | awk ' BEGIN { FS="[,;}{:]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_time"/) { printf("%s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_ename"/){ print ",", $(nf_cnt+1) } } } ' > $parsed_first
-#
-cat $parsed_first | sed  's/\"//g' > $parsed_second
-echo "555"
-cat $parsed_second | awk 'BEGIN { FS="[,\n]"; RS="" } {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/){ awk -f awk_parsetime.sh } print $(nf_cnt+1) } }' | 
+cat $parsed_first | sed  's/\"//g ; s/\,\ /,/g' > $parsed_second
+
+cat $parsed_second | awk 'BEGIN { FS="[\r\n]"} {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/)print $nf_cnt } }' | awk -f awk_parsetime.sh > $parsed_third
+
+cat $parsed_second | sed -i.bak  's/^[0-9].*\-//g' $parsed_second
+
+paste $parsed_second $parsed_third
 
