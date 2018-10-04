@@ -18,9 +18,11 @@ function get_json_value()
     local c_ename="cos_ename"
     local c_time="cos_time"
 
-    #use the  , : } as filed separator
-    print json_file | awk ''
-    printf("course name %d, course time and location %d \n")
+    local parsed_first="paserd_json.txt"
+
+    #use the  , : } as file delimitor
+    cat $json_file | awk ' BEGIN {FS="[,;}{:]"} { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_ename"/) { printf("course ename: %s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_time"/){ print " | time:  ", $(nf_cnt+1) } } }' > $parsed_first
+    #printf("course name %d, course time and location %d \n")
 }
 
 get_json_value class.json
