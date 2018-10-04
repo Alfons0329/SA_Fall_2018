@@ -20,6 +20,8 @@ data_base="db.txt"
 
 #use the  , : } as file delimitor
 cat $json_file | awk ' BEGIN { FS="[,;}{:]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_time"/) { printf("%s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_ename"/){ print ",", $(nf_cnt+1) } } } ' > $parsed_first
-cat $parsed_first | sed  's/\"//g; s/\-/\,/g' > $parsed_second
-cat $parsed_second | awk 'BEGIN { FS="[,\n]"; RS="" } {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/){ print "time: " $nf_cnt } } }'
+#
+cat $parsed_first | sed  's/\"//g' > $parsed_second
+echo "555"
+cat $parsed_second | awk 'BEGIN { FS="[,\n]"; RS="" } {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/){ awk -f awk_parsetime.sh } print $(nf_cnt+1) } }' | 
 
