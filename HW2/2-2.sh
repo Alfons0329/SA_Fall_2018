@@ -20,15 +20,18 @@ data_base="db.txt"
 time_selected="selected_time.txt"
 
 #use the  , : } as file delimitor
-cat $json_file | awk ' BEGIN { FS="[,;}{:]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_time"/) { printf("%s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_ename"/){ print ",", $(nf_cnt+1) } } } ' > $parsed_first
+cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
 #remove the " symbol
-cat $parsed_first | sed -i.bak  's/\"//g ; s/\,\ /,/g' $parsed_first
-#extract the time from 2G5CD to 2G 5C 5D
-cat $parsed_first | awk 'BEGIN { FS="[\r\n]"} {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/)print $nf_cnt } }' | awk -f awk_parsetime.sh > $parsed_second
+cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
+#dunno wtf cause 317 in it
+cat $parsed_first | sed -i.bak 's/317// ; s/e,,f/e f/' $parsed_first
+#extract the time from 2G5CD to 2G 5C 5D got problem here
+#cat $parsed_first | less
+cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' #| awk -f awk_parsetime.sh > "awk_time.txt"
 #remove the - from cos_data
-cat $parsed_first | sed -i.bak 's/^[0-9].*\-//g' $parsed_first
+#cat $parsed_first | sed -i.bak 's/^[0-9].*\-//g' $parsed_first
 
-paste $parsed_first $parsed_second > $data_base
+#paste $parsed_first $parsed_second > $data_base
 
 for i in 1 2 3 4 5 6
 do
