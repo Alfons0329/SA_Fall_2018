@@ -21,10 +21,10 @@ time_selected="selected_time.txt"
 
 #use the  , : } as file delimitor
 cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
-#remove the " symbol
-cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
+#cat $parsed_first | less
 #dunno wtf cause 317 in it
-cat $parsed_first | sed -i.bak 's/317// ; s/e,,f/e f/' $parsed_first
+cat $parsed_first | sed -i.bak 's/317// ; s/--/ /' $parsed_first
+cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
 #extract the time from 2G5CD to 2G 5C 5D got problem here
 #cat $parsed_first | less
 cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' #| awk -f awk_parsetime.sh > "awk_time.txt"
