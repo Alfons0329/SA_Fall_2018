@@ -1,0 +1,130 @@
+SA321,Calculus (I)	|1G~1H~4C~4D~
+SC206,Calculus (I)	|1G~1H~4C~4D~
+SA214,Calculus (I)	|1G~1H~4C~4D~
+SC207,Calculus (I)	|4C~4D~
+SA320,Calculus (I)	|1G~1H~4C~4D~
+SC106,Calculus (I)	|1G~1H~4C~4D~
+EE105,Calculus (I)	|1G~1H~4C~4D~
+SC110,Physics(I)	|1C~1D~4G~4H~
+SA321,Physics(I)	|1C~1D~4G~4H~
+SA320,Physics (I)	|1C~1D~4G~4H~
+SC105,Physics (I)	|1C~1D~4G~4H~
+SC109,Physics (I)	|1C~1D~4G~4H~
+SC151,Physics (I)	|1C~1D~4G~4H~
+SC152,Physics (I)	|1C~1D~4G~4H~
+SC001,Physics (I)	|4G~4H~
+AB101,Career Planning and Mentor of Hours	|3G~3H~
+EC122,Competitive Programming (II)	|5I~5J~5K~
+ED302,Competitive Programming(III)	|6E~6F~6G~
+EC315,LabVIEW Programming Language	|2E~2F~5B~
+ED302,Mathematical Logic\r	|2C~2D~4G~
+EC115,Digital Systems Design	|2B~5E~5F~
+AB101,Service Learning II	|2A~
+EC114,Electrical Circuits and Electronics (I)  	|1G~4C~4D~
+EC016,Design and Implementation of IOT Applications	|2E~2F~2G~
+EC115,Introduction to Cryptography	|2G~5C~5D~
+EC220,Digital Circuit Lab.	|2I~2J~2K~
+EC022,Introduction to Multimedia Information System	|2E~2F~5B~
+ED302,Introduction to Pattern Recognition	|2G~5C~5D~
+ED117,Introduction to Machine Learning	|2E~2F~5B~
+EC115,Network Planning and Management Practices	|4I~4J~4K~
+EC324,Android Progr	|2E~2F~2G~
+ED117,Intro. to Network Programming	|1G~4C~4D~
+EDB27,Introduction to Computer Graphics	|1C~1D~3B~
+EC122,Computer System Administration	|4I~4J~4K~
+EC115,Introduction to Computers and Programming	|1E~1F~4B~
+EC122,Introduction to Computers and Programming	|1E~1F~
+EC114,Introduction to Computers and Programming	|1E~1F~
+EC122,Probability	|3C~3D~5G~
+EC114,Intro. to Computer Networks	|1B~4E~4F~
+EC015,Introduction to Algorithms	|2C~2D~4G~
+EC316,Basic Programming	|1N~3N~5N~
+EDB27,Intro. to Compiler Design	|3C~3D~5G~
+EC114,Linear Algebra	|3C~3D~5G~
+EC115,Linear Algebra	|3C~3D~5G~
+ED102,Computer Science and Engineering Projects (I)	|6E~6F~
+EC115,Introduction to Operating Systems	|2C~2D~4G~
+AB101,Computer Science Seminars	|1E~1F~
+EC220,Microprocessor System Lab.	|3I~3J~3K~
+EC220,Microprocessor System Lab.	|1I~1J~1K~
+EC022,Probability 	|3C~3D~5G~
+EC114,Introduction to Algorithms	|2C~2D~4G~
+EC122,Introduction to Algorithms	|2C~2D~4G~
+EDB27,Computer Science and Engineering Projects (II)	|3G~3H~
+EC016,Introduction to Operating Systems	|2C~2D~4G~
+ED117,Introduction to Operating Systems	|2C~2D~4G~
+EC015,Intro. to Computer Networks	|1B~4E~4F~
+EC122,Intro. to Computer Networks	|1B~4E~4F~
+EC115,Intro. to Computer Networks	|1B~4E~4F~
+ED117,Intro. to Compiler Design	|3C~3D~5G~
+EC015,Linear Algebra	|3C~3D~5G~
+EC122,Differential Equations	|1C~1D~3B~
+EC115,Differential Equations	|1C~1D~3B~
+EC122,Formal Languages and Theory of Computation	|1G~4C~4D~
+ED305,Logic Design and Design for Security	|2C~2D~4G~
+ED202,Queuing Theory	|1E~1F~4B~
+ED202,Cloud Fog Computing and Big Data Analytics	|2G~5C~5D~
+EC122,Entrepreneurship Realization	|2E~2F~2G~
+A403,The  Paradigms of Novels	|1E~1F~
+A205,Sociology	|1E~1F~
+A102,Introduction to Music Theory	|1E~1F~
+A302,Life Science	|1E~1F~
+A302,Introduction to Psychology	|2C~2D~
+A301,Contemporary World	|2C~2D~
+A304,Political Science	|2C~2D~
+A102,Introduction to Music	|2C~2D~
+A305,Taiwanese Literature	|2C~2D~
+A303,History Analysis	|2C~2D~
+A306,Introduction to Laws	|2C~2D~
+A401,Introduction to Philosophy	|2C~2D~
+A401,Selected Readings on Lu Xun	|4A~4B~
+A306,History's Turning Points	|1E~1F~
+A103,The Shift of Global Economy and Industries	|1E~1F~
+from Ancient  to Modern	|2C~2D~
+CSPC2,Cognition and Presentation	|2C~2D~
+A306,The Rise and Fall of the Great Powers	|4A~4B~
+A307,Freshman English (I)	|4E~4F~
+A204,Freshman English (I)	|4E~4F~
+A501,Freshman English (I)	|4E~4F~
+A508,Freshman English (I)	|4E~4F~
+A509,Freshman English (I)	|4E~4F~
+,Physical Education	|3A~3B~
+,Physical Education	|3A~3B~
+,Physical Education	|3A~3B~
+,Physical Education	|3A~3B~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physical Education	|2G~2H~
+,Physcial Education	|2G~2H~
+,Physcial Education	|2G~2H~
+,Physical Education	|2E~2F~
+,Physical Education	|2E~2F~
+,Physical Education	|2E~2F~
+,Physical Education	|2E~2F~
+,Physical Education	|2E~2F~
+,Physical Education	|2E~2F~
+,Physcial Education	|2E~2F~
+,Physcial Education	|2E~2F~
+AB101,Career Planning and Mentor of Hours	|3G~3H~
+EC122,Competitive Programming (II)	|5I~5J~5K~
+ED302,Competitive Programming(III)	|6E~6F~6G~
+EC315,LabVIEW Programming Language	|2E~2F~5B~
+ED302,Mathematical Logic\r	|2C~2D~4G~
+EC115,Digital Systems Design	|2B~5E~5F~
+AB101,Service Learning II	|2A~
+EC114,Electrical Circuits and Electronics (I)  	|1G~4C~4D~
+EC016,Design and Implementation of IOT Applications	|2E~2F~2G~
+EC115,Introduction to Cryptography	|2G~5C~5D~
+EC220,Digital Circuit Lab.	|2I~2J~2K~
+EC022,Introduction to Multimedia Information System	|2E~2F~5B~
+ED302,Introduction to Pattern Recognition	|2G~5C~5D~
+ED117,Introduction to Machine Learning	|2E~2F~5B~
+EC115,Network Planning and Management Practices	|4I~4J~4K~
+EC324,Android Progr	|2E~2F~2G~
+ED117,Intro. to Network Programming	|1G~4C~4D~
+EDB27,Introduction to Computer Graphics	|1C~1D~3B~
+EC122,Computer System Administration	|4I~4J~4K~

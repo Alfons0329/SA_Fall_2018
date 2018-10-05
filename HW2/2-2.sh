@@ -14,18 +14,27 @@ fi
 #use this parsing function with awk and sed to output the value of certain field
 
 json_file="class.json"
-parsed_first="parsed_json.txt"
-parsed_second="time_to_cos.txt"
-parsed_third="parsed_time.txt"
+parsed_first="cos_data.txt"
+parsed_second="time_data.txt"
 data_base="db.txt"
+time_selected="selected_time.txt"
 
 #use the  , : } as file delimitor
 cat $json_file | awk ' BEGIN { FS="[,;}{:]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/"cos_time"/) { printf("%s", $(nf_cnt+1)) } else if( $(nf_cnt)~/"cos_ename"/){ print ",", $(nf_cnt+1) } } } ' > $parsed_first
-cat $parsed_first | sed  's/\"//g ; s/\,\ /,/g' > $parsed_second
+#remove the " symbol
+cat $parsed_first | sed -i.bak  's/\"//g ; s/\,\ /,/g' $parsed_first
+#extract the time from 2G5CD to 2G 5C 5D
+cat $parsed_first | awk 'BEGIN { FS="[\r\n]"} {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/)print $nf_cnt } }' | awk -f awk_parsetime.sh > $parsed_second
+#remove the - from cos_data
+cat $parsed_first | sed -i.bak 's/^[0-9].*\-//g' $parsed_first
 
-cat $parsed_second | awk 'BEGIN { FS="[\r\n]"} {  for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if($nf_cnt ~/^[1-9].*/)print $nf_cnt } }' | awk -f awk_parsetime.sh > $parsed_third
+paste $parsed_first $parsed_second > $data_base
 
-cat $parsed_second | sed -i.bak  's/^[0-9].*\-//g' $parsed_second
-
-paste $parsed_second $parsed_third
+for i in 1 2 3 4 5 6
+do
+    for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
+    do
+        echo $i$j",no" >> $time_selected
+    done
+done
 
