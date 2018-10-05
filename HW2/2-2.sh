@@ -27,11 +27,14 @@ cat $parsed_first | sed -i.bak 's/317// ; s/--/ /' $parsed_first
 cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
 #extract the time from 2G5CD to 2G 5C 5D got problem here
 #cat $parsed_first | less
-cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' #| awk -f awk_parsetime.sh > "awk_time.txt"
+rm -f $parsed_second
+cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' | awk -f awk_parsetime.sh > $parsed_second
+#cat $parsed_second | less
+#cat $parsed_first | less
 #remove the - from cos_data
 #cat $parsed_first | sed -i.bak 's/^[0-9].*\-//g' $parsed_first
 
-#paste $parsed_first $parsed_second > $data_base
+paste $parsed_first $parsed_second > $data_base
 
 for i in 1 2 3 4 5 6
 do
