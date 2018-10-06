@@ -10,7 +10,7 @@ BEGIN {
     # {
     #     printf("char %c \n", char[i] <= "9" ? char[i] + 48 : char[i])
     # }
-    printf("|")
+
     for(i=1; i<=length($0); i++)
     {
         # printf("i is now? %d value %c\n", i, char[i]);

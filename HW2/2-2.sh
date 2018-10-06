@@ -24,7 +24,7 @@ time_selected="selected_time.txt"
 cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
 
 #remove some unnecessary things, and remove the tab
-cat $parsed_first | sed -i.bak 's/\t//g' $parsed_first
+cat $parsed_first | sed -E -i.bak 's/   //g' $parsed_first
 cat $parsed_first | sed -i.bak 's/317// ; s/--//' $parsed_first
 
 #rearrange the data
@@ -35,7 +35,7 @@ cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
 rm -f $parsed_second
 cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' | awk -f awk_parsetime.sh > $parsed_second
 
-paste $parsed_first $parsed_second > $data_base
+paste -d'|' $parsed_first $parsed_second > $data_base
 cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
 #--------------------------------------------------------generate timetable----------------------------------------------------#
 #generate the selected time
@@ -52,16 +52,11 @@ finished=0
 generate_list() {
     #processed with tag item
     local menu_data_base="menu_db.txt"
-    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d \"%s\" off\n",++i , $1) } ' > $menu_data_base
+    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf(" f%d \"%s\" off \\\n",++i , $1) } ' > $menu_data_base
     #display the menu dialog
     menu_data_base=$(cat "menu_db.txt")
-    dialog --buildlist "Choose one" 200 200 200 \
-        1 "class" off \
-        2 "class2" off \
-        3 "intro to theory" off \
-        4 "inteo to abc   " on
-
-
+    echo $menu_data_base
+    dialog --buildlist "Choose one" 400 400 400 $menu_data_base
 }
 
 check_collision() {
