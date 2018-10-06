@@ -1,5 +1,5 @@
 #!/bin/sh
-#unit test: can crawl the course table, 1002 ok
+#----------------------------------------------------JSON crawling------------------------------------------------------------#
 if [ -e "class.json" ]; #check if the course exists
 then
     echo "Course table exists "
@@ -10,6 +10,7 @@ else
     name=**&m_teaname=**&m_cos_id=**&m_cos_code=**&m_crstime=**&m_crsoutline=**&m_costype=**' >> class.json
 fi
 
+#----------------------------------------------------JSON parsing------------------------------------------------------------#
 #JSON parsing, parse cos_ename, cos_time(including location after - mark)
 #use this parsing function with awk and sed to output the value of certain field
 
@@ -22,8 +23,9 @@ time_selected="selected_time.txt"
 #use the " as file delimitor to extract whole class time
 cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
 
-#dunno wtf cause 317 in it use sed to delete it
-cat $parsed_first | sed -i.bak 's/317// ; s/--/ /' $parsed_first
+#remove some unnecessary things, and remove the tab
+cat $parsed_first | sed -i.bak 's/\t//g' $parsed_first
+cat $parsed_first | sed -i.bak 's/317// ; s/--//' $parsed_first
 
 #rearrange the data
 cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
@@ -35,6 +37,8 @@ cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ )
 
 paste $parsed_first $parsed_second > $data_base
 cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
+#--------------------------------------------------------generate timetable----------------------------------------------------#
+#generate the selected time
 for i in 1 2 3 4 5 6
 do
     for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
@@ -43,3 +47,25 @@ do
     done
 done
 
+#generate the timetable
+finished=0
+generate_list() {
+    #processed with tag item
+    local menu_data_base="menu_db.txt"
+    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d \"%s\" off\n",++i , $1) } ' > $menu_data_base
+    #display the menu dialog
+    menu_data_base=$(cat "menu_db.txt")
+    dialog --buildlist "Choose one" 200 200 200 \
+        1 "class" off \
+        2 "class2" off \
+        3 "intro to theory" off \
+        4 "inteo to abc   " on
+
+
+}
+
+check_collision() {
+
+}
+
+generate_list
