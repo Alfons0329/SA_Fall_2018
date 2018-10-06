@@ -51,16 +51,22 @@ done
 finished=0
 generate_list() {
     #processed with tag item
-    local menu_data_base="menu_db.txt"
-    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf(" f%d \"%s\" off \\\n",++i , $1) } ' > $menu_data_base
-    #display the menu dialog
-    menu_data_base=$(cat "menu_db.txt")
-    echo $menu_data_base
-    dialog --buildlist "Choose one" 400 400 400 $menu_data_base
+
+    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off ",++i , $1) } ' > "menu_db.txt"
+    #display the menu dialog and remove space if use parameter
+    sed -i.bak 's/ /_/g' "menu_db.txt"
+    sed -i.bak 's/_off_/ off /g' "menu_db.txt"
+
+    sed -i.bak 's/-/ /g' "menu_db.txt"
+    menu_db=$(cat "menu_db.txt")
+
+    dialog --buildlist "Choose one" 200 200 200 $menu_db
 }
 
 check_collision() {
 
 }
-
-generate_list
+for i in 1 2 3 4
+do
+    generate_list
+done
