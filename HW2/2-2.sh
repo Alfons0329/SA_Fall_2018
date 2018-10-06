@@ -19,23 +19,22 @@ parsed_second="time_data.txt"
 data_base="db.txt"
 time_selected="selected_time.txt"
 
-#use the  , : } as file delimitor
+#use the " as file delimitor to extract whole class time
 cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
-#cat $parsed_first | less
-#dunno wtf cause 317 in it
+
+#dunno wtf cause 317 in it use sed to delete it
 cat $parsed_first | sed -i.bak 's/317// ; s/--/ /' $parsed_first
+
+#rearrange the data
 cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
-#extract the time from 2G5CD to 2G 5C 5D got problem here
+
+#extract the time from 2G5CD-EC115,3IJK-EC222 to 2G 2C 5D 3I 3J 3K
 #cat $parsed_first | less
 rm -f $parsed_second
 cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' | awk -f awk_parsetime.sh > $parsed_second
-#cat $parsed_second | less
-#cat $parsed_first | less
-#remove the - from cos_data
-#cat $parsed_first | sed -i.bak 's/^[0-9].*\-//g' $parsed_first
 
 paste $parsed_first $parsed_second > $data_base
-
+cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
 for i in 1 2 3 4 5 6
 do
     for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
