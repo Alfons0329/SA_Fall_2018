@@ -43,12 +43,13 @@ for i in 1 2 3 4 5 6
 do
     for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
     do
-        echo $i$j",no" >> $time_selected
+        echo $i$j >> $time_selected
     done
 done
 
 #generate the timetable
-finished=0
+sel=0 #current selected course
+col=0 #is collided or not
 generate_list() {
     #processed with tag item
 
@@ -60,13 +61,41 @@ generate_list() {
     sed -i.bak 's/-/ /g' "menu_db.txt"
     menu_db=$(cat "menu_db.txt")
 
-    dialog --buildlist "Choose one" 200 200 200 $menu_db
+    sel=$(dialog --buildlist "Choose one" 200 200 200 $menu_db)
+
 }
 
 check_collision() {
 
 }
-for i in 1 2 3 4
+
+sel_name=""
+sel_time=""
+
+time_arr=(  )
+
+write_db() {
+    #extracted the course name from the cos_name.txt with the selected number
+    sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i if(i==sel){ printf("%s", $NF) } } ')
+    echo "1111"
+    sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i if(i==sel){ printf("%s", $0) } } ')
+    echo "2222"
+    echo $sel_time | awk ' BEGIN {FS=","; i=0 } { for(i=1; i<=FS; i++) { time_arr[i-1]=$i} } '
+    echo "3333"
+    for i in "${time_arr[@]}"
+    do
+        echo "$i", $sel_name
+        sed -i.bak 's/'$i'/'$i','$sel_name'/'
+    done
+}
+
+#-----------------------------------------------work flow-------------------------------------------------------------#
+while [ $sel -ne 1 ]
 do
     generate_list
+    #check_collision
+    write_db
 done
+
+
+
