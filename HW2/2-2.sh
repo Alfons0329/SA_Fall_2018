@@ -48,7 +48,7 @@ do
 done
 
 #generate the timetable
-sel=0 #current selected course
+sel=100 #current selected course
 col=0 #is collided or not
 generate_list() {
     #processed with tag item
@@ -61,8 +61,7 @@ generate_list() {
     sed -i.bak 's/-/ /g' "menu_db.txt"
     menu_db=$(cat "menu_db.txt")
 
-    sel=$(dialog --buildlist "Choose one" 200 200 200 $menu_db)
-
+    sel=$(dialog --output-fd 1 --buildlist "Choose one" 200 200 200 $menu_db)
 }
 
 check_collision() {
@@ -72,27 +71,25 @@ check_collision() {
 sel_name=""
 sel_time=""
 
-time_arr=(  )
-
 write_db() {
     #extracted the course name from the cos_name.txt with the selected number
-    sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i if(i==sel){ printf("%s", $NF) } } ')
-    echo "1111"
-    sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i if(i==sel){ printf("%s", $0) } } ')
-    echo "2222"
-    echo $sel_time | awk ' BEGIN {FS=","; i=0 } { for(i=1; i<=FS; i++) { time_arr[i-1]=$i} } '
-    echo "3333"
-    for i in "${time_arr[@]}"
-    do
-        echo "$i", $sel_name
-        sed -i.bak 's/'$i'/'$i','$sel_name'/'
-    done
+    #sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i=="){ printf("%s", $NF) } } ')
+    #cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $NF) } } ' | less
+    echo $sel >> "se.txt"
+    #sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ')
+    #cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ' | less
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
-while [ $sel -ne 1 ]
+for i in 1 2
 do
+
     generate_list
+
+    #if [ $sel -eq 1 ];
+    #then
+    #    break
+    #fi
     #check_collision
     write_db
 done
