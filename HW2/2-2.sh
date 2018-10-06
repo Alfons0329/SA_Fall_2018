@@ -60,11 +60,10 @@ generate_list() {
 
     sed -i.bak 's/-/ /g' "menu_db.txt"
     menu_db=$(cat "menu_db.txt")
-    menu_db="1 car off 2 god,is off 3 yes,ok__ off"
-    sel=$(dialog --output-fd 1 --buildlist "Choose one" 200 200 200 $menu_db)
+    sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
 
     rm -f "se.txt"
-    echo "$sel" > "se.txt"
+    echo $sel
 }
 
 check_collision() {
@@ -76,10 +75,9 @@ sel_time=""
 
 write_db() {
     #extracted the course name from the cos_name.txt with the selected number
-    #sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i=="){ printf("%s", $NF) } } ')
-    #cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $NF) } } ' | less
-    #sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ')
-    #cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ' | less
+    sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $NF) } } ')
+    sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ')
+    print $sel_time, $sel_name
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
