@@ -1,5 +1,6 @@
 #!/bin/sh
 #----------------------------------------------------JSON crawling------------------------------------------------------------#
+#Unit test OK 10/4
 if [ -e "class.json" ]; #check if the course exists
 then
     echo "Course table exists "
@@ -11,6 +12,7 @@ else
 fi
 
 #----------------------------------------------------JSON parsing------------------------------------------------------------#
+#Unit test OK 10/6
 #JSON parsing, parse cos_ename, cos_time(including location after - mark)
 #use this parsing function with awk and sed to output the value of certain field
 
@@ -37,7 +39,8 @@ cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ )
 
 paste -d'|' $parsed_first $parsed_second > $data_base
 cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
-#--------------------------------------------------------generate timetable----------------------------------------------------#
+#--------------------------------------------------------generate timetable---------------------------------------------------#
+#Unit test OK 10/5
 #generate the selected time
 for i in 1 2 3 4 5 6
 do
@@ -50,6 +53,7 @@ done
 #generate the timetable
 sel=100 #current selected course
 col=0 #is collided or not
+
 generate_list() {
     #processed with tag item
 
@@ -57,21 +61,17 @@ generate_list() {
     #display the menu dialog and remove space if use parameter
     sed -i.bak 's/ /_/g' "menu_db.txt"
     sed -i.bak 's/_off_/ off /g' "menu_db.txt"
-
     sed -i.bak 's/-/ /g' "menu_db.txt"
-    menu_db=$(cat "menu_db.txt")
-    sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
+    sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 "menu_db.txt")
 
-    rm -f "se.txt"
-    echo $sel
 }
-
 check_collision() {
 
 }
 
 sel_name=""
 sel_time=""
+sel_time_parsed=""
 
 write_db() {
     #extracted the course name from the cos_name.txt with the selected number
@@ -111,9 +111,10 @@ do
     #if [ $sel -eq 1 ];
     #then
     #    break
-    #fi
+    #fd
     #check_collision
-    write_db
+    #write_db
 done
+
 
 
