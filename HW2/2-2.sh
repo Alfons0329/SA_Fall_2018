@@ -42,7 +42,6 @@ init() {
     #display the menu dialog and remove space if use parameter
     sed -i.bak 's/ /_/g' "menu_db.txt"
     sed -i.bak 's/_off/ off/g' "menu_db.txt"
-
     sed -i.bak 's/-/ /g' "menu_db.txt"
 
 
@@ -66,7 +65,10 @@ sel_name=""
 sel_time=""
 
 write_db() {
-    menu_db=$(cat "menu_db.txt")
+    cp "menu_db.txt" "menu_db_bk.txt"
+    tr -d '\n' < "menu_db_bk.txt"
+    sed -i.bak 's/\\//g' "menu_db_bk.txt"
+    menu_db=$(cat "menu_db_bk.txt")
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     echo "sel is "$sel
     #extracted the course name from the cos_name.txt with the selected number
