@@ -62,8 +62,6 @@ generate_list() {
     menu_db=$(cat "menu_db.txt")
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
 
-    rm -f "se.txt"
-    echo $sel
 }
 
 check_collision() {
@@ -76,21 +74,25 @@ sel_time=""
 write_db() {
     #extracted the course name from the cos_name.txt with the selected number
     #``sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $NF) } } ')
+    echo "sel " "$sel"
     for i in "$sel"
     do
-        echo "Selected row is ","$i"
+        int=$(echo "$i" | awk '{printf ("%d", $0)}')
+        echo "int is","$int"
 
-        sel_time=$(cat "time_data.txt" | awk -v sel_row="$i" ' BEGIN { i=0 } { ++i; if(i==sel_rowl){ printf("%s", $0) } } ')
+        cat "time_data.txt" | awk -v sel_row="$int" ' BEGIN { i=0 } { ++i; if(i==sel_rowl){ printf("%s", $0) } } '
+        sel_time=$(cat "time_data.txt" | awk -v sel_row="$int" ' BEGIN { i=0 } { ++i; if(i==sel_rowl){ printf("%s", $0) } } ')
         sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
 
         echo "sel time parsed ", "$sel_time_parsed" | less
 
-        sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_rowl){ printf("%s", $NF) } } ')
+        cat "cos_data.txt" | awk -v sel_row="$int" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_rowl){ printf("%s", $NF) } } '
+        sel_name=$(cat "cos_data.txt" | awk -v sel_row="$int" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_rowl){ printf("%s", $NF) } } ')
 
         echo "sel name " , "$sel_name" | less
 
         #change the menu_db from off to on
-        sed -E -i.bak "s/off/on/$i" "menu_db.txt"
+        sed -E -i.bak "s/off/on/$int" "menu_db.txt"
 
         #change the selected time from no to yes and write the class name into it
         for j in "$sel_time_parsed"
@@ -103,7 +105,7 @@ write_db() {
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
-for i in 1 2 3 4 5
+for i in 1 2
 do
 
     generate_list
