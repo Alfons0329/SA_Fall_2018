@@ -73,7 +73,7 @@ write_db() {
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
     rm -f "cur_selected.txt"
-    touch "cur_selected.yxy"
+    touch "cur_selected.txt"
     for i in $sel
     do
         sel_time=$(cat "time_data.txt" | awk -v sel_row="$i" ' BEGIN { i=0 } { ++i; if(i==sel_row){ printf("%s", $0) } } ')
@@ -81,6 +81,7 @@ write_db() {
 
         sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
 
+        echo "$sel_name,$sel_time" >> "cur_selected.txt"
         #change the menu_db from off to on
         sed -E -i.bak "s/off/on/$i" "menu_db.txt"
 
@@ -93,8 +94,9 @@ write_db() {
 
     done
 
-    #check the class conflict
+    #check the class conflict for two types
     #check the conflict b/w the selected class
+    cat "cur_selected.txt" | less
     #check the conflict b/w selected class and the class already on the time table
 
 }
