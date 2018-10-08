@@ -60,10 +60,8 @@ generate_list() {
     #display the menu dialog and remove space if use parameter
     sed -i.bak 's/ /_/g' "menu_db.txt"
     sed -i.bak 's/_off_/ off /g' "menu_db.txt"
-
     sed -i.bak 's/-/ /g' "menu_db.txt"
-    menu_db=$(cat "menu_db.txt")
-    sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
+    sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 "menu_db.txt")
 
 }
 
@@ -73,16 +71,26 @@ check_collision() {
 
 sel_name=""
 sel_time=""
+sel_time_parsed=""
 
 write_db() {
     #extracted the course name from the cos_name.txt with the selected number
     #``sel_name=$(cat "cos_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $NF) } } ')
     for i in "$sel"
     do
-        echo "Selected column is ","$i"
+        echo "Selected row is ","$i"
         sel_time=$(cat "time_data.txt" | awk ' BEGIN { i=0 } { ++i; if(i==$sel){ printf("%s", $0) } } ')
+        sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
+
         #change the menu_db from off to on
-        #change the selected time from no to yes and write the class name
+        sed -E -i.bak "s/off/on/$i" "menu_db.txt"
+
+        #change the selected time from no to yes and write the class name into it
+        for j in "$sel_time_parsed"
+        do
+
+        done
+
     done
 
     print $sel_time, $sel_name
