@@ -38,10 +38,10 @@ init() {
     cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
 
     #processed with tag item for buildlist
-    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off ",++i , $1) } ' > "menu_db.txt"
+    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
     #display the menu dialog and remove space if use parameter
     sed -i.bak 's/ /_/g' "menu_db.txt"
-    sed -i.bak 's/_off_/ off /g' "menu_db.txt"
+    sed -i.bak 's/_off/ off/g' "menu_db.txt"
 
     sed -i.bak 's/-/ /g' "menu_db.txt"
 
@@ -79,9 +79,9 @@ write_db() {
 
         sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
 
-        echo "$sel_name,$sel_time"
         #change the menu_db from off to on
-        sed -E -i.bak "s/off/on/$i" "menu_db.txt"
+        echo "$sel_name,$sel_time,replace with $i"
+        sed -i.bak "$i s/off/on/" "menu_db.txt"
 
         #change the selected time from no to yes and write the class name into it
         for j in $sel_time_parsed
@@ -105,6 +105,7 @@ do
     then
         echo "Course table exists!"
     else
+        rm -f "class.json"
         init
     fi
     write_db
