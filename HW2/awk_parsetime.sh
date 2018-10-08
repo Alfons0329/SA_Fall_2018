@@ -6,10 +6,6 @@ BEGIN {
 }
 {
     split($0, char, "")
-    # for(i=1; i<=length($0); i++)
-    # {
-    #     printf("char %c \n", char[i] <= "9" ? char[i] + 48 : char[i])
-    # }
 
     for(i=1; i<=length($0); i++)
     {
