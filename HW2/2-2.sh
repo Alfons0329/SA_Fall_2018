@@ -122,9 +122,7 @@ write_db() {
     #if there is a conflict, show the data of conflicted classes
     if [ $conf -eq 1 ];
     then
-        conflicted_class=$(cat "conflict.txt")
-        echo "Class conflicts"
-        echo $conflicted_class | less
+        dialog --title "Conflict class as follows: " --textbox "conflict.txt" 50 50
     else
 
         gen_menu
