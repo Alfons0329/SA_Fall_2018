@@ -70,10 +70,10 @@ write_db() {
     sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
     echo "cast menudb"
-    
+
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
-    
+
     rm -f "cur_selected.txt" "conflict.txt"
     touch "cur_selected.txt" "conflict.txt"
     table="cur_selected.txt"
@@ -93,13 +93,13 @@ write_db() {
             echo "replace time $j"
             sed -E -i.bak "s/$j/$j,$sel_name/" "cur_selected.txt"
         done
-        
+
     done
 
     cat "cur_selected.txt" | less
 
     #iterate through the current selected class and check whether the conflict exists
-    cat "cur_selected.txt" | awk ' BEGIN { FS=","; conflict=0 } { if(NF>2){ conflict=1; printf("%s\n", $0) } } ' > "conflict.txt"
+    cat "cur_selected.txt" | awk ' BEGIN { FS=","; conflict=0 } { if(NF>3){ conflict=1; printf("%s\n", $0) } } ' > "conflict.txt"
 
     #the conflict data is not null, conflict happens
     if [ -s "conflict.txt" ];
@@ -107,13 +107,13 @@ write_db() {
         conf=1 #is conflicted
     fi
 
-    #if there is a conflict, show the data of conflicted classes 
+    #if there is a conflict, show the data of conflicted classes
     if [ $conf -eq 1 ];
     then
         conflicted_class=$(cat "conflict.txt")
         echo "Class conflicts $conflicted_class" | less
     else
-        
+
         #no conflict, write back to the class already selected
         for i in $sel
         do
@@ -132,7 +132,7 @@ write_db() {
             echo "$sel_name,$sel_time,replace with $i"
             sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
-        
+
     fi
 }
 

@@ -1,4 +1,4 @@
-1 1GH4CD,SA321,Calculus_(I) off
+1 1GH4CD,SA321,Calculus_(I) on
 2 1GH4CD,SC206,Calculus_(I) off
 3 1GH4CD,SA214,Calculus_(I) off
 4 4CD,SC207,Calculus_(I) off
@@ -14,7 +14,7 @@
 14 1CD4GH,SC152,Physics_(I) off
 15 4GH,SC001,Physics_(I) off
 16 3GH,AB101,Career_Planning_and_Mentor_of_Hours off
-17 5IJK,EC122,Competitive_Programming_(II) off
+17 5IJK,EC122,Competitive_Programming_(II) on
 18 6EFG,ED302,Competitive_Programming(III) off
 19 2EF5B,EC315,LabVIEW_Programming_Language off
 20 2CD4G,ED302,Mathematical_Logicr off
