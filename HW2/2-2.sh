@@ -19,7 +19,7 @@ gen_table() {
     rm -f $table
     for i in 1 2 3 4 5 6
     do
-        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
+        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "Y" "I" "J" "K" "L"
         do
             echo $i$j"," >> $table
         done
@@ -66,7 +66,7 @@ sel=999 #current selected course
 conf=0 #is collided or not
 sel_name=""
 sel_time=""
-
+quit=0
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
     tr -d '\n' < "menu_db_bk.txt"
@@ -76,6 +76,12 @@ write_db() {
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
+    if [ $? -eq 1 ];
+    then
+        echo "Quit"
+        return
+    fi
+
 
     rm -f "cur_selected.txt" "conflict.txt"
     touch "cur_selected.txt" "conflict.txt"
@@ -97,7 +103,6 @@ write_db() {
         #check the time conflict write back to the current selected class
         for j in $sel_time_parsed
         do
-            echo "replace time $j"
             sed -E -i.bak "s/$j/$j,$sel_name/" "cur_selected.txt"
         done
 
@@ -118,7 +123,8 @@ write_db() {
     if [ $conf -eq 1 ];
     then
         conflicted_class=$(cat "conflict.txt")
-        echo "Class conflicts $conflicted_class" | less
+        echo "Class conflicts"
+        echo $conflicted_class | less
     else
 
         gen_menu
@@ -141,11 +147,13 @@ write_db() {
             sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
 
+        echo "Current time table"
+        cat "selected_time.txt" | awk ' BEGIN { i=0 } { ++i; printf("%s | ",$0); if(i%16==0){ printf("\n\n") } }' | less
     fi
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
-for i in 1 2 3
+for i in 1 2 3 4
 do
     if [ -e "class.json" ];
     then
@@ -155,6 +163,10 @@ do
         init
     fi
     write_db
+    if [ $? -eq 1 ];
+    then
+        break
+    fi
 done
 
 
