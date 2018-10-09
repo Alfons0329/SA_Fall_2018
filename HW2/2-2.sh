@@ -35,7 +35,7 @@ init() {
     cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' | awk -f awk_parsetime.sh > $parsed_second
 
     paste -d'|' $parsed_first $parsed_second > $data_base
-    cat $data_base | sed -i.bak 's/,,/,/g' $data_base | cat $data_base | awk 'BEGIN {FS="|"} {print "Course data: ", $1, " time: ", $2 } '
+    cat $data_base | sed -i.bak 's/,,/,/g' $data_base
 
     #processed with tag item for buildlist
     cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
@@ -69,6 +69,7 @@ write_db() {
     tr -d '\n' < "menu_db_bk.txt"
     sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
+    echo "cast menudb"
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     echo "sel is "$sel
     #extracted the course name from the cos_name.txt with the selected number
