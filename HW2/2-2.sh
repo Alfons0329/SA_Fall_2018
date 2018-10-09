@@ -5,9 +5,18 @@ json_file="class.json"
 parsed_first="cos_data.txt"
 parsed_second="time_data.txt"
 data_base="db.txt"
-time_selected="selected_time.txt"
+table
 
-
+gen_table() {
+    rm -f $table
+    for i in 1 2 3 4 5 6
+    do
+        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
+        do
+            echo $i$j"," >> $table
+        done
+    done
+}
 init() {
     echo "Course table does not exist "
     curl 'https://timetable.nctu.edu.tw/?r=main/get_cos_list' --data \
@@ -44,23 +53,14 @@ init() {
     sed -i.bak 's/_off/ off/g' "menu_db.txt"
     sed -i.bak 's/-/ /g' "menu_db.txt"
 
-
-    #--------------------------------------------------------generate timetable----------------------------------------------------#
-    #generate the selected time
-    rm -f "selected_time.txt"
-    for i in 1 2 3 4 5 6
-    do
-        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "I" "J" "K" "L"
-        do
-            echo $i$j"," >> $time_selected
-        done
-    done
+    table="selected_time.txt"
+    gen_table
 }
 
 #--------------------------------------------------------write back db and check collision-------------------------------------#
 
 sel=999 #current selected course
-col=0 #is collided or not
+conf=0 #is collided or not
 sel_name=""
 sel_time=""
 
@@ -70,35 +70,70 @@ write_db() {
     sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
     echo "cast menudb"
+    
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
-    echo "sel is "$sel
     #extracted the course name from the cos_name.txt with the selected number
-    rm -f "cur_selected.txt"
-    touch "cur_selected.txt"
+    
+    rm -f "cur_selected.txt" "conflict.txt"
+    touch "cur_selected.txt" "conflict.txt"
+    table="cur_selected.txt"
+    gen_table
+    conf=0
+
+    #push all the current selected data to "cur_selected.txt" ex: 3C,Math,English
     for i in $sel
     do
         sel_time=$(cat "time_data.txt" | awk -v sel_row="$i" ' BEGIN { i=0 } { ++i; if(i==sel_row){ printf("%s", $0) } } ')
         sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
 
         sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
-
-        #change the menu_db from off to on
-        echo "$sel_name,$sel_time,replace with $i"
-        sed -i.bak "$i s/off/on/" "menu_db.txt"
-
-        #change the selected time from no to yes and write the class name into it
+        #check the time conflict write back to the current selected class
         for j in $sel_time_parsed
         do
             echo "replace time $j"
-            sed -E -i.bak "s/$j/$j,$sel_name/" "selected_time.txt"
+            sed -E -i.bak "s/$j/$j,$sel_name/" "cur_selected.txt"
         done
-
+        
     done
 
-    #check the class conflict for two types
-    #check the conflict b/w the selected class
-    #check the conflict b/w selected class and the class already on the time table
+    cat "cur_selected.txt" | less
 
+    #iterate through the current selected class and check whether the conflict exists
+    cat "cur_selected.txt" | awk ' BEGIN { FS=","; conflict=0 } { if(NF>2){ conflict=1; printf("%s\n", $0) } } ' > "conflict.txt"
+
+    #the conflict data is not null, conflict happens
+    if [ -s "conflict.txt" ];
+    then
+        conf=1 #is conflicted
+    fi
+
+    #if there is a conflict, show the data of conflicted classes 
+    if [ $conf -eq 1 ];
+    then
+        conflicted_class=$(cat "conflict.txt")
+        echo "Class conflicts $conflicted_class" | less
+    else
+        
+        #no conflict, write back to the class already selected
+        for i in $sel
+        do
+            sel_time=$(cat "time_data.txt" | awk -v sel_row="$i" ' BEGIN { i=0 } { ++i; if(i==sel_row){ printf("%s", $0) } } ')
+            sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
+
+            sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
+
+            #check the time conflict write back to the current selected class
+            for j in $sel_time_parsed
+            do
+                sed -E -i.bak "s/$j/$j,$sel_name/" "selected_time.txt"
+            done
+
+            #change the menu_db from off to on if the current selection is legal
+            echo "$sel_name,$sel_time,replace with $i"
+            sed -i.bak "$i s/off/on/" "menu_db.txt"
+        done
+        
+    fi
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
