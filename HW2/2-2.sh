@@ -6,6 +6,14 @@ parsed_first="cos_data.txt"
 parsed_second="time_data.txt"
 data_base="db.txt"
 table
+gen_menu() {
+    #processed with tag item for buildlist
+    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
+    #display the menu dialog and remove space if use parameter
+    sed -i.bak 's/ /_/g' "menu_db.txt"
+    sed -i.bak 's/_off/ off/g' "menu_db.txt"
+    sed -i.bak 's/-/ /g' "menu_db.txt"
+}
 
 gen_table() {
     rm -f $table
@@ -17,6 +25,7 @@ gen_table() {
         done
     done
 }
+
 init() {
     echo "Course table does not exist "
     curl 'https://timetable.nctu.edu.tw/?r=main/get_cos_list' --data \
@@ -46,15 +55,9 @@ init() {
     paste -d'|' $parsed_first $parsed_second > $data_base
     cat $data_base | sed -i.bak 's/,,/,/g' $data_base
 
-    #processed with tag item for buildlist
-    cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
-    #display the menu dialog and remove space if use parameter
-    sed -i.bak 's/ /_/g' "menu_db.txt"
-    sed -i.bak 's/_off/ off/g' "menu_db.txt"
-    sed -i.bak 's/-/ /g' "menu_db.txt"
-
     table="selected_time.txt"
     gen_table
+    gen_menu
 }
 
 #--------------------------------------------------------write back db and check collision-------------------------------------#
@@ -76,9 +79,13 @@ write_db() {
 
     rm -f "cur_selected.txt" "conflict.txt"
     touch "cur_selected.txt" "conflict.txt"
+
     table="cur_selected.txt"
     gen_table
     conf=0
+
+    table="selected_time.txt"
+    gen_table
 
     #push all the current selected data to "cur_selected.txt" ex: 3C,Math,English
     for i in $sel
@@ -96,7 +103,7 @@ write_db() {
 
     done
 
-    cat "cur_selected.txt" | less
+    #cat "cur_selected.txt" | less
 
     #iterate through the current selected class and check whether the conflict exists
     cat "cur_selected.txt" | awk ' BEGIN { FS=","; conflict=0 } { if(NF>3){ conflict=1; printf("%s\n", $0) } } ' > "conflict.txt"
@@ -114,6 +121,7 @@ write_db() {
         echo "Class conflicts $conflicted_class" | less
     else
 
+        gen_menu
         #no conflict, write back to the class already selected
         for i in $sel
         do
@@ -129,7 +137,7 @@ write_db() {
             done
 
             #change the menu_db from off to on if the current selection is legal
-            echo "$sel_name,$sel_time,replace with $i"
+            #echo "$sel_name,$sel_time,replace with $i"
             sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
 
