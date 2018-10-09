@@ -76,7 +76,8 @@ write_db() {
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
-    if [ $? -eq 1 ];
+    quit=$?
+    if [ $quit -eq 1 ];
     then
         echo "Quit"
         return
@@ -151,7 +152,7 @@ write_db() {
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
-for i in 1 2 3 4
+while true
 do
     if [ -e "class.json" ];
     then
@@ -161,7 +162,7 @@ do
         init
     fi
     write_db
-    if [ $? -eq 1 ];
+    if [ $quit -eq 1 ];
     then
         break
     fi
