@@ -7,7 +7,7 @@ BEGIN {
         if(length(nf_cnt)<13)
         { 
             printf("%s", $nf_cnt); 
-            for(j=13-length($nf_cnt) ;j>=0; --j)
+            for(j=13-length($nf_cnt)-1 ;j>=0; --j)
             { 
                 printf(" ");  
             }

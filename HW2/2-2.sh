@@ -17,9 +17,9 @@ gen_menu() {
 
 gen_table() {
     rm -f $table
-    for i in 1 2 3 4 5 6
+    for i in 1 2 3 4 5 
     do
-        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "Y" "I" "J" "K" "L"
+        for j in "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
         do
             echo $i$j"," >> $table
         done
