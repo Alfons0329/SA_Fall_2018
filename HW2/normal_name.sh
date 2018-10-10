@@ -1,7 +1,9 @@
 #!/bin/sh 
-rm -f "show1.txt"
+rm -f "show.txt"
 
 #block width = 16 each
+
+print_type=0
 none="x"
 point="."
 boundary="|" #1 + class name 13 + blank_short
@@ -54,51 +56,60 @@ parse_name() {
 
 find_assign() {
     
-    name1="x."
-    name2="."
-    name3="."
-    name4="."
+    name1="x.           " # 2 + 11
+    name2=".            " # 1 + 12
+    name3=".            " # 1 + 12
+    name4=".            " # 1 + 12
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="$this_time" ' { if($0~/sel_row.*/) print $0 } ')
+    to_put=$(cat "final_show.txt" | awk -v sel_row="$thistime" ' { if($0~/sel_row.*/) print $0 } ')
     
-    cat "final_show.txt" | awk -v sel_row="$this_time" ' { if($0~/sel_row.*/) print $0 } '
+    cat "final_show.txt" | awk -v sel_row="$thistime" ' { if($0~/sel_row.*/) print $0 } '
     echo "$to_put" | sed 's/,/ /g'
     
     cnt=0
     for i in $to_put
     do
         case $cnt
-        0) name1=$i ;;
-        1) name2=$i ;;
-        2) name3=$i ;;
-        3) name4=$i ;;
+            0 ) name1=$i ;;
+            1 ) name2=$i ;;
+            2 ) name3=$i ;;
+            3 ) name4=$i ;;
         
         cnt=cnt+1
+        esac
     done 
+    echo "$name1, $name2, $name3, $name4"
 }
 
 
 print_firstline() {  
-    firstline=$none$blank_short$monday$boundary$blank_short$tuesday$boundary$blank_short$wednesday$boundary$blank_short$thursday$boundary$blank_short$friday$boundary
-    printf "$firstline\n" >> "show1.txt"
+    firstline=$none$blank_short\
+    $point$monday$blank_long\
+    $point$tuesday$blank_long\
+    $point$wednesday$blank_long\
+    $point$thursday$blank_long\
+    $point$friday$blank_long
+
+    printf "$firstline\n" >> "show.txt"
 }
 
 print_class() {
-    line1=$1$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line2=$1$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line3=$1$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line4=$1$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    printf "$line1\n" >> "show1.txt"
-    printf "$line2\n" >> "show1.txt"
-    printf "$line3\n" >> "show1.txt"
-    printf "$line4\n" >> "show1.txt"
+    
+    line1=$1$blank_short$boundary$name1$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
+    line2=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
+    line3=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
+    line4=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
+
+    printf "$line1\n" >> "show.txt"
+    printf "$line2\n" >> "show.txt"
+    printf "$line3\n" >> "show.txt"
+    printf "$line4\n" >> "show.txt"
 }
 
 print_splitline() {
     allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
-    printf "$allsplit\n" >> "show1.txt"
+    printf "$allsplit\n" >> "show.txt"
 }
-
 
 
 gen_table
@@ -109,7 +120,15 @@ for i in 1 2 3 4 5
 do
     for j in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
     do
-        print_class
+        print_class $j
         print_splitline
     done
+done
+for i in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
+do
+    for j in 1 2 3 4 5
+    do
+        print_class $j
+        print_splitline
+    done 
 done
