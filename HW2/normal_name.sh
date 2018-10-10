@@ -24,6 +24,31 @@ name1="x."
 name2="."
 name3="."
 name4="."
+name5="x."
+name6="."
+name7="."
+name8="."
+name9="x."
+name10="."
+name11="."
+name12="."
+name13="x."
+name14="."
+name15="."
+name16="."
+name17="x."
+name18="."
+name19="."
+name20="."
+#extended time
+name21="x."
+name22="."
+name23="."
+name24="."
+name25="x."
+name26="."
+name27="."
+name28="."
 
 #Use sed to make 13 character a line and next line, split with, 
 gen_table() {
@@ -56,12 +81,13 @@ parse_name() {
 
 find_assign() {
     
+    #monday
     name1="x.           " # 2 + 11
     name2=".            " # 1 + 12
     name3=".            " # 1 + 12
     name4=".            " # 1 + 12
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="$thistime" ' { if($0~/sel_row.*/) print $0 } ')
+    to_put=$(cat "final_show.txt" | awk -v sel_row="$thistime" ' { if($0~/1sel_row.*/) print $0 } ')
     
     cat "final_show.txt" | awk -v sel_row="$thistime" ' { if($0~/sel_row.*/) print $0 } '
     echo "$to_put" | sed 's/,/ /g'
@@ -95,10 +121,10 @@ print_firstline() {
 
 print_class() {
     
-    line1=$1$blank_short$boundary$name1$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line2=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line3=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
-    line4=$point$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary$blank_long$boundary
+    line1=$1$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary
+    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary
+    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary
+    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary
 
     printf "$line1\n" >> "show.txt"
     printf "$line2\n" >> "show.txt"
@@ -116,18 +142,13 @@ gen_table
 parse_name
 print_firstline
 
-for i in 1 2 3 4 5 
-do
-    for j in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
-    do
-        print_class $j
-        print_splitline
-    done
-done
+
 for i in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
 do
     for j in 1 2 3 4 5
     do
+        thistime=$j
+        find_assign
         print_class $j
         print_splitline
     done 
