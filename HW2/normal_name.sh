@@ -21,36 +21,6 @@ friday="Fri"
 thistime=""
 thisday=""
 
-name1="x."
-name2="."
-name3="."
-name4="."
-name5="x.           "
-name6=".            "
-name7=".            "
-name8=".            "
-name9="x.           "
-name10=".            "
-name11=".            "
-name12=".            "
-name13="x.           "
-name14=".            "
-name15=".            "
-name16=".            "
-name17="x.           "
-name18=".            "
-name19=".            "
-name20=".            "
-#extended time
-name21="x.           "
-name22=".            "
-name23=".            "
-name24=".            "
-name25="x.           "
-name26=".            "
-name27=".            "
-name28=".            "
-
 #Use sed to make 13 character a line and next line, split with, 
 gen_table() {
     rm -f "empty_time.txt"
@@ -84,19 +54,49 @@ parse_name() {
 find_assign() {
     
     #monday
-    name1="x.           " # 2 + 11
-    name2=".            " # 1 + 12
-    name3=".            " # 1 + 12
-    name4=".            " # 1 + 12
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="1$thistime" ' { if($0~/1C.*/){ print $0; } }' )
-    # cat "final_show.txt" | awk -v sel_row="1$thistime" ' { if($0~/sel_row.*/){ print $0; } printf("selrow is %s \n",sel_row ) } '
-    #cat "final_show.txt" | awk -v sel_row="$thistime" ' BEGIN{ time="1"sel_time } { if($0~/time.*/) print $0 } '
-    name1=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ print $2}')
-    name2=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ print $3}')
-    name3=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ print $4}')
-    name4=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($5)==13){ print $5; } else{ print".            " } }')
-    echo "name1 $name1, name2 $name2, name3 $name3, name4 $name4"
+    to_put=$(cat "final_show.txt" | awk -v sel_row="1$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+    name1=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+    name2=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+    name3=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+    name4=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+    
+    #tuesday
+
+    to_put=$(cat "final_show.txt" | awk -v sel_row="2$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+    name5=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+    name6=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+    name7=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+    name8=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+    
+    #wednesday
+
+    to_put=$(cat "final_show.txt" | awk -v sel_row="3$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+    name9=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+    name10=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+    name11=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+    name12=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+
+    #thursday
+
+    to_put=$(cat "final_show.txt" | awk -v sel_row="4$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+    name13=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+    name14=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+    name15=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+    name16=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+
+    #friday
+
+    to_put=$(cat "final_show.txt" | awk -v sel_row="5$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+    name17=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+    name18=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+    name19=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+    name20=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
 }
 
 
@@ -146,7 +146,7 @@ print_firstline
 
 for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
 do
-    echo $i
+    # echo $i
     thistime=$i
     find_assign
     print_class
