@@ -1,4 +1,4 @@
-1 1GH4CD,SA321,Calculus_(I) on\
+1 1GH4CD,SA321,Calculus_(I) off\
 2 1GH4CD,SC206,Calculus_(I) off\
 3 1GH4CD,SA214,Calculus_(I) off\
 4 4CD,SC207,Calculus_(I) off\
@@ -11,7 +11,7 @@
 11 1CD4GH,SC105,Physics_(I) off\
 12 1CD4GH,SC109,Physics_(I) off\
 13 1CD4GH,SC151,Physics_(I) off\
-14 1CD4GH,SC152,Physics_(I) on\
+14 1CD4GH,SC152,Physics_(I) off\
 15 4GH,SC001,Physics_(I) off\
 16 3GH,AB101,Career_Planning_and_Mentor_of_Hours off\
 17 5IJK,EC122,Competitive_Programming_(II) off\
@@ -20,11 +20,11 @@
 20 2CD4G,ED302,Mathematical_Logic\r off\
 21 2B5EF,EC115,Digital_Systems_Design off\
 22 2A,AB101,Service_Learning_II off\
-23 1G4CD,EC114,Electrical_Circuits_and_Electronics_(I)__ off\
+23 1G4CD,EC114,Electrical_Circuits_and_Electronics_(I)__ on\
 24 2EFG,EC016,Design_and_Implementation_of_IOT_Applications off\
-25 2G5CD,EC115,Introduction_to_Cryptography off\
+25 2G5CD,EC115,Introduction_to_Cryptography on\
 26 2IJK,EC220,5CD,EC114,Digital_Circuit_Lab. off\
-27 2EF5B,EC022,Introduction_to_Multimedia_Information_System off\
+27 2EF5B,EC022,Introduction_to_Multimedia_Information_System on\
 28 2G5CD,ED302,Introduction_to_Pattern_Recognition off\
 29 2EF5B,ED117,Introduction_to_Machine_Learning off\
 30 4IJK,EC115,Network_Planning_and_Management_Practices off\
