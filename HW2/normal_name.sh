@@ -1,13 +1,14 @@
 #!/bin/sh 
 rm -f "show1.txt"
 
+#block width = 16 each
 none="x"
 point="."
-boundary="|"
-blank_short="               "
-blank_long="                  "
-time_split="= "
-long_split="=================== "
+boundary="|" #1 + class name 13 + blank_short
+blank_short="  "
+blank_long="            " #day + 12 + blank_short
+time_split="=  " #1 + 2
+long_split="==============  " #12 + 2
 
 monday="Mon"
 tuesday="Tue"
@@ -15,10 +16,12 @@ wednesday="Wed"
 thursday="Thu"
 friday="Fri"
 
-name1=""
-name2=""
-name3=""
-name4=""
+thistime=""
+
+name1="x."
+name2="."
+name3="."
+name4="."
 
 #Use sed to make 13 character a line and next line, split with, 
 gen_table() {
@@ -49,9 +52,30 @@ parse_name() {
     
 }   
 
-# find_assign() {
+find_assign() {
+    
+    name1="x."
+    name2="."
+    name3="."
+    name4="."
 
-# }
+    to_put=$(cat "final_show.txt" | awk -v sel_row="$this_time" ' { if($0~/sel_row.*/) print $0 } ')
+    
+    cat "final_show.txt" | awk -v sel_row="$this_time" ' { if($0~/sel_row.*/) print $0 } '
+    echo "$to_put" | sed 's/,/ /g'
+    
+    cnt=0
+    for i in $to_put
+    do
+        case $cnt
+        0) name1=$i ;;
+        1) name2=$i ;;
+        2) name3=$i ;;
+        3) name4=$i ;;
+        
+        cnt=cnt+1
+    done 
+}
 
 
 print_firstline() {  
@@ -75,5 +99,17 @@ print_splitline() {
     printf "$allsplit\n" >> "show1.txt"
 }
 
+
+
 gen_table
 parse_name
+print_firstline
+
+for i in 1 2 3 4 5 
+do
+    for j in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
+    do
+        print_class
+        print_splitline
+    done
+done
