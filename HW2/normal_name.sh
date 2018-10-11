@@ -200,10 +200,10 @@ arrange() {
 }
 
 
+print_type=$1
 gen_table
 parse_name
 print_firstline
-print_type=$1
 
 if [ $1 -eq 0 ];
 then
