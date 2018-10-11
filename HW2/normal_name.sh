@@ -268,4 +268,3 @@ fi
 
 # 0 3 2
 
-dialog --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200

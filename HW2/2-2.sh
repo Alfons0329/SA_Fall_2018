@@ -66,7 +66,6 @@ init() {
 #--------------------------------------------------------write back db and check collision-------------------------------------#
 
 sel=999 #current selected course
-conf=0 #is collided or not
 sel_name=""
 sel_time=""
 quit=0
@@ -150,11 +149,11 @@ write_db() {
         done
 
         echo "Current time table"
-        cat "selected_time.txt" | awk ' BEGIN { i=0 } { ++i; printf("%s | ",$0); if(i%16==0){ printf("\n\n") } }' | less
     fi
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
+start_only=0
 for i in 1 2 3 4 5
 do
     if [ -e "class.json" ];
@@ -164,10 +163,13 @@ do
         init
     fi
 
-    sh "normal_name.sh" 0
+    if [ $start_only -eq 0 ];
+    then
+        sh "normal_name.sh" 0
+        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+        start_only=1
+    fi
 
-    dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
-    echo "choose is $choose "
     if [ $? -eq 0 ]; #add class
     then
 
@@ -184,6 +186,13 @@ do
         sh "normal_name.sh" 4
 
     then
+    fi
+
+    echo "Conflict $conf "
+    if [ $conf -eq 0 ];
+    then
+        sh "normal_name.sh" 0
+        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
     fi
 
 done
