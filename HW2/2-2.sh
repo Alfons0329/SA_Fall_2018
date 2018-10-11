@@ -199,10 +199,12 @@ do
     fi
 
 
-
-    sh "normal_name.sh" 3
-    dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
-
+    if [ $quit -eq 0 ] && [ $conf -eq 1 ];
+    then
+    else
+        sh "normal_name.sh" 3
+        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+    fi
 
 done
 
