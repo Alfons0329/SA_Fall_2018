@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 rm -f "show.txt"
 
 #block width = 16 each
@@ -17,17 +17,19 @@ tuesday="Tue"
 wednesday="Wed"
 thursday="Thu"
 friday="Fri"
+saturday=""
+sunday=""
 
 thistime=""
 thisday=""
 
-#Use sed to make 13 character a line and next line, split with, 
+#Use sed to make 13 character a line and next line, split with,
 gen_table() {
     rm -f "empty_time.txt"
     touch "empty_time.txt"
-    for i in 1 2 3 4 5 
+    for i in 1 2 3 4 5 6 7
     do
-        for j in  "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L"
+        for j in "N" "M" "A" "B" "C" "D" "X" "E" "F" "G" "H" "Y" "I" "J" "K" "L"
         do
             echo $i$j >> "empty_time.txt"
         done
@@ -37,7 +39,7 @@ gen_table() {
 parse_name() {
     cp "selected_time.txt" "show_name_tmp.txt"
     #remove the time to merge later
-    sed -E -i.bak 's/[1-9][MNXY].*//d' "show_name_tmp.txt"
+    #sed -E -i.bak 's/[1-9][MNXY].*//g' "show_name_tmp.txt"
     sed -E -i.bak 's/[1-9][A-Z],//g' "show_name_tmp.txt"
     #split the string every 13 character long
     sed -E -i.bak 's/(.{13})/\1\,/g' "show_name_tmp.txt"
@@ -48,11 +50,11 @@ parse_name() {
     cat "show_name_tmp.txt" | awk -f splitfill.sh > "show_name_processed.txt"
     #printf("debug: %s i=[%d] NF=[%d]\n", $nf_cnt, i, NF) }
     paste -d',' "empty_time.txt" "show_name_processed.txt" > "final_show.txt"
-    
-}   
+
+}
 
 find_assign() {
-    
+
     #monday
 
     to_put=$(cat "final_show.txt" | awk -v sel_row="1$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
@@ -61,7 +63,7 @@ find_assign() {
     name2=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
     name3=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
     name4=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
-    
+
     #tuesday
 
     to_put=$(cat "final_show.txt" | awk -v sel_row="2$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
@@ -70,7 +72,7 @@ find_assign() {
     name6=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
     name7=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
     name8=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
-    
+
     #wednesday
 
     to_put=$(cat "final_show.txt" | awk -v sel_row="3$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
@@ -97,21 +99,58 @@ find_assign() {
     name18=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
     name19=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
     name20=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+
+    #saturday
+    name21=""
+    name22=""
+    name23=""
+    name24=""
+    name25=""
+    name26=""
+    name27=""
+    name28=""
+
+    if [ $1 -ge 3 ];
+    then
+
+        #saturday
+        to_put=$(cat "final_show.txt" | awk -v sel_row="6$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+        name21=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+        name22=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+        name23=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+        name24=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+
+
+        #sunday
+        to_put=$(cat "final_show.txt" | awk -v sel_row="7$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+
+        name25=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
+        name26=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
+        name27=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($3)==13){ print $3; } else{ print".            " } }')
+        name28=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($4)==13){ print $4; } else{ print".            " } }')
+
+    fi
+
 }
 
 
-print_firstline() {  
-    firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long
-
+print_firstline() {
+    if [ $1 -ge 3 ];
+    then
+        saturday="Sat"
+        sunday="Sun"
+    fi
+                 firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
     printf "$firstline\n" >> "show.txt"
 }
 
 print_class() {
-    
-    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary
-    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary
-    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary
-    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary
+
+    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21
+    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22
+    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23
+    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24
 
     printf "$line1\n" >> "show.txt"
     printf "$line2\n" >> "show.txt"
@@ -129,26 +168,53 @@ gen_table
 parse_name
 print_firstline
 
+if [ $1 -eq 1 ]; #type 1, normal time with class name
+then
 
-# for i in  'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L';
-# do
-#     for j in 1 2 3 4 5;
-#     do
-#         thistime=""
-#         #thistime=$j$i
-#         echo $j$i
-#         thisday=$i
-#         find_assign
-#         print_class $j
-#         print_splitline
-#     done 
-# done
+    for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
+    do
+        thistime=$i
+        find_assign
+        print_class
+        print_splitline
+    done
 
-for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
-do
-    # echo $i
-    thistime=$i
-    find_assign
-    print_class
-    print_splitline
-done
+else if [ $1 -eq 2 ]; #type 2 normal time with class location
+then
+
+    for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
+    do
+        thistime=$i
+        find_assign
+        print_class
+        print_splitline
+    done
+
+else if [ $1 -eq 3 ]; #type 3 extended time with class name
+then
+
+     for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
+     do
+        thistime=$i
+        find_assign
+        print_class
+        print_splitline
+     done
+else
+then
+    for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
+    do
+        thistime=$i
+        find_assign
+        print_class
+        print_splitline
+    done
+fi
+
+#if is extended class table, use this for loop
+
+#otherwise normal one use this for loop for short class
+
+
+
+dialog --title "WTF" --textbox "show.txt" 200 200

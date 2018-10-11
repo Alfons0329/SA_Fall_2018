@@ -1,29 +1,14 @@
 
 
-Introduction ,to Computer G,raphics      ,
-Introduction ,to Computer G,raphics      ,
 
 
-Electrical Ci,rcuits and El,ectronics (I),             ,
-
-
+Physics (I)  ,
+Physics (I)  ,
 
 
 
-
-
-
-
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Cryptograp,hy           ,
-
-
-
-
-
-
-Introduction ,to Computer G,raphics      ,
+Calculus (I) ,             ,
+Calculus (I) ,             ,
 
 
 
@@ -36,8 +21,9 @@ Introduction ,to Computer G,raphics      ,
 
 
 
-Electrical Ci,rcuits and El,ectronics (I),             ,
-Electrical Ci,rcuits and El,ectronics (I),             ,
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
+Introduction ,to Pattern Re,cognition    ,
 
 
 
@@ -47,9 +33,75 @@ Electrical Ci,rcuits and El,ectronics (I),             ,
 
 
 
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Cryptograp,hy           ,
-Introduction ,to Cryptograp,hy           ,
+
+
+
+
+
+
+Career Planni,ng and Mentor, of Hours    ,
+Career Planni,ng and Mentor, of Hours    ,
+
+
+
+
+
+
+
+
+
+Calculus (I) ,             ,
+Calculus (I) ,             ,
+
+
+
+Physics (I)  ,
+Physics (I)  ,
+
+
+
+
+
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+Introduction ,to Pattern Re,cognition    ,
+Introduction ,to Pattern Re,cognition    ,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

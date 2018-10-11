@@ -1,40 +1,60 @@
 x  .Mon            .Tue            .Wed            .Thu            .Fri            
+M  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+N  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
 A  |x.             |x.             |x.             |x.             |x.             |
 .  |.              |.              |.              |.              |.              |
 .  |.              |.              |.              |.              |.              |
 .  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-B  |x.             |x.             |Introduction   |x.             |Introduction   |
-.  |.              |.              |to Computer G  |.              |to Multimedia  |
-.  |.              |.              |raphics        |.              | Information   |
-.  |.              |.              |.              |.              |System         |
+B  |x.             |x.             |x.             |x.             |LabVIEW Progr  |
+.  |.              |.              |.              |.              |amming Langua  |
+.  |.              |.              |.              |.              |ge             |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-C  |Introduction   |x.             |x.             |Electrical Ci  |Introduction   |
-.  |to Computer G  |.              |.              |rcuits and El  |to Cryptograp  |
-.  |raphics        |.              |.              |ectronics (I)  |hy             |
-.  |.              |.              |.              |               |.              |
+C  |Physics (I)    |x.             |x.             |Calculus (I)   |Introduction   |
+.  |.              |.              |.              |               |to Pattern Re  |
+.  |.              |.              |.              |.              |cognition      |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-D  |Introduction   |x.             |x.             |Electrical Ci  |Introduction   |
-.  |to Computer G  |.              |.              |rcuits and El  |to Cryptograp  |
-.  |raphics        |.              |.              |ectronics (I)  |hy             |
-.  |.              |.              |.              |               |.              |
+D  |Physics (I)    |x.             |x.             |Calculus (I)   |Introduction   |
+.  |.              |.              |.              |               |to Pattern Re  |
+.  |.              |.              |.              |.              |cognition      |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-E  |x.             |Introduction   |x.             |x.             |x.             |
-.  |.              |to Multimedia  |.              |.              |.              |
-.  |.              | Information   |.              |.              |.              |
-.  |.              |System         |.              |.              |.              |
+X  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-F  |x.             |Introduction   |x.             |x.             |x.             |
-.  |.              |to Multimedia  |.              |.              |.              |
-.  |.              | Information   |.              |.              |.              |
-.  |.              |System         |.              |.              |.              |
+E  |x.             |LabVIEW Progr  |x.             |x.             |x.             |
+.  |.              |amming Langua  |.              |.              |.              |
+.  |.              |ge             |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-G  |Electrical Ci  |Introduction   |x.             |x.             |x.             |
-.  |rcuits and El  |to Cryptograp  |.              |.              |.              |
-.  |ectronics (I)  |hy             |.              |.              |.              |
-.  |               |.              |.              |.              |.              |
+F  |x.             |LabVIEW Progr  |x.             |x.             |x.             |
+.  |.              |amming Langua  |.              |.              |.              |
+.  |.              |ge             |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-H  |x.             |x.             |x.             |x.             |x.             |
+G  |Calculus (I)   |Introduction   |Career Planni  |Physics (I)    |x.             |
+.  |               |to Pattern Re  |ng and Mentor  |.              |.              |
+.  |.              |cognition      | of Hours      |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+H  |Calculus (I)   |x.             |Career Planni  |Physics (I)    |x.             |
+.  |               |.              |ng and Mentor  |.              |.              |
+.  |.              |.              | of Hours      |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+Y  |x.             |x.             |x.             |x.             |x.             |
 .  |.              |.              |.              |.              |.              |
 .  |.              |.              |.              |.              |.              |
 .  |.              |.              |.              |.              |.              |
