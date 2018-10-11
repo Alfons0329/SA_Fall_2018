@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 #----------------------------------------------------JSON crawling------------------------------------------------------------#
 
 json_file="class.json"
@@ -81,7 +81,7 @@ write_db() {
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
     quit=$?
-
+    echo "quit is $quit" | less
     if [ $quit -eq 1 ];
     then
         if [ $conf -eq 1 ];
@@ -164,7 +164,7 @@ write_db() {
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
-for i in 1 2 3 4 5;
+while true;
 do
     if [ -e "class.json" ];
     then
@@ -174,7 +174,6 @@ do
     fi
 
 
-    echo "choose $?" | less
     if [ "$choose" -eq 2 ];
     then
         break
@@ -198,7 +197,7 @@ do
     then
     else
         sh "normal_name.sh" 3
-        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+        dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
         choose=$?
     fi
 

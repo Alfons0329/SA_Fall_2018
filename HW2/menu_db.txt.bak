@@ -1,7 +1,7 @@
 1 1GH4CD,SA321,Calculus_(I) off\
-2 1GH4CD,SC206,Calculus_(I) on\
+2 1GH4CD,SC206,Calculus_(I) off\
 3 1GH4CD,SA214,Calculus_(I) off\
-4 4CD,SC207,Calculus_(I) off\
+4 4CD,SC207,Calculus_(I) on\
 5 1GH4CD,SA320,Calculus_(I) off\
 6 1GH4CD,SC106,Calculus_(I) off\
 7 1GH4CD,EE105,Calculus_(I) off\
@@ -22,7 +22,7 @@
 22 2A,AB101,Service_Learning_II off\
 23 1G4CD,EC114,Electrical_Circuits_and_Electronics_(I)__ off\
 24 2EFG,EC016,Design_and_Implementation_of_IOT_Applications off\
-25 2G5CD,EC115,Introduction_to_Cryptography off\
+25 2G5CD,EC115,Introduction_to_Cryptography on\
 26 2IJK,EC220,5CD,EC114,Digital_Circuit_Lab. off\
 27 2EF5B,EC022,Introduction_to_Multimedia_Information_System off\
 28 2G5CD,ED302,Introduction_to_Pattern_Recognition off\
