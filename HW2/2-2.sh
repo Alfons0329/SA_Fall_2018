@@ -6,6 +6,9 @@ parsed_first="cos_data.txt"
 parsed_second="time_data.txt"
 data_base="db.txt"
 table
+table_option=0
+choose=0
+
 gen_menu() {
     #processed with tag item for buildlist
     cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
@@ -152,20 +155,36 @@ write_db() {
 }
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
-while true
+for i in 1 2 3 4 5
 do
     if [ -e "class.json" ];
     then
         echo "Course table exists!"
     else
-        rm -f "class.json"
         init
     fi
-    write_db
-    if [ $quit -eq 1 ];
+
+    sh "normal_name.sh" 0
+    choose=$(dialog --file "show.txt")
+
+    if [ $choose -eq 0 ]; #add class
+    then
+
+        write_db
+
+    elif [ $choose -eq 1 ]; #exit
     then
         break
+    elif [ $choose -eq 3 ]; #option
+
+        sh "normal_name.sh" 1
+        sh "normal_name.sh" 2
+        sh "normal_name.sh" 3
+        sh "normal_name.sh" 4
+
+    then
     fi
+
 done
 
 

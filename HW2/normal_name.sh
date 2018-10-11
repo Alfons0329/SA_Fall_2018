@@ -25,6 +25,7 @@ thisday=""
 
 #Use sed to make 13 character a line and next line, split with,
 gen_table() {
+
     rm -f "empty_time.txt"
     touch "empty_time.txt"
     for i in 1 2 3 4 5 6 7
@@ -37,6 +38,7 @@ gen_table() {
 }
 
 parse_name() {
+
     cp "selected_time.txt" "show_name_tmp.txt"
     #remove the time to merge later
     #sed -E -i.bak 's/[1-9][MNXY].*//g' "show_name_tmp.txt"
@@ -110,7 +112,7 @@ find_assign() {
     name27=""
     name28=""
 
-    if [ $1 -ge 3 ]; #extended time table, assign saturday and sunday
+    if [ $print_type -ge 3 ]; #extended time table, assign saturday and sunday
     then
 
         #saturday
@@ -137,7 +139,7 @@ find_assign() {
 
 print_firstline() {
 
-    if [ $1 -ge 3 ]; #extended time table, assign saturday and sunday
+    if [ $print_type -ge 3 ]; #extended time table, assign saturday and sunday
     then
         saturday="Sat"
         sunday="Sun"
@@ -160,16 +162,26 @@ print_class() {
 }
 
 print_splitline() {
-    allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
+       allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
     printf "$allsplit\n" >> "show.txt"
+}
+
+arrange() {
+
+    sed -i.bak 's/.*/"&"\\/' "show.txt"
+    show_content=$(cat "show.txt")
+    echo "dialog --extra-button --extra-label "Option" --ok-lebel "Add Class" --cancel-label "Exit" --yesno "normal" 200 200 " > "show.txt"
+    echo $show_content >> "show.txt"
+
 }
 
 
 gen_table
 parse_name
 print_firstline
+print_type=$1
 
-if [ $1 -eq 1 ]; #type 1, normal time with class name
+if [ $1 -eq 0 ];
 then
 
     for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
@@ -180,7 +192,7 @@ then
         print_splitline
     done
 
-else if [ $1 -eq 2 ]; #type 2 normal time with class location
+elif [ $1 -eq 1 ]; #type 1, normal time with class name
 then
 
     for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
@@ -191,7 +203,18 @@ then
         print_splitline
     done
 
-else if [ $1 -eq 3 ]; #type 3 extended time with class name
+elif [ $1 -eq 2 ]; #type 2 normal time with class location
+then
+
+    for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
+    do
+        thistime=$i
+        find_assign
+        print_class
+        print_splitline
+    done
+
+elif [ $1 -eq 3 ]; #type 3 extended time with class name
 then
 
      for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
@@ -201,8 +224,10 @@ then
         print_class
         print_splitline
      done
-else #type 4 extended time with class location
+
+elif [ $1 -eq 4 ]; #type 4 extended time with class location
 then
+
     for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
     do
         thistime=$i
@@ -210,12 +235,6 @@ then
         print_class
         print_splitline
     done
+
 fi
 
-#if is extended class table, use this for loop
-
-#otherwise normal one use this for loop for short class
-
-
-
-dialog --title "WTF" --textbox "show.txt" 200 200
