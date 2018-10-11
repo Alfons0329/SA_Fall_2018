@@ -166,15 +166,16 @@ do
 
     sh "normal_name.sh" 0
 
+    choose=$(dialog --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200)
     if [ $choose -eq 0 ]; #add class
     then
 
         write_db
 
-    elif [ $choose -eq 1 ]; #exit
+    elif [ $choose -eq 3 ]; #exit
     then
         break
-    elif [ $choose -eq 3 ]; #option
+    elif [ $choose -eq 2 ]; #option
 
         sh "normal_name.sh" 1
         sh "normal_name.sh" 2

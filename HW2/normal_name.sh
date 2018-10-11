@@ -143,7 +143,9 @@ print_firstline() {
     then
         saturday="Sat"
         sunday="Sun"
-                     firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
+
+                         firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
+
     else
         firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long
     fi
@@ -153,11 +155,23 @@ print_firstline() {
 
 print_class() {
 
-    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21$blank_short$boundary$name25
-    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22$blank_short$boundary$name26
-    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23$blank_short$boundary$name27
-    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24$blank_short$boundary$name28
+    if [ $print_type -ge 3 ];
+    then
+     line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21$blank_short$boundary$name25$blank_short$boundary
+    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22$blank_short$boundary$name26$blank_short$boundary
+    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23$blank_short$boundary$name27$blank_short$boundary
+    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24$blank_short$boundary$name28$blank_short$boundary
 
+
+    else
+
+    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary
+    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary
+    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary
+    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary
+
+
+    fi
     printf "$line1\n" >> "show.txt"
     printf "$line2\n" >> "show.txt"
     printf "$line3\n" >> "show.txt"
@@ -165,7 +179,14 @@ print_class() {
 }
 
 print_splitline() {
+    if [ $print_type -ge 3 ];
+    then
+
+       allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$long_split$long_split$time_split
+    else
+
        allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
+    fi
     printf "$allsplit\n" >> "show.txt"
 }
 
@@ -175,7 +196,7 @@ arrange() {
     cat "show_tmp.txt" | awk ' { printf("%s\\\n", $0)  } ' >> "show.txt"
     putin=$(cat "show.txt")
     echo $putin
-    echo "--extra-button --extra-label \"Option\" --ok-label \"Add_ Class\" --cancel-label "Exit" --yesno \"$putin\" 200 200 " > "show.txt"
+    echo "--extra-button --extra-label \"Option\" --ok-label \"Add_ Class\" --cancel-label \"Exit\" --yesno \"$putin\" 200 200 200 " > "show.txt"
 }
 
 
@@ -194,7 +215,7 @@ then
         print_class
         print_splitline
     done
-    arrange
+    #arrange
 elif [ $1 -eq 1 ]; #type 1, normal time with class name
 then
 
@@ -206,7 +227,7 @@ then
         print_splitline
     done
 
-    arrange
+    #arrange
 elif [ $1 -eq 2 ]; #type 2 normal time with class location
 then
 
@@ -218,7 +239,7 @@ then
         print_splitline
     done
 
-    arrange
+    #arrange
 elif [ $1 -eq 3 ]; #type 3 extended time with class name
 then
 
@@ -230,7 +251,7 @@ then
         print_splitline
      done
 
-    arrange
+   # arrange
 elif [ $1 -eq 4 ]; #type 4 extended time with class location
 then
 
@@ -242,8 +263,9 @@ then
         print_splitline
     done
 
-    arrange
+    #arrange
 fi
 
-dialog --file "show.txt"
+# 0 3 2
 
+dialog --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
