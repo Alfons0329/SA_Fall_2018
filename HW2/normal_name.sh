@@ -110,7 +110,7 @@ find_assign() {
     name27=""
     name28=""
 
-    if [ $1 -ge 3 ];
+    if [ $1 -ge 3 ]; #extended time table, assign saturday and sunday
     then
 
         #saturday
@@ -136,21 +136,22 @@ find_assign() {
 
 
 print_firstline() {
-    if [ $1 -ge 3 ];
+
+    if [ $1 -ge 3 ]; #extended time table, assign saturday and sunday
     then
         saturday="Sat"
         sunday="Sun"
     fi
-                 firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
+                     firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
     printf "$firstline\n" >> "show.txt"
 }
 
 print_class() {
 
-    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21
-    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22
-    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23
-    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24
+    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21$blank_short$boundary$name25
+    line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22$blank_short$boundary$name26
+    line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23$blank_short$boundary$name27
+    line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24$blank_short$boundary$name28
 
     printf "$line1\n" >> "show.txt"
     printf "$line2\n" >> "show.txt"
@@ -200,7 +201,7 @@ then
         print_class
         print_splitline
      done
-else
+else #type 4 extended time with class location
 then
     for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
     do
