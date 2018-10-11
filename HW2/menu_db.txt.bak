@@ -1,5 +1,5 @@
 1 1GH4CD,SA321,Calculus_(I) off\
-2 1GH4CD,SC206,Calculus_(I) off\
+2 1GH4CD,SC206,Calculus_(I) on\
 3 1GH4CD,SA214,Calculus_(I) off\
 4 4CD,SC207,Calculus_(I) off\
 5 1GH4CD,SA320,Calculus_(I) off\
@@ -12,7 +12,7 @@
 12 1CD4GH,SC109,Physics_(I) off\
 13 1CD4GH,SC151,Physics_(I) off\
 14 1CD4GH,SC152,Physics_(I) off\
-15 4GH,SC001,Physics_(I) off\
+15 4GH,SC001,Physics_(I) on\
 16 3GH,AB101,Career_Planning_and_Mentor_of_Hours on\
 17 5IJK,EC122,Competitive_Programming_(II) off\
 18 6EFG,ED302,Competitive_Programming(III) off\
@@ -28,7 +28,7 @@
 28 2G5CD,ED302,Introduction_to_Pattern_Recognition off\
 29 2EF5B,ED117,Introduction_to_Machine_Learning off\
 30 4IJK,EC115,Network_Planning_and_Management_Practices off\
-31 2EFG,EC324,Android_Progr off\
+31 2EFG,EC324,Android_Progr on\
 32 1G4CD,ED117,Intro._to_Network_Programming off\
 33 1CD3B,EDB27,Introduction_to_Computer_Graphics off\
 34 4IJK,EC122,Computer_System_Administration off\

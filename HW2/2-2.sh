@@ -74,16 +74,22 @@ write_db() {
     tr -d '\n' < "menu_db_bk.txt"
     sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
-    echo "cast menudb"
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
     quit=$?
+
     if [ $quit -eq 1 ];
     then
-        echo "Quit"
-        return
+        if [ $conf -eq 1 ];
+        then
+            cp "selected_time_bk.txt" "selected_time.txt"
+            return
+        else
+            return
+        fi
     fi
+
 
 
     rm -f "cur_selected.txt" "conflict.txt"
@@ -93,8 +99,6 @@ write_db() {
     gen_table
     conf=0
 
-    table="selected_time.txt"
-    gen_table
 
     #push all the current selected data to "cur_selected.txt" ex: 3C,Math,English
     for i in $sel
@@ -126,7 +130,11 @@ write_db() {
     if [ $conf -eq 1 ];
     then
         dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
+        cp "selected_time.txt" "selected_time_bk.txt"
     else
+
+        table="selected_time.txt"
+        gen_table
 
         gen_menu
         #no conflict, write back to the class already selected
@@ -148,7 +156,6 @@ write_db() {
             sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
 
-        echo "Current time table"
     fi
 }
 
@@ -165,20 +172,24 @@ do
 
     if [ $start_only -eq 0 ];
     then
-        sh "normal_name.sh" 0
+        sh "normal_name.sh" 3
         dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
         start_only=1
     fi
 
-    if [ $? -eq 0 ]; #add class
+
+    choose=$?
+
+    if [ $choose -eq 2 ];
+    then
+        break
+    fi
+
+    if [ $choose -eq 0 ]; #add class
     then
 
         write_db
-
-    elif [ $? -eq 3 ]; #exit
-    then
-        break
-    elif [ $? -eq 2 ]; #option
+    elif [ $choose -eq 3 ]; #option
     then
         sh "normal_name.sh" 1
         sh "normal_name.sh" 2
@@ -187,12 +198,11 @@ do
 
     fi
 
-    echo "Conflict $conf "
-    if [ $conf -eq 0 ];
-    then
-        sh "normal_name.sh" 3
-        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
-    fi
+
+
+    sh "normal_name.sh" 3
+    dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+
 
 done
 

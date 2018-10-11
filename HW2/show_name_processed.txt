@@ -7,6 +7,8 @@
 
 
 
+Calculus (I) ,             ,
+Calculus (I) ,             ,
 
 
 
@@ -19,12 +21,9 @@
 
 
 
-
-
-LabVIEW Progr,amming Langua,ge           ,
-LabVIEW Progr,amming Langua,ge           ,
-
-
+Android Progr,             ,
+Android Progr,             ,
+Android Progr,             ,
 
 
 
@@ -35,7 +34,8 @@ LabVIEW Progr,amming Langua,ge           ,
 
 
 
-
+Probability  ,
+Probability  ,
 
 
 
@@ -50,6 +50,13 @@ Career Planni,ng and Mentor, of Hours    ,
 
 
 
+Calculus (I) ,             ,
+Calculus (I) ,             ,
+
+
+
+Physics (I)  ,
+Physics (I)  ,
 
 
 
@@ -64,14 +71,7 @@ Career Planni,ng and Mentor, of Hours    ,
 
 
 
-
-LabVIEW Progr,amming Langua,ge           ,
-
-
-
-
-
-
+Probability  ,
 
 
 
