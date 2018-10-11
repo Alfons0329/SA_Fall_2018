@@ -126,7 +126,7 @@ write_db() {
     #if there is a conflict, show the data of conflicted classes
     if [ $conf -eq 1 ];
     then
-        dialog --title "Conflict class as follows: " --textbox "conflict.txt" 50 50
+        dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
     else
 
         gen_menu
@@ -166,16 +166,17 @@ do
 
     sh "normal_name.sh" 0
 
-    choose=$(dialog --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200)
-    if [ $choose -eq 0 ]; #add class
+    dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+    echo "choose is $choose "
+    if [ $? -eq 0 ]; #add class
     then
 
         write_db
 
-    elif [ $choose -eq 3 ]; #exit
+    elif [ $? -eq 3 ]; #exit
     then
         break
-    elif [ $choose -eq 2 ]; #option
+    elif [ $? -eq 2 ]; #option
 
         sh "normal_name.sh" 1
         sh "normal_name.sh" 2
