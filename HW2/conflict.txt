@@ -1,4 +1,0 @@
-1G,Calculus (I),Calculus (I),Calculus (I),
-1H,Calculus (I),Calculus (I),Calculus (I),
-4C,Calculus (I),Calculus (I),Calculus (I),Calculus (I),
-4D,Calculus (I),Calculus (I),Calculus (I),Calculus (I),

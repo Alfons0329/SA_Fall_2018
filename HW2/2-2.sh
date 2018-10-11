@@ -165,7 +165,6 @@ do
     fi
 
     sh "normal_name.sh" 0
-    choose=$(dialog --file "show.txt")
 
     if [ $choose -eq 0 ]; #add class
     then

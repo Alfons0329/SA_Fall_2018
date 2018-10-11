@@ -143,8 +143,11 @@ print_firstline() {
     then
         saturday="Sat"
         sunday="Sun"
-    fi
                      firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long$point$saturday$blank_long$point$sunday$blanklong
+    else
+        firstline=$none$blank_short$point$monday$blank_long$point$tuesday$blank_long$point$wednesday$blank_long$point$thursday$blank_long$point$friday$blank_long
+    fi
+
     printf "$firstline\n" >> "show.txt"
 }
 
@@ -167,12 +170,12 @@ print_splitline() {
 }
 
 arrange() {
-
-    sed -i.bak 's/.*/"&"\\/' "show.txt"
-    show_content=$(cat "show.txt")
-    echo "dialog --extra-button --extra-label "Option" --ok-lebel "Add Class" --cancel-label "Exit" --yesno "normal" 200 200 " > "show.txt"
-    echo $show_content >> "show.txt"
-
+    cp "show.txt" "show_tmp.txt"
+    rm -f "show.txt"
+    cat "show_tmp.txt" | awk ' { printf("%s\\\n", $0)  } ' >> "show.txt"
+    putin=$(cat "show.txt")
+    echo $putin
+    echo "--extra-button --extra-label \"Option\" --ok-label \"Add_ Class\" --cancel-label "Exit" --yesno \"$putin\" 200 200 " > "show.txt"
 }
 
 
@@ -191,7 +194,7 @@ then
         print_class
         print_splitline
     done
-
+    arrange
 elif [ $1 -eq 1 ]; #type 1, normal time with class name
 then
 
@@ -203,6 +206,7 @@ then
         print_splitline
     done
 
+    arrange
 elif [ $1 -eq 2 ]; #type 2 normal time with class location
 then
 
@@ -214,6 +218,7 @@ then
         print_splitline
     done
 
+    arrange
 elif [ $1 -eq 3 ]; #type 3 extended time with class name
 then
 
@@ -225,6 +230,7 @@ then
         print_splitline
      done
 
+    arrange
 elif [ $1 -eq 4 ]; #type 4 extended time with class location
 then
 
@@ -236,5 +242,8 @@ then
         print_splitline
     done
 
+    arrange
 fi
+
+dialog --file "show.txt"
 

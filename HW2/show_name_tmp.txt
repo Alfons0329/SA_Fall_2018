@@ -2,9 +2,13 @@
 
 
 
+Physics (I),
+Physics (I),
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
@@ -17,6 +21,9 @@
 
 
 
+LabVIEW Progr,amming Langua,ge,
+LabVIEW Progr,amming Langua,ge,
+Introduction ,to Pattern Re,cognition,
 
 
 
@@ -32,6 +39,8 @@
 
 
 
+Career Planni,ng and Mentor, of Hours,
+Career Planni,ng and Mentor, of Hours,
 
 
 
@@ -41,9 +50,13 @@
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
+Physics (I),
+Physics (I),
 
 
 
@@ -52,22 +65,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+LabVIEW Progr,amming Langua,ge,
+Introduction ,to Pattern Re,cognition,
+Introduction ,to Pattern Re,cognition,
 
 
 
