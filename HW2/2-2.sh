@@ -173,26 +173,18 @@ do
         init
     fi
 
-    if [ $start_only -eq 0 ];
-    then
-        sh "normal_name.sh" 3
-        dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
-        start_only=1
-    fi
 
-
-    choose=$?
-    echo "choose $choose" | less
-    if [ $choose -eq 2 ];
+    echo "choose $?" | less
+    if [ "$choose" -eq 2 ];
     then
         break
     fi
 
-    if [ $choose -eq 0 ]; #add class
+    if [ "$choose" -eq 0 ]; #add class
     then
 
         write_db
-    elif [ $choose -eq 3 ]; #option
+    elif [ "$choose" -eq 3 ]; #option
     then
         sh "normal_name.sh" 1
         sh "normal_name.sh" 2
@@ -207,6 +199,7 @@ do
     else
         sh "normal_name.sh" 3
         dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+        choose=$?
     fi
 
 done

@@ -2,11 +2,13 @@
 
 
 
-Physics (I),
-Physics (I),
+Physics(I),
+Physics(I),
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
@@ -21,8 +23,6 @@ Physics (I),
 
 
 
-LabVIEW Progr,amming Langua,ge,
-LabVIEW Progr,amming Langua,ge,
 
 
 
@@ -50,13 +50,15 @@ LabVIEW Progr,amming Langua,ge,
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
+Physics(I),
+Physics(I),
 
 
-Physics (I),
-Physics (I),
 
 
 
@@ -65,7 +67,6 @@ Physics (I),
 
 
 
-LabVIEW Progr,amming Langua,ge,
 
 
 
@@ -74,9 +75,6 @@ LabVIEW Progr,amming Langua,ge,
 
 
 
-Competitive P,rogramming (I,I),
-Competitive P,rogramming (I,I),
-Competitive P,rogramming (I,I),
 
 
 
@@ -85,9 +83,11 @@ Competitive P,rogramming (I,I),
 
 
 
-Competitive P,rogramming(II,I),
-Competitive P,rogramming(II,I),
-Competitive P,rogramming(II,I),
+
+
+
+
+
 
 
 
