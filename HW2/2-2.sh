@@ -5,7 +5,7 @@ json_file="class.json"
 parsed_first="cos_data.txt"
 parsed_second="time_data.txt"
 data_base="db.txt"
-table
+table=""
 table_option=0
 choose=0
 
@@ -154,7 +154,7 @@ write_db() {
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
-for i in 1 2 3 4 5
+while true
 do
     if [ -e "class.json" ];
     then
@@ -179,19 +179,18 @@ do
     then
         break
     elif [ $? -eq 2 ]; #option
-
+    then
         sh "normal_name.sh" 1
         sh "normal_name.sh" 2
         sh "normal_name.sh" 3
         sh "normal_name.sh" 4
 
-    then
     fi
 
     echo "Conflict $conf "
     if [ $conf -eq 0 ];
     then
-        sh "normal_name.sh" 0
+        sh "normal_name.sh" 3
         dialog  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
     fi
 

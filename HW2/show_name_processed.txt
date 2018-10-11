@@ -7,8 +7,6 @@
 
 
 
-Calculus (I) ,             ,
-Calculus (I) ,             ,
 
 
 
@@ -16,19 +14,21 @@ Calculus (I) ,             ,
 
 
 
-Service Learn,ing II       ,
-Digital Syste,ms Design    ,
 
 
 
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Multimedia, Information ,System       ,
 
 
 
-Digital Circu,it Lab.      ,
-Digital Circu,it Lab.      ,
-Digital Circu,it Lab.      ,
+
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
+
+
+
+
+
+
 
 
 
@@ -50,27 +50,27 @@ Career Planni,ng and Mentor, of Hours    ,
 
 
 
-Calculus (I) ,             ,
-Calculus (I) ,             ,
 
 
 
 
 
 
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
 
 
 
 
-Introduction ,to Multimedia, Information ,System       ,
-Digital Circu,it Lab.      ,
-Digital Circu,it Lab.      ,
 
-Digital Syste,ms Design    ,
-Digital Syste,ms Design    ,
+
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+
+
+
+
+
 
 
 

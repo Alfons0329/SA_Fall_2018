@@ -157,7 +157,7 @@ print_class() {
 
     if [ $print_type -ge 3 ];
     then
-     line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21$blank_short$boundary$name25$blank_short$boundary
+    line1=$thistime$blank_short$boundary$name1$blank_short$boundary$name5$blank_short$boundary$name9$blank_short$boundary$name13$blank_short$boundary$name17$blank_short$boundary$name21$blank_short$boundary$name25$blank_short$boundary
     line2=$point$blank_short$boundary$name2$blank_short$boundary$name6$blank_short$boundary$name10$blank_short$boundary$name14$blank_short$boundary$name18$blank_short$boundary$name22$blank_short$boundary$name26$blank_short$boundary
     line3=$point$blank_short$boundary$name3$blank_short$boundary$name7$blank_short$boundary$name11$blank_short$boundary$name15$blank_short$boundary$name19$blank_short$boundary$name23$blank_short$boundary$name27$blank_short$boundary
     line4=$point$blank_short$boundary$name4$blank_short$boundary$name8$blank_short$boundary$name12$blank_short$boundary$name16$blank_short$boundary$name20$blank_short$boundary$name24$blank_short$boundary$name28$blank_short$boundary
@@ -182,10 +182,10 @@ print_splitline() {
     if [ $print_type -ge 3 ];
     then
 
-       allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$long_split$long_split$time_split
+        allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$long_split$long_split$time_split
     else
 
-       allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
+        allsplit=$time_split$long_split$long_split$long_split$long_split$long_split$time_split
     fi
     printf "$allsplit\n" >> "show.txt"
 }
