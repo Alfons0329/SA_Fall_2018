@@ -2,59 +2,6 @@
 
 
 
-
-
-
-
-
-Calculus (I) ,             ,
-Calculus (I) ,             ,
-
-
-
-
-
-
-
-
-
-
-
-
-Android Progr,             ,
-Android Progr,             ,
-Android Progr,             ,
-
-
-
-
-
-
-
-
-
-
-Probability  ,
-Probability  ,
-
-
-
-Career Planni,ng and Mentor, of Hours    ,
-Career Planni,ng and Mentor, of Hours    ,
-
-
-
-
-
-
-
-
-
-Calculus (I) ,             ,
-Calculus (I) ,             ,
-
-
-
 Physics (I)  ,
 Physics (I)  ,
 
@@ -71,7 +18,11 @@ Physics (I)  ,
 
 
 
-Probability  ,
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
 
 
 
@@ -88,6 +39,55 @@ Probability  ,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Physics (I)  ,
+Physics (I)  ,
+
+
+
+
+
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+
+
+
+
+
+
+
+
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
+
+
+
+
+
+
+
+
+Competitive P,rogramming(II,I)           ,
+Competitive P,rogramming(II,I)           ,
+Competitive P,rogramming(II,I)           ,
 
 
 

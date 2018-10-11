@@ -61,6 +61,9 @@ init() {
     table="selected_time.txt"
     gen_table
     gen_menu
+
+    quit=0
+    conf=0
 }
 
 #--------------------------------------------------------write back db and check collision-------------------------------------#
@@ -68,7 +71,7 @@ init() {
 sel=999 #current selected course
 sel_name=""
 sel_time=""
-quit=0
+
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
     tr -d '\n' < "menu_db_bk.txt"
@@ -161,7 +164,7 @@ write_db() {
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
-while true
+for i in 1 2 3 4 5;
 do
     if [ -e "class.json" ];
     then
@@ -179,7 +182,7 @@ do
 
 
     choose=$?
-
+    echo "choose $choose" | less
     if [ $choose -eq 2 ];
     then
         break
