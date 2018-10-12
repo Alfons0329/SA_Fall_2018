@@ -1,0 +1,61 @@
+x  .Mon            .Tue            .Wed            .Thu            .Fri            
+A  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+B  |x.             |Digital Syste  |Introduction   |Introduction   |Introduction   |
+.  |.              |ms Design      |to Computer G  |to Computers   |to Multimedia  |
+.  |.              |.              |raphics        |and Programmi  | Information   |
+.  |.              |.              |.              |ng             |System         |
+=  ==============  ==============  ==============  ==============  ==============  =  
+C  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |
+.  |to Computer G  |.              |.              |               |to Cryptograp  |
+.  |raphics        |.              |.              |.              |hy             |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+D  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |
+.  |to Computer G  |.              |.              |               |to Cryptograp  |
+.  |raphics        |.              |.              |.              |hy             |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+E  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |
+.  |to Computers   |to Multimedia  |.              |.              |ms Design      |
+.  |and Programmi  | Information   |.              |.              |.              |
+.  |ng             |System         |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+F  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |
+.  |to Computers   |to Multimedia  |.              |.              |ms Design      |
+.  |and Programmi  | Information   |.              |.              |.              |
+.  |ng             |System         |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+G  |x.             |Introduction   |Career Planni  |x.             |Probability    |
+.  |.              |to Cryptograp  |ng and Mentor  |.              |.              |
+.  |.              |hy             | of Hours      |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+H  |x.             |x.             |Career Planni  |x.             |x.             |
+.  |.              |.              |ng and Mentor  |.              |.              |
+.  |.              |.              | of Hours      |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+I  |x.             |x.             |Introduction   |Network Plann  |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |.              |
+.  |.              |.              |and Programmi  |ement Practic  |.              |
+.  |.              |.              |ng             |es             |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+J  |x.             |x.             |Introduction   |Network Plann  |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |.              |
+.  |.              |.              |and Programmi  |ement Practic  |.              |
+.  |.              |.              |ng             |es             |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+K  |x.             |x.             |Introduction   |Network Plann  |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |.              |
+.  |.              |.              |and Programmi  |ement Practic  |.              |
+.  |.              |.              |ng             |es             |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  
+L  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  =  

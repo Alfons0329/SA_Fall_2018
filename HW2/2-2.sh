@@ -81,7 +81,6 @@ write_db() {
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
     #extracted the course name from the cos_name.txt with the selected number
     quit=$?
-    echo "quit is $quit" | less
     if [ $quit -eq 1 ];
     then
         if [ $conf -eq 1 ];
@@ -164,6 +163,7 @@ write_db() {
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
+print_type=1
 while true;
 do
     if [ -e "class.json" ];
@@ -185,18 +185,17 @@ do
         write_db
     elif [ "$choose" -eq 3 ]; #option
     then
-        sh "normal_name.sh" 1
-        sh "normal_name.sh" 2
-        sh "normal_name.sh" 3
-        sh "normal_name.sh" 4
 
+        print_type=$(dialog --title --stdout "Pick a choice" --menu "Choose one" 200 200 10 \
+            1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location")
     fi
 
 
     if [ $quit -eq 0 ] && [ $conf -eq 1 ];
     then
+        start_only=0 #nop since without this, cant run on macOS for debugging
     else
-        sh "normal_name.sh" 3
+        sh "normal_name.sh" $print_type
         dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
         choose=$?
     fi
