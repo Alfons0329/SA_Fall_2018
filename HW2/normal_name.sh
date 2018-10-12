@@ -22,7 +22,7 @@ sunday=""
 
 thistime=""
 thisday=""
-
+to_cat="final_show.txt"
 #Use sed to make 13 character a line and next line, split with,
 gen_table() {
 
@@ -40,18 +40,23 @@ gen_table() {
 parse_name() {
 
     cp "selected_time.txt" "show_name_tmp.txt"
+    cp "selected_loc.txt" "show_loc_tmp.txt"
     #remove the time to merge later
     #sed -E -i.bak 's/[1-9][MNXY].*//g' "show_name_tmp.txt"
     sed -E -i.bak 's/[1-9][A-Z],//g' "show_name_tmp.txt"
+    sed -E -i.bak 's/[1-9][A-Z],//g' "show_loc_tmp.txt"
     #split the string every 13 character long
     sed -E -i.bak 's/(.{13})/\1\,/g' "show_name_tmp.txt"
+    sed -E -i.bak 's/(.{13})/\1\,/g' "show_loc_tmp.txt"
 
     # rm -f "show_name_processed.txt"
     # touch "show_name_processed.txt"
     #padding the white space
     cat "show_name_tmp.txt" | awk -f splitfill.sh > "show_name_processed.txt"
+    cat "show_loc_tmp.txt" | awk -f splitfill.sh > "show_loc_processed.txt"
     #printf("debug: %s i=[%d] NF=[%d]\n", $nf_cnt, i, NF) }
     paste -d',' "empty_time.txt" "show_name_processed.txt" > "final_show.txt"
+    paste -d',' "empty_time.txt" "show_loc_processed.txt" > "final_show_loc.txt"
 
 }
 
@@ -59,7 +64,7 @@ find_assign() {
 
     #monday
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="1$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+    to_put=$(cat $to_cat | awk -v sel_row="1$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
     name1=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
     name2=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -68,7 +73,7 @@ find_assign() {
 
     #tuesday
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="2$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+    to_put=$(cat $to_cat | awk -v sel_row="2$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
     name5=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
     name6=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -77,7 +82,7 @@ find_assign() {
 
     #wednesday
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="3$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+    to_put=$(cat $to_cat | awk -v sel_row="3$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
     name9=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
     name10=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -86,7 +91,7 @@ find_assign() {
 
     #thursday
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="4$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+    to_put=$(cat $to_cat | awk -v sel_row="4$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
     name13=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
     name14=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -95,7 +100,7 @@ find_assign() {
 
     #friday
 
-    to_put=$(cat "final_show.txt" | awk -v sel_row="5$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+    to_put=$(cat $to_cat | awk -v sel_row="5$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
     name17=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
     name18=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -116,7 +121,7 @@ find_assign() {
     then
 
         #saturday
-        to_put=$(cat "final_show.txt" | awk -v sel_row="6$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+        to_put=$(cat $to_cat | awk -v sel_row="6$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
         name21=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
         name22=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -125,7 +130,7 @@ find_assign() {
 
 
         #sunday
-        to_put=$(cat "final_show.txt" | awk -v sel_row="7$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
+        to_put=$(cat $to_cat | awk -v sel_row="7$thistime" ' BEGIN{ FS="," } { if($1~sel_row){ printf("%s,%s,%s,%s", $2, $3, $4, $5) } } ')
 
         name25=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($1)==13){ print $1; } else{ print"x.           " } }')
         name26=$(echo "$to_put" | awk 'BEGIN{ FS="," }{ if(length($2)==13){ print $2; } else{ print".            " } }')
@@ -190,15 +195,6 @@ print_splitline() {
     printf "$allsplit\n" >> "show.txt"
 }
 
-arrange() {
-    cp "show.txt" "show_tmp.txt"
-    rm -f "show.txt"
-    cat "show_tmp.txt" | awk ' { printf("%s\\\n", $0)  } ' >> "show.txt"
-    putin=$(cat "show.txt")
-    echo $putin
-    echo "--extra-button --extra-label \"Option\" --ok-label \"Add_ Class\" --cancel-label \"Exit\" --yesno \"$putin\" 200 200 200 " > "show.txt"
-}
-
 
 print_type=$1
 gen_table
@@ -222,6 +218,7 @@ then
     for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
     do
         thistime=$i
+        to_cat="final_show.txt"
         find_assign
         print_class
         print_splitline
@@ -234,6 +231,7 @@ then
     for i in 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L'
     do
         thistime=$i
+        to_cat="final_show_loc.txt"
         find_assign
         print_class
         print_splitline
@@ -246,6 +244,7 @@ then
      for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
      do
         thistime=$i
+        to_cat="final_show.txt"
         find_assign
         print_class
         print_splitline
@@ -258,6 +257,7 @@ then
     for i in 'M' 'N' 'A' 'B' 'C' 'D' 'X' 'E' 'F' 'G' 'H' 'Y' 'I' 'J' 'K' 'L'
     do
         thistime=$i
+        to_cat="final_show_loc.txt"
         find_assign
         print_class
         print_splitline

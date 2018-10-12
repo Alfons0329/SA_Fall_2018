@@ -2,11 +2,13 @@
 
 
 
-Introduction ,to Computer G,raphics      ,
-Introduction ,to Computer G,raphics      ,
+
+
 
 Introduction ,to Computers ,and Programmi,ng           ,
 Introduction ,to Computers ,and Programmi,ng           ,
+Calculus (I) ,             ,
+Calculus (I) ,             ,
 
 
 
@@ -16,15 +18,11 @@ Introduction ,to Computers ,and Programmi,ng           ,
 
 
 
-Service Learn,ing II       ,
-Digital Syste,ms Design    ,
+Mathematical ,Logicr       ,
+Mathematical ,Logicr       ,
 
-
-
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Cryptograp,hy           ,
-
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
 
 
 
@@ -33,9 +31,11 @@ Introduction ,to Cryptograp,hy           ,
 
 
 
-Introduction ,to Computer G,raphics      ,
-Probability  ,
-Probability  ,
+
+
+
+
+
 
 
 
@@ -55,23 +55,23 @@ Calculus (I) ,             ,
 
 
 
-Physics (I)  ,
-Physics (I)  ,
-
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
+Mathematical ,Logicr       ,
 
 
 
 
-Introduction ,to Multimedia, Information ,System       ,
-Introduction ,to Cryptograp,hy           ,
-Introduction ,to Cryptograp,hy           ,
 
-Digital Syste,ms Design    ,
-Digital Syste,ms Design    ,
-Probability  ,
+
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+
+
+
+
+
+
 
 
 Competitive P,rogramming (I,I)           ,
