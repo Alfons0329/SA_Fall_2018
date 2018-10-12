@@ -30,7 +30,7 @@ gen_table() {
     touch "empty_time.txt"
     for i in 1 2 3 4 5 6 7
     do
-        for j in "N" "M" "A" "B" "C" "D" "X" "E" "F" "G" "H" "Y" "I" "J" "K" "L"
+        for j in "M" "N" "A" "B" "C" "D" "X" "E" "F" "G" "H" "Y" "I" "J" "K" "L"
         do
             echo $i$j >> "empty_time.txt"
         done

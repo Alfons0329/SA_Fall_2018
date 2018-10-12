@@ -1,12 +1,12 @@
 
+Basic Program,ming,
 
 
 
 
 
 
-Introduction ,to Computers ,and Programmi,ng,
-Introduction ,to Computers ,and Programmi,ng,
+
 Calculus (I),,
 Calculus (I),,
 
@@ -17,9 +17,9 @@ Calculus (I),,
 
 
 
+Digital Syste,ms Design,
 
-Mathematical ,Logicr,
-Mathematical ,Logicr,
+
 
 LabVIEW Progr,amming Langua,ge,
 LabVIEW Progr,amming Langua,ge,
@@ -31,7 +31,7 @@ LabVIEW Progr,amming Langua,ge,
 
 
 
-
+Basic Program,ming,
 
 
 
@@ -42,35 +42,35 @@ LabVIEW Progr,amming Langua,ge,
 Career Planni,ng and Mentor, of Hours,
 Career Planni,ng and Mentor, of Hours,
 
-Introduction ,to Computers ,and Programmi,ng,
-Introduction ,to Computers ,and Programmi,ng,
-Introduction ,to Computers ,and Programmi,ng,
 
 
 
 
-Introduction ,to Computers ,and Programmi,ng,
+
+
+
+
 Calculus (I),,
 Calculus (I),,
 
 
 
-Mathematical ,Logicr,
+Physics (I),
+Physics (I),
+
+Computer Syst,em Administra,tion,
+Computer Syst,em Administra,tion,
+Computer Syst,em Administra,tion,
 
 
-
-
-
-
-
-
+Basic Program,ming,
 
 LabVIEW Progr,amming Langua,ge,
 
 
 
-
-
+Digital Syste,ms Design,
+Digital Syste,ms Design,
 
 
 

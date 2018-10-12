@@ -12,13 +12,13 @@
 12 1CD4GH,SC109,Physics_(I) off\
 13 1CD4GH,SC151,Physics_(I) off\
 14 1CD4GH,SC152,Physics_(I) off\
-15 4GH,SC001,Physics_(I) off\
+15 4GH,SC001,Physics_(I) on\
 16 3GH,AB101,Career_Planning_and_Mentor_of_Hours on\
 17 5IJK,EC122,Competitive_Programming_(II) on\
 18 6EFG,ED302,Competitive_Programming(III) on\
 19 2EF5B,EC315,LabVIEW_Programming_Language on\
-20 2CD4G,ED302,Mathematical_Logic\r on\
-21 2B5EF,EC115,Digital_Systems_Design off\
+20 2CD4G,ED302,Mathematical_Logic\r off\
+21 2B5EF,EC115,Digital_Systems_Design on\
 22 2A,AB101,Service_Learning_II off\
 23 1G4CD,EC114,Electrical_Circuits_and_Electronics_(I)__ off\
 24 2EFG,EC016,Design_and_Implementation_of_IOT_Applications off\
@@ -31,7 +31,7 @@
 31 2EFG,EC324,Android_Progr off\
 32 1G4CD,ED117,Intro._to_Network_Programming off\
 33 1CD3B,EDB27,Introduction_to_Computer_Graphics off\
-34 4IJK,EC122,Computer_System_Administration off\
+34 4IJK,EC122,Computer_System_Administration on\
 35 1EF4B,EC115,4IJK,EC315,Introduction_to_Computers_and_Programming off\
 36 1EF,EC122,3IJK,EC315,4B,EC122,Introduction_to_Computers_and_Programming off\
 37 1EF,EC114,2IJK,EC315,4B,EC114,Introduction_to_Computers_and_Programming off\
