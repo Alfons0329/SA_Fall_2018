@@ -179,6 +179,7 @@ do
     if [ -e "class.json" ];
     then
         echo "Course table exists!"
+        print_type=1
     else
         init
     fi
@@ -196,8 +197,12 @@ do
     elif [ "$choose" -eq 3 ]; #option
     then
 
-        print_type=$(dialog --title --stdout "Pick a choice" --menu "Choose one" 200 200 10 \
+        get=$(dialog --title --stdout "Pick a choice" --menu "Choose one" 200 200 10 \
             1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location")
+        if [ $? -ne 1 ];
+        then
+            print_type=$get
+        fi
     fi
 
 
@@ -211,5 +216,4 @@ do
     fi
 
 done
-
 

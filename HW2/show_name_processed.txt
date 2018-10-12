@@ -1,5 +1,5 @@
 
-Basic Program,ming         ,
+
 
 
 
@@ -17,7 +17,7 @@ Calculus (I) ,             ,
 
 
 
-Digital Syste,ms Design    ,
+
 
 
 
@@ -31,7 +31,7 @@ LabVIEW Progr,amming Langua,ge           ,
 
 
 
-Basic Program,ming         ,
+
 
 
 
@@ -58,19 +58,19 @@ Calculus (I) ,             ,
 Physics (I)  ,
 Physics (I)  ,
 
-Computer Syst,em Administra,tion         ,
-Computer Syst,em Administra,tion         ,
-Computer Syst,em Administra,tion         ,
 
 
-Basic Program,ming         ,
+
+
+
+
 
 LabVIEW Progr,amming Langua,ge           ,
 
 
 
-Digital Syste,ms Design    ,
-Digital Syste,ms Design    ,
+
+
 
 
 

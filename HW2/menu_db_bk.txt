@@ -18,7 +18,7 @@
 18 6EFG,ED302,Competitive_Programming(III) on
 19 2EF5B,EC315,LabVIEW_Programming_Language on
 20 2CD4G,ED302,Mathematical_Logicr off
-21 2B5EF,EC115,Digital_Systems_Design on
+21 2B5EF,EC115,Digital_Systems_Design off
 22 2A,AB101,Service_Learning_II off
 23 1G4CD,EC114,Electrical_Circuits_and_Electronics_(I)__ off
 24 2EFG,EC016,Design_and_Implementation_of_IOT_Applications off
@@ -31,14 +31,14 @@
 31 2EFG,EC324,Android_Progr off
 32 1G4CD,ED117,Intro._to_Network_Programming off
 33 1CD3B,EDB27,Introduction_to_Computer_Graphics off
-34 4IJK,EC122,Computer_System_Administration on
+34 4IJK,EC122,Computer_System_Administration off
 35 1EF4B,EC115,4IJK,EC315,Introduction_to_Computers_and_Programming off
 36 1EF,EC122,3IJK,EC315,4B,EC122,Introduction_to_Computers_and_Programming off
 37 1EF,EC114,2IJK,EC315,4B,EC114,Introduction_to_Computers_and_Programming off
 38 3CD5G,EC122,Probability off
 39 1B4EF,EC114,Intro._to_Computer_Networks off
 40 2CD4G,EC015,Introduction_to_Algorithms off
-41 1N3N5N,EC316,Basic_Programming on
+41 1N3N5N,EC316,Basic_Programming off
 42 3CD5G,EDB27,Intro._to_Compiler_Design off
 43 3CD5G,EC114,Linear_Algebra off
 44 3CD5G,EC115,Linear_Algebra off
