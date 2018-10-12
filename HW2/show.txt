@@ -29,12 +29,12 @@ F  |x.             |LabVIEW Progr  |x.             |x.             |x.          
 .  |.              |ge             |.              |.              |.              |
 .  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-G  |Calculus (I)   |x.             |Career Planni  |Physics (I)    |x.             |
+G  |Calculus (I)   |x.             |Career Planni  |x.             |x.             |
 .  |               |.              |ng and Mentor  |.              |.              |
 .  |.              |.              | of Hours      |.              |.              |
 .  |.              |.              |.              |.              |.              |
 =  ==============  ==============  ==============  ==============  ==============  =  
-H  |Calculus (I)   |x.             |Career Planni  |Physics (I)    |x.             |
+H  |Calculus (I)   |x.             |Career Planni  |x.             |x.             |
 .  |               |.              |ng and Mentor  |.              |.              |
 .  |.              |.              | of Hours      |.              |.              |
 .  |.              |.              |.              |.              |.              |

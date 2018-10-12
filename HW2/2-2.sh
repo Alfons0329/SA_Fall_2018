@@ -96,15 +96,12 @@ write_db() {
         fi
     fi
 
-
-
     rm -f "cur_selected.txt" "conflict.txt"
     touch "cur_selected.txt" "conflict.txt"
 
     table="cur_selected.txt"
     gen_table
     conf=0
-
 
     #push all the current selected data to "cur_selected.txt" ex: 3C,Math,English
     for i in $sel
@@ -174,16 +171,15 @@ write_db() {
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
 print_type=1
+choose=4
 while true;
 do
     if [ -e "class.json" ];
     then
         echo "Course table exists!"
-        print_type=1
     else
         init
     fi
-
 
     if [ "$choose" -eq 2 ];
     then
