@@ -2,8 +2,8 @@
 
 
 
-
-
+Physics (I),
+Physics (I),
 
 
 
@@ -21,8 +21,8 @@ Calculus (I),,
 
 
 
-LabVIEW Progr,amming Langua,ge,
-LabVIEW Progr,amming Langua,ge,
+
+
 
 
 
@@ -55,6 +55,8 @@ Calculus (I),,
 
 
 
+Physics (I),
+Physics (I),
 
 
 
@@ -64,8 +66,6 @@ Calculus (I),,
 
 
 
-
-LabVIEW Progr,amming Langua,ge,
 
 
 

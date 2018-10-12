@@ -65,8 +65,6 @@ init() {
     gen_table
     gen_menu
 
-    quit=0
-    conf=0
 }
 
 #--------------------------------------------------------write back db and check collision-------------------------------------#
@@ -74,7 +72,8 @@ init() {
 sel=999 #current selected course
 sel_name=""
 sel_time=""
-
+conf=0
+quit=0
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
     tr -d '\n' < "menu_db_bk.txt"
@@ -200,7 +199,6 @@ do
             print_type=$get
         fi
     fi
-
 
     if [ $quit -eq 0 ] && [ $conf -eq 1 ];
     then
