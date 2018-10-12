@@ -1,61 +1,81 @@
-x  .Mon            .Tue            .Wed            .Thu            .Fri            
-A  |x.             |x.             |x.             |x.             |x.             |
-.  |.              |.              |.              |.              |.              |
-.  |.              |.              |.              |.              |.              |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-B  |x.             |Digital Syste  |Introduction   |Introduction   |Introduction   |
-.  |.              |ms Design      |to Computer G  |to Computers   |to Multimedia  |
-.  |.              |.              |raphics        |and Programmi  | Information   |
-.  |.              |.              |.              |ng             |System         |
-=  ==============  ==============  ==============  ==============  ==============  =  
-C  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |
-.  |to Computer G  |.              |.              |               |to Cryptograp  |
-.  |raphics        |.              |.              |.              |hy             |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-D  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |
-.  |to Computer G  |.              |.              |               |to Cryptograp  |
-.  |raphics        |.              |.              |.              |hy             |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-E  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |
-.  |to Computers   |to Multimedia  |.              |.              |ms Design      |
-.  |and Programmi  | Information   |.              |.              |.              |
-.  |ng             |System         |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-F  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |
-.  |to Computers   |to Multimedia  |.              |.              |ms Design      |
-.  |and Programmi  | Information   |.              |.              |.              |
-.  |ng             |System         |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-G  |x.             |Introduction   |Career Planni  |x.             |Probability    |
-.  |.              |to Cryptograp  |ng and Mentor  |.              |.              |
-.  |.              |hy             | of Hours      |.              |.              |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-H  |x.             |x.             |Career Planni  |x.             |x.             |
-.  |.              |.              |ng and Mentor  |.              |.              |
-.  |.              |.              | of Hours      |.              |.              |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-I  |x.             |x.             |Introduction   |Network Plann  |x.             |
-.  |.              |.              |to Computers   |ing and Manag  |.              |
-.  |.              |.              |and Programmi  |ement Practic  |.              |
-.  |.              |.              |ng             |es             |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-J  |x.             |x.             |Introduction   |Network Plann  |x.             |
-.  |.              |.              |to Computers   |ing and Manag  |.              |
-.  |.              |.              |and Programmi  |ement Practic  |.              |
-.  |.              |.              |ng             |es             |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-K  |x.             |x.             |Introduction   |Network Plann  |x.             |
-.  |.              |.              |to Computers   |ing and Manag  |.              |
-.  |.              |.              |and Programmi  |ement Practic  |.              |
-.  |.              |.              |ng             |es             |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
-L  |x.             |x.             |x.             |x.             |x.             |
-.  |.              |.              |.              |.              |.              |
-.  |.              |.              |.              |.              |.              |
-.  |.              |.              |.              |.              |.              |
-=  ==============  ==============  ==============  ==============  ==============  =  
+x  .Mon            .Tue            .Wed            .Thu            .Fri            .Sat            .Sun
+M  |x.             |x.             |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+N  |x.             |x.             |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+A  |x.             |Service Learn  |x.             |x.             |x.             |x.             |x.             |
+.  |.              |ing II         |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+B  |x.             |Digital Syste  |Introduction   |Introduction   |Introduction   |x.             |x.             |
+.  |.              |ms Design      |to Computer G  |to Computers   |to Multimedia  |.              |.              |
+.  |.              |.              |raphics        |and Programmi  | Information   |.              |.              |
+.  |.              |.              |.              |ng             |System         |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+C  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |x.             |x.             |
+.  |to Computer G  |.              |.              |               |to Cryptograp  |.              |.              |
+.  |raphics        |.              |.              |.              |hy             |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+D  |Introduction   |x.             |Probability    |Calculus (I)   |Introduction   |x.             |x.             |
+.  |to Computer G  |.              |.              |               |to Cryptograp  |.              |.              |
+.  |raphics        |.              |.              |.              |hy             |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+X  |x.             |x.             |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+E  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |Competitive P  |x.             |
+.  |to Computers   |to Multimedia  |.              |.              |ms Design      |rogramming(II  |.              |
+.  |and Programmi  | Information   |.              |.              |.              |I)             |.              |
+.  |ng             |System         |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+F  |Introduction   |Introduction   |x.             |x.             |Digital Syste  |Competitive P  |x.             |
+.  |to Computers   |to Multimedia  |.              |.              |ms Design      |rogramming(II  |.              |
+.  |and Programmi  | Information   |.              |.              |.              |I)             |.              |
+.  |ng             |System         |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+G  |x.             |Introduction   |Career Planni  |Physics (I)    |Probability    |Competitive P  |x.             |
+.  |.              |to Cryptograp  |ng and Mentor  |.              |.              |rogramming(II  |.              |
+.  |.              |hy             | of Hours      |.              |.              |I)             |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+H  |x.             |x.             |Career Planni  |Physics (I)    |x.             |x.             |x.             |
+.  |.              |.              |ng and Mentor  |.              |.              |.              |.              |
+.  |.              |.              | of Hours      |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+Y  |x.             |x.             |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+I  |x.             |x.             |Introduction   |Network Plann  |Competitive P  |x.             |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |rogramming (I  |.              |.              |
+.  |.              |.              |and Programmi  |ement Practic  |I)             |.              |.              |
+.  |.              |.              |ng             |es             |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+J  |x.             |x.             |Introduction   |Network Plann  |Competitive P  |x.             |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |rogramming (I  |.              |.              |
+.  |.              |.              |and Programmi  |ement Practic  |I)             |.              |.              |
+.  |.              |.              |ng             |es             |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+K  |x.             |x.             |Introduction   |Network Plann  |Competitive P  |x.             |x.             |
+.  |.              |.              |to Computers   |ing and Manag  |rogramming (I  |.              |.              |
+.  |.              |.              |and Programmi  |ement Practic  |I)             |.              |.              |
+.  |.              |.              |ng             |es             |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  
+L  |x.             |x.             |x.             |x.             |x.             |x.             |x.             |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+.  |.              |.              |.              |.              |.              |.              |.              |
+=  ==============  ==============  ==============  ==============  ==============  ==============  ==============  =  

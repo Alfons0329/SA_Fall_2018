@@ -16,7 +16,7 @@ Introduction ,to Computers ,and Programmi,ng           ,
 
 
 
-
+Service Learn,ing II       ,
 Digital Syste,ms Design    ,
 
 
@@ -55,8 +55,8 @@ Calculus (I) ,             ,
 
 
 
-
-
+Physics (I)  ,
+Physics (I)  ,
 
 Network Plann,ing and Manag,ement Practic,es           ,
 Network Plann,ing and Manag,ement Practic,es           ,
@@ -74,9 +74,9 @@ Digital Syste,ms Design    ,
 Probability  ,
 
 
-
-
-
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
 
 
 

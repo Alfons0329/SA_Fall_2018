@@ -60,6 +60,9 @@ init() {
 
     table="selected_time.txt"
     gen_table
+
+    table="selected_loc.txt"
+    gen_table
     gen_menu
 
     quit=0
@@ -86,6 +89,7 @@ write_db() {
         if [ $conf -eq 1 ];
         then
             cp "selected_time_bk.txt" "selected_time.txt"
+            cp "selected_loc_bk.txt" "selected_loc.txt"
             return
         else
             return
@@ -133,9 +137,13 @@ write_db() {
     then
         dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
         cp "selected_time.txt" "selected_time_bk.txt"
+        cp "selected_loc.txt" "selected_loc_bk.txt"
     else
 
         table="selected_time.txt"
+        gen_table
+
+        table="selected_loc.txt"
         gen_table
 
         gen_menu
@@ -147,10 +155,12 @@ write_db() {
 
             sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
 
+            sel_loc=$(cat "cos_data.txt" | awk -v sel_row="$i" ' BEGIN { i=0; FS="," } { ++i; if(i==sel_row) { for(j=1;j<=NF;j++){ if(j%2==0){ printf("%s ",$j) } } } }')
             #check the time conflict write back to the current selected class
             for j in $sel_time_parsed
             do
                 sed -E -i.bak "s/$j/$j,$sel_name/" "selected_time.txt"
+                sed -E -i.bak "s/$j/$j,$sel_loc/" "selected_loc.txt"
             done
 
             #change the menu_db from off to on if the current selection is legal
