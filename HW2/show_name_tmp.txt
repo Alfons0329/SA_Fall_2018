@@ -74,9 +74,6 @@ Physics (I),
 
 
 
-Competitive P,rogramming (I,I),
-Competitive P,rogramming (I,I),
-Competitive P,rogramming (I,I),
 
 
 
@@ -88,6 +85,9 @@ Competitive P,rogramming (I,I),
 
 
 
+Competitive P,rogramming(II,I),
+Competitive P,rogramming(II,I),
+Competitive P,rogramming(II,I),
 
 
 
