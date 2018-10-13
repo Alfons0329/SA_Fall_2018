@@ -23,7 +23,7 @@ Calculus (I) ,             ,
 
 
 
-Introduction ,to Pattern Re,cognition    ,
+
 
 
 
@@ -66,8 +66,8 @@ Physics (I)  ,
 
 
 
-Introduction ,to Pattern Re,cognition    ,
-Introduction ,to Pattern Re,cognition    ,
+
+
 
 
 
@@ -85,9 +85,9 @@ Competitive P,rogramming (I,I)           ,
 
 
 
-Competitive P,rogramming(II,I)           ,
-Competitive P,rogramming(II,I)           ,
-Competitive P,rogramming(II,I)           ,
+
+
+
 
 
 

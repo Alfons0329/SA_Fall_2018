@@ -1,5 +1,4 @@
 #!/bin/sh 
-#----------------------------------------------------JSON crawling------------------------------------------------------------#
 
 json_file="class.json"
 parsed_first="cos_data.txt"
@@ -8,7 +7,7 @@ data_base="db.txt"
 table=""
 table_option=0
 choose=0
-
+#----------------------------------------------------gen timtable and data for buildlist------------------------------------------------------------#
 gen_menu() {
     #processed with tag item for buildlist
     cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
@@ -30,8 +29,9 @@ gen_table() {
     done
 }
 
+#----------------------------------------------------init------------------------------------------------------------#
 init() {
-    echo "Course table does not exist "
+    echo "class table does not exist "
     curl 'https://timetable.nctu.edu.tw/?r=main/get_cos_list' --data \
     'm_acy=107&m_sem=1&m_degree=3&m_dep_id=17&m_group=**&m_grade=**&m_class=**&m_option=**&m_crs \
     name=**&m_teaname=**&m_cos_id=**&m_cos_code=**&m_crstime=**&m_crsoutline=**&m_costype=**' >> class.json
@@ -68,12 +68,13 @@ init() {
 }
 
 #--------------------------------------------------------write back db and check collision-------------------------------------#
-
-sel=999 #current selected course
+#--------------------------------------------------------global variable for database processing-------------------------------#
+sel=999 #current row of selected class
 sel_name=""
 sel_time=""
 conf=0
 quit=0
+#--------------------------------------------------------global variable for database processing-------------------------------#
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
     tr -d '\n' < "menu_db_bk.txt"
@@ -81,16 +82,20 @@ write_db() {
     menu_db=$(cat "menu_db_bk.txt")
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
-    #extracted the course name from the cos_name.txt with the selected number
+    
+    #extracted the class name from the cos_name.txt with the selected number
     quit=$?
     if [ $quit -eq 1 ];
     then
         if [ $conf -eq 1 ];
         then
+            #restore the backup if press cancel after class confliction since without this, class table will lost
             cp "selected_time_bk.txt" "selected_time.txt"
             cp "selected_loc_bk.txt" "selected_loc.txt"
+
             return
         else
+            #press cancel without confliction, just return since the selected_time is successfully write back
             return
         fi
     fi
@@ -109,15 +114,13 @@ write_db() {
         sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
 
         sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
+        
         #check the time conflict write back to the current selected class
         for j in $sel_time_parsed
         do
             sed -E -i.bak "s/$j/$j,$sel_name/" "cur_selected.txt"
         done
-
     done
-
-    #cat "cur_selected.txt" | less
 
     #iterate through the current selected class and check whether the conflict exists
     cat "cur_selected.txt" | awk ' BEGIN { FS=","; conflict=0 } { if(NF>3){ conflict=1; printf("%s\n", $0) } } ' > "conflict.txt"
@@ -132,17 +135,20 @@ write_db() {
     if [ $conf -eq 1 ];
     then
         dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
-        cp "selected_time.txt" "selected_time_bk.txt"
+
+        #back up the current one to prevent data loss if press cancel after class conflict
+        cp "selected_time.txt" "selected_time_bk.txt" 
         cp "selected_loc.txt" "selected_loc_bk.txt"
     else
-
         table="selected_time.txt"
         gen_table
 
         table="selected_loc.txt"
         gen_table
 
+        #re-generate the menu for current legal class selection write back
         gen_menu
+
         #no conflict, write back to the class already selected
         for i in $sel
         do
@@ -160,10 +166,8 @@ write_db() {
             done
 
             #change the menu_db from off to on if the current selection is legal
-            #echo "$sel_name,$sel_time,replace with $i"
             sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
-
     fi
 }
 
@@ -175,7 +179,7 @@ while true;
 do
     if [ -e "class.json" ];
     then
-        echo "Course table exists!"
+        echo "class table exists!"
     else
         init
     fi
@@ -187,12 +191,11 @@ do
 
     if [ "$choose" -eq 0 ]; #add class
     then
-
         write_db
     elif [ "$choose" -eq 3 ]; #option
     then
 
-        get=$(dialog --title --stdout "Pick a choice" --menu "Choose one" 200 200 10 \
+        get=$(dialog --title --stdout "Options" --menu "Choose one" 200 200 10 \
             1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location")
         if [ $? -ne 1 ];
         then
@@ -208,6 +211,4 @@ do
         dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
         choose=$?
     fi
-
 done
-
