@@ -42,12 +42,12 @@ parse_name() {
     cp "selected_time.txt" "show_name_tmp.txt"
     cp "selected_loc.txt" "show_loc_tmp.txt"
     #remove the time to merge later
-    #sed -E -i 's/[1-9][MNXY].*//g' "show_name_tmp.txt"
-    sed -E -i 's/[1-9][A-Z],//g' "show_name_tmp.txt"
-    sed -E -i 's/[1-9][A-Z],//g' "show_loc_tmp.txt"
+    #sed -E -i.bak 's/[1-9][MNXY].*//g' "show_name_tmp.txt"
+    sed -E -i.bak 's/[1-9][A-Z],//g' "show_name_tmp.txt"
+    sed -E -i.bak 's/[1-9][A-Z],//g' "show_loc_tmp.txt"
     #split the string every 13 character long
-    sed -E -i 's/(.{13})/\1\,/g' "show_name_tmp.txt"
-    sed -E -i 's/(.{13})/\1\,/g' "show_loc_tmp.txt"
+    sed -E -i.bak 's/(.{13})/\1\,/g' "show_name_tmp.txt"
+    sed -E -i.bak 's/(.{13})/\1\,/g' "show_loc_tmp.txt"
 
     # rm -f "show_name_processed.txt"
     # touch "show_name_processed.txt"

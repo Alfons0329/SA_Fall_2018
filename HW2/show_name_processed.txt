@@ -2,8 +2,8 @@
 
 
 
-Physics (I)  ,
-Physics (I)  ,
+
+
 
 
 
@@ -23,7 +23,7 @@ Calculus (I) ,             ,
 
 
 
-
+Introduction ,to Pattern Re,cognition    ,
 
 
 
@@ -66,8 +66,8 @@ Physics (I)  ,
 
 
 
-
-
+Introduction ,to Pattern Re,cognition    ,
+Introduction ,to Pattern Re,cognition    ,
 
 
 

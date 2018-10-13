@@ -14,9 +14,9 @@ gen_menu() {
     cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
     
     #display the menu dialog and remove space if use parameter
-    sed -i 's/ /_/g' "menu_db.txt"
-    sed -i 's/_off/ off/g' "menu_db.txt"
-    sed -i 's/-/ /g' "menu_db.txt"
+    sed -i.bak 's/ /_/g' "menu_db.txt"
+    sed -i.bak 's/_off/ off/g' "menu_db.txt"
+    sed -i.bak 's/-/ /g' "menu_db.txt"
 }
 
 gen_table() {
@@ -44,11 +44,11 @@ init() {
     cat $json_file | awk ' BEGIN { FS="[\"]" } { for( nf_cnt=0; nf_cnt<NF; nf_cnt++ ){ if( $(nf_cnt)~/cos_time/) { printf("%s", $(nf_cnt+2)) } else if( $(nf_cnt)~/cos_ename/){ print ",", $(nf_cnt+2) } } } ' > $parsed_first
 
     #remove some unnecessary things for better data processing
-    cat $parsed_first | sed -E -i 's/   //g' $parsed_first
-    cat $parsed_first | sed -i 's/317// ; s/--//' $parsed_first
+    cat $parsed_first | sed -E -i.bak 's/   //g' $parsed_first
+    cat $parsed_first | sed -i.bak 's/317// ; s/--//' $parsed_first
 
     #rearrange the data, make 3CD5G-EC115 to 3CD5G,EC115 such that , can be used as th delimiter
-    cat $parsed_first | sed -i  's/\, /,/g ; s/-/,/g' $parsed_first
+    cat $parsed_first | sed -i.bak  's/\, /,/g ; s/-/,/g' $parsed_first
 
     #extract the time from 2G5CD-EC115,3IJK-EC222 to 2G 2C 5D 3I 3J 3K
     #cat $parsed_first | less
@@ -56,7 +56,7 @@ init() {
     cat $parsed_first | awk 'BEGIN {FS=","} {  for( nf_cnt=0; nf_cnt<=NF; nf_cnt++ ){ if(nf_cnt==NF){ printf("\n") } else if(nf_cnt && (nf_cnt % 2 == 1)){ printf("%s,",$nf_cnt) } } } ' | awk -f awk_parsetime.sh > $parsed_second
 
     paste -d'|' $parsed_first $parsed_second > $data_base
-    cat $data_base | sed -i 's/,,/,/g' $data_base
+    cat $data_base | sed -i.bak 's/,,/,/g' $data_base
 
     table="selected_time.txt"
     gen_table
@@ -77,7 +77,7 @@ quit=0
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
     tr -d '\n' < "menu_db_bk.txt"
-    sed -i 's/\\//g' "menu_db_bk.txt"
+    sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
@@ -112,7 +112,7 @@ write_db() {
         #check the time conflict write back to the current selected class
         for j in $sel_time_parsed
         do
-            sed -E -i "s/$j/$j,$sel_name/" "cur_selected.txt"
+            sed -E -i.bak "s/$j/$j,$sel_name/" "cur_selected.txt"
         done
 
     done
@@ -155,13 +155,13 @@ write_db() {
             #check the time conflict write back to the current selected class
             for j in $sel_time_parsed
             do
-                sed -E -i "s/$j/$j,$sel_name/" "selected_time.txt"
-                sed -E -i "s/$j/$j,$sel_loc/" "selected_loc.txt"
+                sed -E -i.bak "s/$j/$j,$sel_name/" "selected_time.txt"
+                sed -E -i.bak "s/$j/$j,$sel_loc/" "selected_loc.txt"
             done
 
             #change the menu_db from off to on if the current selection is legal
             #echo "$sel_name,$sel_time,replace with $i"
-            sed -i "$i s/off/on/" "menu_db.txt"
+            sed -i.bak "$i s/off/on/" "menu_db.txt"
         done
 
     fi
