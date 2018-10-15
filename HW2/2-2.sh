@@ -208,7 +208,6 @@ do
             print_type=$back
         fi
     fi
-
     if [ $quit -eq 0 ] && [ $conf -eq 1 ];
     then
         start_only=0 #nop since without this, cant run on macOS for debugging
@@ -220,8 +219,8 @@ do
         then
             sh "partial_name.sh"
         elif [ $print_type -eq 7 ];
-            sh "partial_time.sh"
         then
+            sh "partial_time.sh"
         else
             sh "print_table.sh" $print_type
             dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
