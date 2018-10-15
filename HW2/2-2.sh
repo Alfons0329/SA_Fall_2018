@@ -180,7 +180,6 @@ while true;
 do
     if [ -e "class.json" ];
     then
-        echo "class table exists!"
     else
         init
     fi
