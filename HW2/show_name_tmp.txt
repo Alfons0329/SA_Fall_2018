@@ -1,9 +1,14 @@
 
+Basic Program,ming,
 
 
+Physics (I),
+Physics (I),
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
@@ -12,6 +17,7 @@
 
 
 
+Digital Syste,ms Design,
 
 
 
@@ -25,6 +31,7 @@
 
 
 
+Basic Program,ming,
 
 
 
@@ -32,6 +39,8 @@
 
 
 
+Career Planni,ng and Mentor, of Hours,
+Career Planni,ng and Mentor, of Hours,
 
 
 
@@ -41,20 +50,33 @@
 
 
 
+Calculus (I),,
+Calculus (I),,
 
 
 
+Physics (I),
+Physics (I),
 
+Network Plann,ing and Manag,ement Practic,es,
+Network Plann,ing and Manag,ement Practic,es,
+Network Plann,ing and Manag,ement Practic,es,
 
 
+Basic Program,ming,
 
 
 
 
 
+Digital Syste,ms Design,
+Digital Syste,ms Design,
 
 
 
+Competitive P,rogramming (I,I),
+Competitive P,rogramming (I,I),
+Competitive P,rogramming (I,I),
 
 
 
@@ -63,31 +85,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Competitive P,rogramming(II,I),
+Competitive P,rogramming(II,I),
+Competitive P,rogramming(II,I),
 
 
 

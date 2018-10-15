@@ -1,0 +1,12 @@
+5IJK,EC122,Competitive Programming (II)
+6EFG,ED302,Competitive Programming(III)
+2EF5B,EC315,LabVIEW Programming Language
+1G4CD,ED117,Intro. to Network Programming
+1EF4B,EC115,4IJK,EC315,Introduction to Computers and Programming
+1EF,EC122,3IJK,EC315,4B,EC122,Introduction to Computers and Programming
+1EF,EC114,2IJK,EC315,4B,EC114,Introduction to Computers and Programming
+1N3N5N,EC316,Basic Programming
+5IJK,EC122,Competitive Programming (II)
+6EFG,ED302,Competitive Programming(III)
+2EF5B,EC315,LabVIEW Programming Language
+1G4CD,ED117,Intro. to Network Programming
