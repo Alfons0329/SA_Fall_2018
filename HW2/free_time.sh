@@ -14,10 +14,9 @@ line=$(wc -l < "time_data.txt")
 for i in $(seq 1 $line);
 do
     cur_time=$(cat "time_data.txt" | awk -v cur_row="$i" ' BEGIN { FS=","; i=0 } { ++i; if(i==cur_row){ for(j=1; j<=NF; ++j) printf("%s ",$j); } } ') #extract the time of current class
-    nfcnt=$(cat "time_data.txt" | awk -v cur_row="$i" ' BEGIN { FS=","; i=0 } { ++i; if(i==cur_row){ printf("%d",NF) } } ')
+    nfcnt=$(cat "time_data.txt" | awk -v cur_row="$i" ' BEGIN { FS=","; i=0 } { ++i; if(i==cur_row){ printf("%d",NF-1) } } ')
     free_class=$(cat "cos_data.txt" | awk -v cur_row="$i" ' BEGIN { FS=","; i=0 } { ++i; if(i==cur_row){ printf("%s",$0) } } ')
 
-    let "nfcnt-=1" #nfcnt decrement by one to remove \n in the end
     for j in $cur_time
     do
         for k in $free_time_arr
@@ -36,3 +35,4 @@ do
 done
 
 sed -i.bak 's/,,/,/g' "show_free.txt"
+dialog --title "Available free time classes as follows: " --textbox "show_free.txt" 200 200

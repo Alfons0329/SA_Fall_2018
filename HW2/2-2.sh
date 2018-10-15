@@ -216,7 +216,6 @@ do
         if [ $print_type -eq 5 ];
         then
             sh "free_time.sh"
-            dialog --title "Available free time classes as follows: " --textbox "show_free.txt" 200 200
         elif [ $print_type -eq 6 ];
         then
             sh "partial_name.sh"

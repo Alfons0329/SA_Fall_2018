@@ -13,11 +13,10 @@ BEGIN {
         {
             for(j=i+1; char[j]>"9"; j++)
             {
-                printf("%s%s,",char[i],char[j])
+                printf("%s%s ",char[i],char[j])
             }
             i=j-1;
         }
     }
-    printf("\n")
 }
 
