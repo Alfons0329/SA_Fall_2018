@@ -134,7 +134,7 @@ write_db() {
     #if there is a conflict, show the data of conflicted classes
     if [ $conf -eq 1 ];
     then
-        dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
+        dialog --title "Conflict classes as follows: " --textbox "conflict.txt" 200 200
 
         #back up the current one to prevent data loss if press cancel after class conflict
         cp "selected_time.txt" "selected_time_bk.txt"
@@ -175,6 +175,7 @@ write_db() {
 start_only=0
 print_type=1
 choose=4
+back=1
 while true;
 do
     if [ -e "class.json" ];
@@ -196,10 +197,16 @@ do
     then
 
         get=$(dialog --title --stdout "Options" --menu "Choose one" 200 200 10 \
-            1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location" 5 "Course for Free Time" 6 "Partial Name Search" 7 "Partial Time Search" )
+            1 "Normal with class name" 2 "Normal with class location" 3 "Less important time with class name" 4 "Less important time with class location" 5 "Course for free time" 6 "Partial name search" 7 "Partial time search" )
         if [ $? -ne 1 ];
         then
+            if [ $get -le 4 ];
+            then
+                back=$get
+            fi
             print_type=$get
+        else
+            print_type=$back
         fi
     fi
 
@@ -210,6 +217,7 @@ do
         if [ $print_type -eq 5 ];
         then
             sh "free_time.sh"
+            dialog --title "Available free time classes as follows: " --textbox "show_free.txt" 200 200
         elif [ $print_type -eq 6 ];
         then
             sh "partial_name.sh"
