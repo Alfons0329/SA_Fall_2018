@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 json_file="class.json"
 parsed_first="cos_data.txt"
@@ -11,7 +11,7 @@ choose=0
 gen_menu() {
     #processed with tag item for buildlist
     cat $data_base | awk ' BEGIN { FS="|"; i=0 } { printf("%d-%s off\\\n",++i , $1) } ' > "menu_db.txt"
-    
+
     #display the menu dialog and remove space if use parameter
     sed -i.bak 's/ /_/g' "menu_db.txt"
     sed -i.bak 's/_off/ off/g' "menu_db.txt"
@@ -82,7 +82,7 @@ write_db() {
     menu_db=$(cat "menu_db_bk.txt")
 
     sel=$(dialog --stdout --buildlist "Choose one" 200 200 200 $menu_db)
-    
+
     #extracted the class name from the cos_name.txt with the selected number
     quit=$?
     if [ $quit -eq 1 ];
@@ -114,7 +114,7 @@ write_db() {
         sel_time_parsed=$(echo "$sel_time" | sed ' s/,/ /g ')
 
         sel_name=$(cat "cos_data.txt" | awk -v sel_row="$i" '  BEGIN { i=0; FS="," } { ++i; if(i==sel_row){ printf("%s", $NF) } } ')
-        
+
         #check the time conflict write back to the current selected class
         for j in $sel_time_parsed
         do
@@ -137,7 +137,7 @@ write_db() {
         dialog --title "Conflict class as follows: " --textbox "conflict.txt" 200 200
 
         #back up the current one to prevent data loss if press cancel after class conflict
-        cp "selected_time.txt" "selected_time_bk.txt" 
+        cp "selected_time.txt" "selected_time_bk.txt"
         cp "selected_loc.txt" "selected_loc_bk.txt"
     else
         table="selected_time.txt"
@@ -196,7 +196,7 @@ do
     then
 
         get=$(dialog --title --stdout "Options" --menu "Choose one" 200 200 10 \
-            1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location")
+            1 "Normal with Class Name" 2 "Normal with Class Location" 3 "Less Important Time with Class Name" 4 "Less Important Time with Class Location" 5 "Course for Free Time" 6 "Partial Name Search" 7 "Partial Time Search" )
         if [ $? -ne 1 ];
         then
             print_type=$get
@@ -207,8 +207,19 @@ do
     then
         start_only=0 #nop since without this, cant run on macOS for debugging
     else
-        sh "print_table.sh" $print_type
-        dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
-        choose=$?
+        if [ $print_type -eq 5 ];
+        then
+            sh "free_time.sh"
+        elif [ $print_type -eq 6 ];
+        then
+            sh "partial_name.sh"
+        elif [ $print_type -eq 7 ];
+            sh "partial_time.sh"
+        then
+        else
+            sh "print_table.sh" $print_type
+            dialog --stdout  --title "Main menu" --ok-label "Add Class" --extra-button --extra-label "Option" --help-button --help-label "Exit" --textbox "show.txt" 200 200
+            choose=$?
+        fi
     fi
 done

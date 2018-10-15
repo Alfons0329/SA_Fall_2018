@@ -21,8 +21,8 @@ Calculus (I) ,             ,
 
 
 
-
-
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
 
 
 
@@ -65,6 +65,7 @@ Physics (I)  ,
 
 
 
+LabVIEW Progr,amming Langua,ge           ,
 
 
 
@@ -73,10 +74,9 @@ Physics (I)  ,
 
 
 
-
-
-
-
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
+Competitive P,rogramming (I,I)           ,
 
 
 
