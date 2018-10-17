@@ -1,20 +1,22 @@
-2EF5B,EC315,LabVIEW Programming Language
+2B5EF,EC115,Digital Systems Design
 2A,AB101,Service Learning II
-2EFG,EC016,Design and Implementation of IOT Applications
 2G5CD,EC115,Introduction to Cryptography
 2IJK,EC220,5CD,EC114,Digital Circuit Lab.
-2EF5B,EC022,Introduction to Multimedia Information System
 2G5CD,ED302,Introduction to Pattern Recognition
-2EF5B,ED117,Introduction to Machine Learning
-2EFG,EC324,Android Progr
+4IJK,EC115,Network Planning and Management Practices
+4IJK,EC122,Computer System Administration
+1EF4B,EC115,4IJK,EC315,Introduction to Computers and Programming
 1EF,EC122,3IJK,EC315,4B,EC122,Introduction to Computers and Programming
 1EF,EC114,2IJK,EC315,4B,EC114,Introduction to Computers and Programming
 3CD5G,EC122,Probability
 1B4EF,EC114,Intro. to Computer Networks
+1N3N5N,EC316,Basic Programming
 3CD5G,EDB27,Intro. to Compiler Design
 3CD5G,EC114,Linear Algebra
 3CD5G,EC115,Linear Algebra
 1EF,AB101,Computer Science Seminars
+3IJK,EC220,5EF,ED117,Microprocessor System Lab.
+1IJK,EC220,5EF,EDB27,Microprocessor System Lab.
 3CD5G,EC022,Probability 
 1B4EF,EC015,Intro. to Computer Networks
 1B4EF,EC122,Intro. to Computer Networks
@@ -23,7 +25,6 @@
 3CD5G,EC015,Linear Algebra
 1EF4B,ED202,Queuing Theory
 2G5CD,ED202,Cloud Fog Computing and Big Data Analytics
-2EFG,EC122,Entrepreneurship Realization
 1EF,A403,The  Paradigms of Novels
 1EF,A205,Sociology
 1EF,A102,Introduction to Music Theory
@@ -60,20 +61,10 @@
 2GH,Physical Education
 2GH,Physcial Education
 2GH,Physcial Education
-2EF,Physical Education
-2EF,Physical Education
-2EF,Physical Education
-2EF,Physical Education
-2EF,Physical Education
-2EF,Physical Education
-2EF,Physcial Education
-2EF,Physcial Education
-2EF5B,EC315,LabVIEW Programming Language
+2B5EF,EC115,Digital Systems Design
 2A,AB101,Service Learning II
-2EFG,EC016,Design and Implementation of IOT Applications
 2G5CD,EC115,Introduction to Cryptography
 2IJK,EC220,5CD,EC114,Digital Circuit Lab.
-2EF5B,EC022,Introduction to Multimedia Information System
 2G5CD,ED302,Introduction to Pattern Recognition
-2EF5B,ED117,Introduction to Machine Learning
-2EFG,EC324,Android Progr
+4IJK,EC115,Network Planning and Management Practices
+4IJK,EC122,Computer System Administration

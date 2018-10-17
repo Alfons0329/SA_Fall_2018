@@ -173,16 +173,20 @@ write_db() {
 
 #-----------------------------------------------work flow-------------------------------------------------------------#
 start_only=0
-print_type=1
 choose=4
 back=1
+
+if [ -e "class.json" ];
+then
+    print_type=$(cat "print_type.txt")
+else
+    print_type=1
+    init
+fi
+
 while true;
 do
-    if [ -e "class.json" ];
-    then
-    else
-        init
-    fi
+
 
     if [ "$choose" -eq 2 ];
     then
@@ -228,3 +232,4 @@ do
         fi
     fi
 done
+echo "$print_type" > "print_type.txt"

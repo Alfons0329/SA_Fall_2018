@@ -1,5 +1,5 @@
 
-Basic Program,ming         ,
+
 
 
 Physics (I)  ,
@@ -17,7 +17,12 @@ Calculus (I) ,             ,
 
 
 
-Digital Syste,ms Design    ,
+
+
+
+
+LabVIEW Progr,amming Langua,ge           ,
+LabVIEW Progr,amming Langua,ge           ,
 
 
 
@@ -27,11 +32,6 @@ Digital Syste,ms Design    ,
 
 
 
-
-
-
-
-Basic Program,ming         ,
 
 
 
@@ -58,19 +58,19 @@ Calculus (I) ,             ,
 Physics (I)  ,
 Physics (I)  ,
 
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
-Network Plann,ing and Manag,ement Practic,es           ,
-
-
-Basic Program,ming         ,
 
 
 
 
 
-Digital Syste,ms Design    ,
-Digital Syste,ms Design    ,
+
+
+LabVIEW Progr,amming Langua,ge           ,
+
+
+
+
+
 
 
 

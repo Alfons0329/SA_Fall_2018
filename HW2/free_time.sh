@@ -23,7 +23,7 @@ do
         do
             if [ $j = $k ];
             then
-                let "nfcnt-=1"
+                let  "nfcnt-=1" > /dev/null
             fi
         done
     done

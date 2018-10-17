@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -f "show_partial_time.txt"
 echo "" > "show_partial_time.txt"
-substr=$(dialog --inputbox --stdout "Input a substring of time to search: " 200 200 2)
+substr=$(dialog --inputbox --stdout "Input a substring of time to search: " 200 200 )
 subtime=$(echo "$substr" | awk -f "awk_parsetime_pt.sh")
 line=$(wc -l < "time_data.txt")
 
@@ -19,7 +19,7 @@ do
            # echo "j $j k $k name $free_class"
             if [ $j = $k ];
             then
-                let "nfcnt-=1"
+                let "nfcnt-=1" > /dev/null
             fi
         done
     done
