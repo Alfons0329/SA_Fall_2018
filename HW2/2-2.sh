@@ -77,7 +77,7 @@ quit=0
 #--------------------------------------------------------global variable for database processing-------------------------------#
 write_db() {
     cp "menu_db.txt" "menu_db_bk.txt"
-    tr -d '\n' < "menu_db_bk.txt"
+    tr -d '\n' < "menu_db_bk.txt" >> /dev/null
     sed -i.bak 's/\\//g' "menu_db_bk.txt"
     menu_db=$(cat "menu_db_bk.txt")
 
