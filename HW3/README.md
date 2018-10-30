@@ -2,7 +2,7 @@
 
 ## FTP part
 
-### Install the pure-ftpd if nothing is found in your /usr/ports
+### Step 1. Install the pure-ftpd if nothing is found in your /usr/ports
 * First install the snap if is says cd /usr/ports/ftp/pureftpd
 /usr/ports/ftp/pureftpd: No such file or directory.
 ```sh
@@ -13,7 +13,7 @@ portsnap fetch
 cd /usr/ports/ftp/pureftpd
 sudo make #(compile with the upload script after the GUI pops out)
 ```
-### Start the pureftp daemon "pure-ftpd", also solve some problem occurred unexpectedly
+### Step 2. Start the pureftp daemon "pure-ftpd".
 * Now start the ftp daemon service but cries with the following error
 ```sh
 sudo pure-ftpd onestart
@@ -42,3 +42,8 @@ sudo service pure-ftpd onestart
 sudo service pure-ftpd status
 pureftpd is running as pid 83241.
 ```
+
+### Solve some problem occurred unexpectedly after building pure-ftpd
+
+* Unable to connect from localhost to ftp within same PC(one in main os the other in the Virtual Box)
+
