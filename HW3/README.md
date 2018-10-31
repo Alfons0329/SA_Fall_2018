@@ -76,8 +76,8 @@ pureftpd is running as pid 83241. #this shows pure-ftpd is running well
     sudo service pure-ftpd restart
     ```
 
-    * 3-3. OK to login or not?, if not, see [link1 for database checking](https://www.jianshu.com/p/7d86472208cd
-    or [link2 to config your network adapter, and ftp to your virtual user](https://www.youtube.com/watch?v=xlJQ9uWs_qU&list=PL68bOVolR6EqKCHaFJvcLPX8CuqxLRIGo))
+    * 3-3. OK to login or not?, if not, see( [link1 for database checking](https://www.jianshu.com/p/7d86472208cd
+    )or [link2 to config your network adapter, and ftp to your virtual user](https://www.youtube.com/watch?v=xlJQ9uWs_qU&list=PL68bOVolR6EqKCHaFJvcLPX8CuqxLRIGo) )
     Note: Don't forget to `dhclient <host_only_adapter_name>` in BSD for configuring local IP correctly, for example, the newly added adapter for me is em1
     ```sh
     ifconfig
