@@ -2,7 +2,7 @@
 
 ## FTP part
 
-### Step 1. Install the pure-ftpd if nothing is found in your /usr/ports
+### Step 1: Install the pure-ftpd if nothing is found in your /usr/ports
 * First install the snap if is cries 
 
 cd /usr/ports/ftp/pureftpd
@@ -15,7 +15,7 @@ portsnap fetch
 cd /usr/ports/ftp/pureftpd
 sudo make #(compile with the upload script after the GUI pops out, must be installed with sudo!)
 ```
-### Step 2. Start the pureftp daemon "pure-ftpd".
+### Step 2: Start the pureftp daemon "pure-ftpd".
 * Now start the ftp daemon service but cries with the following error
 ```sh
 sudo pure-ftpd onestart
@@ -47,7 +47,7 @@ sudo service pure-ftpd status
 pureftpd is running as pid 83241. #this shows pure-ftpd is running well
 ```
 
-### Trouble shooting after building pure-ftpd but still unable to connect from FileZilla
+###Step 3: Trouble shooting after building pure-ftpd but still unable to connect from FileZilla
 
 * Problem: Unable to connect from localhost to ftp within same PC(one in main OS and the other in the Virtual Box, the user is the one that created after installed FreeBSD)
 
@@ -55,8 +55,28 @@ pureftpd is running as pid 83241. #this shows pure-ftpd is running well
 
 ![](https://imgur.com/r91d07b.png)
 
-* Reason
-Due to the lack of users to be added in the pure-pw system, the pure=pw system is the stand alone user database hold by pure-ftpd
+* Reason: Due to the lack of users to be added in the pure-pw system, the pure=pw system is the stand alone user database hold by pure-ftpd
 
-* Solution
-Try to first add the account and do the configs
+* Solution: Try to first add the account and do the configs
+    <br />Tool is under /usr/local/bin/pure-pw
+    <br />Database is under /usr/local/etc/pureftpd.passwd and
+/usr/local/etc/pureftpd.pdb, cat it after successfully added user to see if data write correctly.
+    
+    * 3-1. Added the user virtual user
+    ```sh
+    pure-pw useradd <user_name> -u <uid> -g <gid> -d <home_dir_path>
+    #for example add test for the id 1003, gid 1003 of system,
+    whose home dir is /home/ftp
+    pure-pw useradd user1 -u 1003 -g 1003 -d /home/ftp
+    ```
+    
+    * 3-2. Build database and restart
+    ```sh
+    pure-pw mkdb
+    sudo service pure-ftpd restart
+    ```
+
+    * 3-3. OK to login or not?
+
+
+
