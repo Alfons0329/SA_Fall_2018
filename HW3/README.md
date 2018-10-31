@@ -3,7 +3,9 @@
 ## FTP part
 
 ### Step 1. Install the pure-ftpd if nothing is found in your /usr/ports
-* First install the snap if is says cd /usr/ports/ftp/pureftpd
+* First install the snap if is cries 
+
+cd /usr/ports/ftp/pureftpd
 /usr/ports/ftp/pureftpd: No such file or directory.
 ```sh
 portsnap fetch
@@ -11,7 +13,7 @@ portsnap fetch
 * Make it with the component that TA wants
 ```sh
 cd /usr/ports/ftp/pureftpd
-sudo make #(compile with the upload script after the GUI pops out)
+sudo make #(compile with the upload script after the GUI pops out, must be installed with sudo!)
 ```
 ### Step 2. Start the pureftp daemon "pure-ftpd".
 * Now start the ftp daemon service but cries with the following error
@@ -21,9 +23,11 @@ sudo pure-ftpd onestart
 /usr/local/etc/rc.d/pure-ftpd: WARNING: /usr/local/etc/pure-ftpd.conf is not readable.
 /usr/local/etc/rc.d/pure-ftpd: WARNING: failed precmd routine for pureftpd
 ```
+
 found that pure-ftpd in /usr/local/etc is not named as pure-ftpd.conf but pure-ftpd.conf.sample
 so just
 ```sh
+
 /usr/local/etc/rc.d
 > cd ..
 > ls
@@ -40,10 +44,19 @@ and then
 ```sh
 sudo service pure-ftpd onestart
 sudo service pure-ftpd status
-pureftpd is running as pid 83241.
+pureftpd is running as pid 83241. #this shows pure-ftpd is running well
 ```
 
-### Solve some problem occurred unexpectedly after building pure-ftpd
+### Trouble shooting after building pure-ftpd but still unable to connect from FileZilla
 
-* Unable to connect from localhost to ftp within same PC(one in main os the other in the Virtual Box)
+* Problem: Unable to connect from localhost to ftp within same PC(one in main OS and the other in the Virtual Box, the user is the one that created after installed FreeBSD)
 
+![](https://imgur.com/NRc2Dza.png)
+
+![](https://imgur.com/r91d07b.png)
+
+* Reason
+Due to the lack of users to be added in the pure-pw system, the pure=pw system is the stand alone user database hold by pure-ftpd
+
+* Solution
+Try to first add the account and do the configs
