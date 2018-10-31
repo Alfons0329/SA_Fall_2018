@@ -47,7 +47,7 @@ sudo service pure-ftpd status
 pureftpd is running as pid 83241. #this shows pure-ftpd is running well
 ```
 
-###Step 3: Trouble shooting after building pure-ftpd but still unable to connect from FileZilla
+### Step 3: Trouble shooting after building pure-ftpd but still unable to connect from FileZilla
 
 * Problem: Unable to connect from localhost to ftp within same PC(one in main OS and the other in the Virtual Box, the user is the one that created after installed FreeBSD)
 
@@ -76,7 +76,22 @@ pureftpd is running as pid 83241. #this shows pure-ftpd is running well
     sudo service pure-ftpd restart
     ```
 
-    * 3-3. OK to login or not?
+    * 3-3. OK to login or not?, if not, see [link1 for database checking](https://www.jianshu.com/p/7d86472208cd
+    or [link2 to config your network adapter, and ftp to your virtual user](https://www.youtube.com/watch?v=xlJQ9uWs_qU&list=PL68bOVolR6EqKCHaFJvcLPX8CuqxLRIGo))
+    Note: Don't forget to `dhclient <host_only_adapter_name>` in BSD for configuring local IP correctly, for example, the newly added adapter for me is em1
+    ```sh
+    ifconfig
+
+    em1: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> metric 0 mtu 1500
+    options=9b<RXCSUM,TXCSUM,VLAN_MTU,VLAN_HWTAGGING,VLAN_HWCSUM>
+    ether 08:00:27:d0:6c:f8
+    hwaddr 08:00:27:d0:6c:f8
+    inet 192.168.56.101 netmask 0xffffff00 broadcast 192.168.56.255
+    nd6 options=29<PERFORMNUD,IFDISABLED,AUTO_LINKLOCAL>
+    media: Ethernet autoselect (1000baseT <full-duplex>)
+    status: active
+    ```
+    Then we can successfully ftp to `192.168.56.101`
 
 
 
