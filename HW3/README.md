@@ -108,6 +108,34 @@ pureftpd is running as pid 83241. #this shows pure-ftpd is running well
 awk -F":" '{print $1}' /etc/passwd
 awk -F":" '{print $1}' /etc/group
 ```
-### Prob 1.
 
+* Regular Linux file permission
+[See 鳥哥 5.2.3 to understand what rwx can do](http://linux.vbird.org/linux_basic/0210filepermission.php#filepermission_dir)
 
+### Prob 1. Anonymous Login
+```
+Anonymous Login
+ Can download from /home/ftp/public
+ Can upload & mkdir from /home/ftp/upload
+ But no download or delete from /home/ftp/upload
+ Hidden directory problem /home/ftp/hidden
+ There is a directory called “treasure” inside /home/ftp/hidden/
+ Client can’t list /home/ftp/hidden/ but can enter hidden/treasure
+```
+
+* Unable to chroot??
+
+```sh
+sudo chroot -u alfons0329 /home/alfons0329/
+chroot: /bin/tcsh: No such file or directory
+```
+
+Check your `$PATH` to see if chroot exists
+
+```sh
+echo $0 #usually lies in /usr/sbin
+```
+
+Mine exists, but stil unable to chroot :|
+
+[check this link](https://unix.stackexchange.com/questions/128046/chroot-failed-to-run-command-bin-bash-no-such-file-or-directory?fbclid=IwAR1xV7TzWuW2tugvfZnmpV5-rA1la-HIm6AyGl-ufeOrVSsqaPJXP7FMdrk)
