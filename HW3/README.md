@@ -1,6 +1,6 @@
 # System Administration HW3 Writeups
 
-## FTP part
+## FTP part I, prequisities
 
 ### Step 1: Install the pure-ftpd if nothing is found in your /usr/ports
 * First install the snap if is cries 
@@ -93,5 +93,21 @@ pureftpd is running as pid 83241. #this shows pure-ftpd is running well
     ```
     Then we can successfully ftp to `192.168.56.101`
 
+
+## FTP part II HW requirements(check 09_file_system pdf p31 -  for more info)
+
+### Some knowledges to know before proceed this part
+* [What is wheel and why use it?](https://www.cnblogs.com/jan5/p/3359421.html)
+
+* [Linux system account administration](http://linux.vbird.org/linux_basic/0410accountmanager.php#passwd_file)
+
+* [shell nologin vs false](https://unix.stackexchange.com/questions/10852/whats-the-difference-between-sbin-nologin-and-bin-false)
+
+* To check all users and groups
+```sh
+awk -F":" '{print $1}' /etc/passwd
+awk -F":" '{print $1}' /etc/group
+```
+### Prob 1.
 
 
