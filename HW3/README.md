@@ -112,18 +112,9 @@ awk -F":" '{print $1}' /etc/group
 * Regular Linux file permission
 [See 鳥哥 5.2.3 to understand what rwx can do](http://linux.vbird.org/linux_basic/0210filepermission.php#filepermission_dir)
 
-### Prob 1. Anonymous Login
-```
-Anonymous Login
- Can download from /home/ftp/public
- Can upload & mkdir from /home/ftp/upload
- But no download or delete from /home/ftp/upload
- Hidden directory problem /home/ftp/hidden
- There is a directory called “treasure” inside /home/ftp/hidden/
- Client can’t list /home/ftp/hidden/ but can enter hidden/treasure
-```
-
-* Unable to chroot??
+<details><summary>Problem: Unable to chroot?? (May not surely happen)</summary>
+<p>
+* 
 
 ```sh
 sudo chroot -u alfons0329 /home/alfons0329/
@@ -139,3 +130,44 @@ echo $0 #usually lies in /usr/sbin
 Mine exists, but stil unable to chroot :|
 
 [check this link](https://unix.stackexchange.com/questions/128046/chroot-failed-to-run-command-bin-bash-no-such-file-or-directory?fbclid=IwAR1xV7TzWuW2tugvfZnmpV5-rA1la-HIm6AyGl-ufeOrVSsqaPJXP7FMdrk)
+
+[And the second last reply of this link gives the answer!!!](https://ubuntuforums.org/showthread.php?t=1434781&s=4098497d6090e45179ec3e50e46e0118&fbclid=IwAR3LDiadDntL3FqjzHR5T4vGUzW6YPz4mse_i5KQtKvnugPDw5z6IJSTg0E)
+
+* Reason: The root dir is the highest in the UNIX file hierachy, it should at least contains an "executable shell" in it. Hence the following commands will fail to proceed
+
+```sh
+sudo mkdir /home/chrooted #make a dir named chrooted for chroot jail
+sudo chroot -u <user_name>  /home/chrooted
+> failed to run command ‘/bin/bash’: No such file or directory  #or the like
+```
+
+but with
+
+```sh
+sudo chroot -u <user_name> /
+#succeeded
+```
+
+That is because there is no /bin/bash directory inside chroot. Make sure you point it to where bash (or other shell's) executable is in chroot directory.
+
+* Solution: Make a symbolic link in it (there is no need to cp all the /bin/ to /home/chrooted), or `mount --bind` (seems not available in BSD)
+
+</p>
+</details>
+
+### Prob 1. Anonymous Login
+
+```
+Anonymous Login
+ Can download from /home/ftp/public
+ Can upload & mkdir from /home/ftp/upload
+ But no download or delete from /home/ftp/upload
+ Hidden directory problem /home/ftp/hidden
+ There is a directory called “treasure” inside /home/ftp/hidden/
+ Client can’t list /home/ftp/hidden/ but can enter hidden/treasure
+```
+
+#### Step1. Config the TLS certificate first
+
+* See [this link](http://blog.topspeedsnail.com/archives/4309) for tutorial
+    * pureftpd.conf lies in `/usr/local/etc` of FreeBSD
