@@ -169,5 +169,20 @@ Anonymous Login
 
 #### Step1. Config the TLS certificate first
 
-* See [this link](http://blog.topspeedsnail.com/archives/4309) for tutorial
+* See [this link](http://blog.topspeedsnail.com/archives/4309) and [this link](http://pureftpd.sourceforge.net/README.TLS)
     * pureftpd.conf lies in `/usr/local/etc` of FreeBSD
+
+#### Step2. The permissions
+* ChrootEveryone yes
+default permission after sysadm created
+```
+drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:18 hidden
+drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:17 public
+drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:17 upload
+```
+* 
+```
+drwxr-x--x(cannot list, no r permission, can cd x permission)  2 sysadm  sysadm     2 Oct 31 05:18 hidden
+drwxr-xr(anonymous download, r permission)-x  2 sysadm  sysadm     2 Oct 31 05:17 public
+drwxr-xrw(anonymous upload and mkdir, w permission)x  2 sysadm  sysadm     2 Oct 31 05:17 upload
+```
