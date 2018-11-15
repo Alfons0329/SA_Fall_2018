@@ -155,16 +155,29 @@ That is because there is no /bin/bash directory inside chroot. Make sure you poi
 </p>
 </details>
 
-### Prob 1. Anonymous Login
+### Prob 1. FTP
 
 ```
 Anonymous Login
- Can download from /home/ftp/public
- Can upload & mkdir from /home/ftp/upload
- But no download or delete from /home/ftp/upload
- Hidden directory problem /home/ftp/hidden
- There is a directory called “treasure” inside /home/ftp/hidden/
- Client can’t list /home/ftp/hidden/ but can enter hidden/treasure
+• Chrooted (/home/ftp) (5%)
+• Download from “/home/ftp/public” (5%)
+• Upload to “/home/ftp/upload” (5%)
+• Can’t download or delete form “/home/ftp/upload” (5%)
+• Hidden directory “/home/ftp/hidden” problem: can enter but can’t
+retrieve directory listing (5%)
+• FTP over TLS (5%)
+
+sysadm
+• Login from SSH (2%)
+• Full access to “/home/ftp”, “upload”, “public” (3%)
+• Full access to “hidden” (list, mkdir, upload, download…) (3%)
+• FTP over TLS (2%)
+
+ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
+• Chrooted (/home/ftp) (5%)
+• Full access to “/home/ftp”, “upload”, “public” (5%)
+• Full access to “hidden” (list, mkdir, upload, download, …) (5%)
+• FTP over TLS (5%)
 ```
 
 #### Step1. Config the TLS certificate first
@@ -173,16 +186,46 @@ Anonymous Login
     * pureftpd.conf lies in `/usr/local/etc` of FreeBSD
 
 #### Step2. The permissions
-* ChrootEveryone yes
-default permission after sysadm created
+
+* anonymous login
+
+    * make a system user ftp so that anonymous can be attatched on that
+    * PureDB should be set like this for the database`PureDB                       /usr/local/etc/pureftpd.pdb`
+```
+drwxr-x--x(cannot list, no r permission, can cd x permission)  2 sysadm  sysadm     2 Oct 31 05:18 hidden
+drwxr-xr(anonymous download, r permission)-x  2 sysadm  sysadm     2 Oct 31 05:17 public
+drwxrwx-w(anonymous upload and mkdir, w permission, but no download and delete, remove r permission)x  2 sysadm  sysadm     2 Oct 31 05:17 upload
+```
+
+* sysadm
+default permission after sysadm created (enough for problem two if these folers were created ny sysadm himself)
 ```
 drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:18 hidden
 drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:17 public
 drwxr-xr-x  2 sysadm  sysadm     2 Oct 31 05:17 upload
 ```
-* 
+
+* ftp-vip
+just add the ftp-vip user under the same group of sysadm and make the database will be fine
+
+```sh
+#attatch virtual user: ftp-vip to the real system user sysadm and its group (make the home dir be /home/ftp)
+pure-pw add useradd ftp-vip -u sysadm -g sysadm -d /home/ftp
+sudo pure-pw mkdb
+sudo service pure-ftpd restart
 ```
-drwxr-x--x(cannot list, no r permission, can cd x permission)  2 sysadm  sysadm     2 Oct 31 05:18 hidden
-drwxr-xr(anonymous download, r permission)-x  2 sysadm  sysadm     2 Oct 31 05:17 public
-drwxr-xrw(anonymous upload and mkdir, w permission)x  2 sysadm  sysadm     2 Oct 31 05:17 upload
+
+#### Verifications
+* Can’t download or delete form “/home/ftp/upload” (5%)
+In your FileZilla, you should see the following error msg: 
+
+* FTP over TLS, the TLS certificate message should popped out and then the following log
+```
+狀態: 	連線已建立, 正在等候歡迎訊息...
+狀態: 	正在初始 TLS...
+狀態: 	正在驗證憑證...
+狀態: 	TLS 連線已建立.
+狀態: 	記錄
+狀態: 	正在取得目錄列表...
+狀態: 	成功取得 "/" 的目錄
 ```
