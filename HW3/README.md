@@ -275,3 +275,11 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
     $ zfs get all mypool/hidden | grep compression
     mypool/hidden  compression           gzip                   local
     ```
+* The newer snapshot is, the closer to the end of command `zfs list -t snapshot`
+    ```sh
+    $ zfs list -t  snapshot
+    NAME                   USED  AVAIL  REFER  MOUNTPOINT
+    mypool/hidden@first       0      -    23K  -
+    mypool/hidden@second      0      -    23K  -
+    mypool/hidden@third       0      -    23K  -
+    ```
