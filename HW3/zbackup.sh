@@ -9,7 +9,6 @@ arg_cnt=0
 
 check_arg()
 {
-	echo "arg_cnt $arg_cnt"
 	if [ $arg_cnt -eq 0 ];
 	then
 		echo " Usage: zbackup [[--list | --delete | --export] target-dataset [ID] | [--import] target-dataset filename | target dataset [rotation count]] "
@@ -35,9 +34,9 @@ check_id()
 
 check_dataset()
 {
-	for data in $(zfs list | cut -d ' ' -f 1);
+	for data in $(zfs list | cut -d ' ' -f 1); 
 	do
-		if [ $1 = $data ] ;
+		if [ $1 = $data ] ; 
 		then
 			return
 		fi
@@ -57,16 +56,16 @@ create()
 	check_id $rot_cnt
 
 	#adjust the rotate count, if not specified rotate count, just set it as 20
-	if [ -z $rot_cnt ] ;
-	then
-		rotate_cnt=20;
+	if [ -z $rot_cnt ] ; 
+	then 
+		rotate_cnt=20; 
 	fi
 
 	#illegal rotate count, quit
-	if [ $rot_cnt -eq 0 ] ;
-	then
+	if [ $rot_cnt -eq 0 ] ; 
+	then 
 		error "Rotate count should in range [1, 20]"
-		exit 0;
+		exit 0; 
 	fi
 
 	#iterate through the data and check if the oldest need to be deleted
@@ -128,7 +127,40 @@ list()
 
 delete()
 {
+	dataset=$1
+	id=$2
 
+	check_id $id
+	check_dataset $dataset
+
+	#if specified id, list the id of specified dataset, otherwise, list all of specified dataset
+	if [ -z $id ];
+	then
+		echo "Delete all the snapshots in dataset: $dataset"
+
+		to_del=$(zfs list -rt snapshot $dataset | awk ' BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%s ", $1); } } ')
+		for i in $to_del;
+		do
+			zfs destroy $i
+
+			if [ $? -eq 0 ];
+			then
+				echo "Successfully delete snapshot $i in dataset $dataset"
+			else
+				error "Unable to delete the snapshot $i in dataset $dataset"
+			fi
+		done
+	else
+		to_del=$(zfs list -rt snapshot $dataset | awk -v to_del_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_del_id + 1) { printf("%s", $1); } } ')
+		zfs destroy $to_del
+
+		if [ $? -eq 0 ];
+		then
+			echo "Successfully delete snapshot $to_del in dataset $dataset"
+		else
+			error "Unable to delete the snapshot $to_del in dataset $dataset"
+		fi
+	fi
 }
 
 error()
@@ -145,16 +177,17 @@ error()
 	case $1 in
 
 		--list)
-			#list all the backup'd zfs datasets
-			#           $1     $2          $3
-			#./zbackup --list mypool/public 2 --> list the all the data in specified dataset
-			#./zbackup --list mypool/public -->list the data with specified ID in specified dataset
+			#          $1     $2            $3
+			#./zbackup --list mypool/public    --> list all the snapshots in specified dataset
+			#./zbackup --list mypool/public 2  --> list the snapshot with specified ID in specified dataset
 			list $2 $3
 			;;
 
 		--delete)
-			#delete the dataset with specified id
-			delete $3
+			#          $1      $2             $3
+			#./zbackup --delete mypool/public    --> list all the snapshots in specified dataset
+			#./zbackup --delete mypool/public 2  --> delete the snapshot with specified ID in specified dataset
+			delete $2 $3
 			;;
 
 		--export)
