@@ -76,8 +76,8 @@ create()
 	if [ $snap_cnt -ge $rot_cnt ];
 	then
 		#delete the oldest n, get their names, use ' ' as the delimeter of cut and get the first field
-		echo "Exist snapshot exceeds the rotation count, now delete the $(($snap_cnt-rot_cnt)) snaps"
-		to_del=$(zfs list -t snapshot | grep $dataset | head -n $(($snap_cnt-rot_cnt)) | cur -d '  ' f 1)
+		echo "Exist snapshot exceeds the rotation count, now delete the $(($snap_cnt-$rot_cnt)) snaps"
+		to_del=$(zfs list -t snapshot | grep $dataset | head -n $(($snap_cnt-$rot_cnt+1)) | cut -d ' ' -f 1)
 
 		for i in $to_del;
 		do
