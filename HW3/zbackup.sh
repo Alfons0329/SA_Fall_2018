@@ -20,7 +20,7 @@ check_arg()
 check_id()
 {
 	case $1 in
-		[0-9]*) #regex repeat
+		[0-9]*) #regex repeat OK
 			;;
 
 		'')
