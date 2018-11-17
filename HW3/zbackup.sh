@@ -1,5 +1,4 @@
 #!/bin/sh
-
 #------------------global variable declaration starts here---------------#
 data=""
 id=""
@@ -7,6 +6,16 @@ filename=""
 rotate_cnt=""
 arg_cnt=0
 #------------------global variable declaration ends here---------------#
+
+check_arg()
+{
+	echo "arg_cnt $arg_cnt"
+	if [ $arg_cnt -eq 0 ];
+	then
+		echo " Usage: zbackup [[--list | --delete | --export] target-dataset [ID] | [--import] target-dataset filename | target dataset [rotation count]] "
+		exit 0
+	fi
+}
 
 #function to check if the id is legal
 check_id()
@@ -19,7 +28,7 @@ check_id()
 			;;
 
 		*)
-			error "Illegal ID number!!"
+			error "Illegal numerical number!!"
 			;;
 	esac
 }
@@ -39,13 +48,13 @@ check_dataset()
 
 create()
 {
-	echo "Function create snapshot"
+	#echo "Function create snapshot d1 $1 d2 $2"
 	#declare some required vars
 	local rot_cnt=$2 #rotation count
 	dataset=$1 #what the name for back up
 
-	#check if the id is illegal
-	check_id $1
+	#check if the rotate count number is illegal
+	check_id $rot_cnt
 
 	#adjust the rotate count
 	#if no specified rotate count, just set it as 20
@@ -67,6 +76,7 @@ create()
 	if [ $snap_cnt -ge $rot_cnt ];
 	then
 		#delete the oldest n, get their names, use ' ' as the delimeter of cut and get the first field
+		echo "Exist snapshot exceeds the rotation count, now delete the $(($snap_cnt-rot_cnt)) snaps"
 		to_del=$(zfs list -t snapshot | grep $dataset | head -n $(($snap_cnt-rot_cnt)) | cur -d '  ' f 1)
 
 		for i in $to_del;
@@ -80,8 +90,9 @@ create()
 			fi
 		done
 	fi
-	#timestamp YYYY-MM-DD_HH-MM-SS
-	timestamp=$(data "+%Y-%m-%d %H-%M-%S")
+	#timestamp YYYY-MM-DD_HH:MM:SS
+	timestamp=`date +"%Y-%m-%d_%H:%M:%S"`
+	echo "$timestamp"
 	zfs snapshot "$dataset@$timestamp"
 
 	if [ $? -eq 0 ];
@@ -104,23 +115,13 @@ delete()
 
 }
 
-check_arg()
-{
-	if [ $arg_cnt -eq 0 ];
-	then
-		echo " Usage: zbackup [[--list | --delete | --export] target-dataset [ID] | [--import] target-dataset filename | target dataset [rotation count]] "
-		exit 0
-	fi
-}
-
 error()
 {
 	echo "Error: " $1
 	exit 0
 }
 
-main()
-{
+	#-------------------------------Main function starts here---------------------#
 	#check if the main usage is correct
 	arg_cnt=$#
 	check_arg
@@ -152,9 +153,6 @@ main()
 			create $1 $2
 			;;
 	esac
-
-}
-
-main
+	#-------------------------------Main function ends here---------------------#
 
 
