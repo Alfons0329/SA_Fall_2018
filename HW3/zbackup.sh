@@ -1,5 +1,5 @@
 #!/bin/sh
-#------------------global variable declaration starts here---------------#
+#------------------global variable declaration starts here--------------#
 data=""
 id=""
 filename=""
