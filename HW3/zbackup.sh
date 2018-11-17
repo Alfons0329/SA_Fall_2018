@@ -39,28 +39,59 @@ check_dataset()
 
 create()
 {
+	echo "Function create snapshot"
 	#declare some required vars
 	local rot_cnt=$2 #rotation count
 	dataset=$1 #what the name for back up
 
 	#check if the id is illegal
 	check_id $1
-	
+
 	#adjust the rotate count
 	#if no specified rotate count, just set it as 20
 	if [ -z "$rot_cnt" ] ; 
 	then 
 		rotate_cnt=20; 
 	fi
-	
+
 	#illegal rotate count
 	if [ $rot_cnt -eq 0 ] ; 
 	then 
-		error "rotate count should in range [1, 20]"
+		error "Rotate count should in range [1, 20]"
 		exit 0; 
 	fi
 
-	#snapshot the data
+	#snapshot the data and check if the oldest need to be deleted
+	snap_cnt=$(zfs list -t snapshot | grep $dataset | wc -l)
+
+	if [ $snap_cnt -ge $rot_cnt ];
+	then
+		#delete the oldest n, get their names, use ' ' as the delimeter of cut and get the first field
+		to_del=$(zfs list -t snapshot | grep $dataset | head -n $(($snap_cnt-rot_cnt)) | cur -d '  ' f 1)
+
+		for i in $to_del;
+		do
+			zfs destroy $i #delete the i oldest snapshots in the given dataset
+			if [ $? -eq 0 ];
+			then
+				echo "Successfully delete snapshot $i in dataset $dataset"
+			else
+				error "Unable to delete the snapshot $i in dataset $dataset"
+			fi
+		done
+	fi
+	#timestamp YYYY-MM-DD_HH-MM-SS
+	timestamp=$(data "+%Y-%m-%d %H-%M-%S")
+	zfs snapshot "$dataset@$timestamp"
+
+	if [ $? -eq 0 ];
+	then
+		echo "Successfully create snapshot $i in dataset $dataset time $timestamp"
+	else
+		error "Unable to create the snapshot $i in dataset $dataset"
+	fi
+
+
 }
 
 list()
@@ -122,7 +153,8 @@ main()
 			;;
 	esac
 
-
 }
+
+main
 
 
