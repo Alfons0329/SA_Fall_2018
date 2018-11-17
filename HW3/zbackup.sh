@@ -35,9 +35,9 @@ check_id()
 
 check_dataset()
 {
-	for data in $(zfs list | cut -d ' ' -f 1); 
+	for data in $(zfs list | cut -d ' ' -f 1);
 	do
-		if [ $1 = $data ] ; 
+		if [ $1 = $data ] ;
 		then
 			return
 		fi
@@ -50,33 +50,32 @@ create()
 {
 	#echo "Function create snapshot d1 $1 d2 $2"
 	#declare some required vars
-	local rot_cnt=$2 #rotation count
 	dataset=$1 #what the name for back up
+	rot_cnt=$2 #rotation count
 
 	#check if the rotate count number is illegal
 	check_id $rot_cnt
 
-	#adjust the rotate count
-	#if no specified rotate count, just set it as 20
-	if [ -z "$rot_cnt" ] ; 
-	then 
-		rotate_cnt=20; 
+	#adjust the rotate count, if not specified rotate count, just set it as 20
+	if [ -z $rot_cnt ] ;
+	then
+		rotate_cnt=20;
 	fi
 
-	#illegal rotate count
-	if [ $rot_cnt -eq 0 ] ; 
-	then 
+	#illegal rotate count, quit
+	if [ $rot_cnt -eq 0 ] ;
+	then
 		error "Rotate count should in range [1, 20]"
-		exit 0; 
+		exit 0;
 	fi
 
-	#snapshot the data and check if the oldest need to be deleted
+	#iterate through the data and check if the oldest need to be deleted
 	snap_cnt=$(zfs list -t snapshot | grep $dataset | wc -l)
 
 	if [ $snap_cnt -ge $rot_cnt ];
 	then
 		#delete the oldest n, get their names, use ' ' as the delimeter of cut and get the first field
-		echo "Exist snapshot exceeds the rotation count, now delete the $(($snap_cnt-$rot_cnt)) snaps"
+		echo "Current snapshot >= the rotation count, now delete the $(($snap_cnt-$rot_cnt)) snaps"
 		to_del=$(zfs list -t snapshot | grep $dataset | head -n $(($snap_cnt-$rot_cnt+1)) | cut -d ' ' -f 1)
 
 		for i in $to_del;
@@ -90,11 +89,13 @@ create()
 			fi
 		done
 	fi
-	#timestamp YYYY-MM-DD_HH:MM:SS
+
+	#add timestamp: timestamp YYYY-MM-DD_HH:MM:SS
 	timestamp=`date +"%Y-%m-%d_%H:%M:%S"`
 	echo "$timestamp"
 	zfs snapshot "$dataset@$timestamp"
 
+	#create snapshot
 	if [ $? -eq 0 ];
 	then
 		echo "Successfully create snapshot $i in dataset $dataset time $timestamp"
@@ -107,6 +108,21 @@ create()
 
 list()
 {
+	dataset=$1
+	id=$2
+
+	check_id $id
+	check_dataset $dataset
+
+	#if specified id, list the id of specified dataset, otherwise, list all of specified dataset
+	if [ -z $id ];
+	then
+		printf "%s\t\t%s\t\t%s\t\n" "ID" "Dataset" "Time"
+		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", ++cnt, $2, $3)} '
+	else
+		printf "%s\t\t%s\t\t%s\t\n" "ID" "Dataset" "Time"
+		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%dTHID\t%s\t%s\t\n", ++cnt, $2, $3)} ' | grep $id"THID" | sed s/THID//
+	fi
 
 }
 
@@ -130,7 +146,10 @@ error()
 
 		--list)
 			#list all the backup'd zfs datasets
-			list
+			#           $1     $2          $3
+			#./zbackup --list mypool/public 2 --> list the all the data in specified dataset
+			#./zbackup --list mypool/public -->list the data with specified ID in specified dataset
+			list $2 $3
 			;;
 
 		--delete)
