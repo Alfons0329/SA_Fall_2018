@@ -1,12 +1,11 @@
 #!/bin/sh
-#------------------global variable declaration starts here--------------#
+#------------------global variable declaration starts here---------------#
 data=""
 id=""
 filename=""
 rotate_cnt=""
 arg_cnt=0
 #------------------global variable declaration ends here---------------#
-
 check_arg()
 {
 	if [ $arg_cnt -eq 0 ];
@@ -20,7 +19,7 @@ check_arg()
 check_id()
 {
 	case $1 in
-		[0-9]*) #regex repeat OK
+		[0-9]*) #regex repeat
 			;;
 
 		'')
@@ -45,7 +44,7 @@ check_dataset()
 }
 
 
-create()
+create_snap()
 {
 	#echo "Function create snapshot d1 $1 d2 $2"
 	#declare some required vars
@@ -105,7 +104,7 @@ create()
 
 }
 
-list()
+list_snap()
 {
 	dataset=$1
 	id=$2
@@ -125,7 +124,7 @@ list()
 
 }
 
-delete()
+delete_snap()
 {
 	dataset=$1
 	id=$2
@@ -163,6 +162,39 @@ delete()
 	fi
 }
 
+export_snap()
+{
+	dataset=$1
+	id=$2
+	
+	#id default to 1
+	if [ -z $id ];
+	then
+		id=1
+	fi
+
+	check_id $id
+	check_dataset $dataset
+	
+	#get the export data with specified id, cut the format of dataset@date without detailed time 
+	to_export=$(zfs list -rt snapshot $dataset | awk -v to_del_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_del_id + 1) { printf("%s", $1); } } ')
+	target=$(echo $to_export | cut -d '_' -f 1)
+	echo "Export destination is $target, to_export is $to_export"
+	
+	#make the target dir according to dataset, send to it, compress and encrypt
+	mkdir -p snapshot_send/$dataset
+	zfs send $to_export >   
+	#&& xz -z $target && openssl enc -aes-256-cbc -in $target.xz -out $target.xz.enc
+
+	#remove the unnecessary file
+	rm -f $target.xz
+}
+
+delete_snap()
+{
+
+}
+
 error()
 {
 	echo "Error: " $1
@@ -180,17 +212,20 @@ error()
 			#          $1     $2            $3
 			#./zbackup --list mypool/public    --> list all the snapshots in specified dataset
 			#./zbackup --list mypool/public 2  --> list the snapshot with specified ID in specified dataset
-			list $2 $3
+			list_snap $2 $3
 			;;
 
 		--delete)
 			#          $1      $2             $3
 			#./zbackup --delete mypool/public    --> list all the snapshots in specified dataset
 			#./zbackup --delete mypool/public 2  --> delete the snapshot with specified ID in specified dataset
-			delete $2 $3
+			delete_snap $2 $3
 			;;
 
 		--export)
+			#          $1      $2             $3
+			#./zbackup --export mypool/public 2  --> export the snapshot with specified ID in specified dataset
+			export_snap $2 $3
 			;;
 
 		--import)
@@ -202,7 +237,7 @@ error()
 
 		*)
 			#default, create the dataset $1 is the name and $2 is the max rotate count of that data set
-			create $1 $2
+			create_snap $1 $2
 			;;
 	esac
 	#-------------------------------Main function ends here---------------------#
