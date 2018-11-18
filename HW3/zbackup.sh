@@ -177,17 +177,21 @@ export_snap()
 	check_dataset $dataset
 	
 	#get the export data with specified id, cut the format of dataset@date without detailed time 
-	to_export=$(zfs list -rt snapshot $dataset | awk -v to_del_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_del_id + 1) { printf("%s", $1); } } ')
-	target=$(echo $to_export | cut -d '_' -f 1)
+	to_export=$(zfs list -rt snapshot $dataset | awk -v to_exp_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_exp_id + 1) { printf("%s", $1); } } ')
+	target_dir=$(echo $to_export | cut -d '_' -f 1)
+	target_dir="snapshot_send/$dataset"
 	echo "Export destination is $target, to_export is $to_export"
 	
 	#make the target dir according to dataset, send to it, compress and encrypt
-	mkdir -p snapshot_send/$dataset
-	zfs send $to_export >   
-	#&& xz -z $target && openssl enc -aes-256-cbc -in $target.xz -out $target.xz.enc
+	mkdir -p snapshot_send
+	mkdir -p $target_dir
+	target_file=$(echo $to_export | cut -d '@' -f 2)
+	zfs send $to_export > $target_dir/$target_file && \
+		xz -z $target_dir/$target_file && \
+		openssl enc -aes-256-cbc -in $target_dir/$target_file.xz -out $target_dir/$target_file.xz.enc
 
 	#remove the unnecessary file
-	rm -f $target.xz
+	rm -f $target_dir/$target_file.xz
 }
 
 delete_snap()
