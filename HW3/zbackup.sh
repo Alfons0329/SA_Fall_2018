@@ -90,7 +90,6 @@ create_snap()
 
 	#add timestamp: timestamp YYYY-MM-DD_HH:MM:SS
 	timestamp=`date +"%Y-%m-%d_%H:%M:%S"`
-	echo "$timestamp"
 	zfs snapshot "$dataset@$timestamp"
 
 	#create snapshot
@@ -180,7 +179,6 @@ export_snap()
 	to_export=$(zfs list -rt snapshot $dataset | awk -v to_exp_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_exp_id + 1) { printf("%s", $1); } } ')
 	target_dir=$(echo $to_export | cut -d '_' -f 1)
 	target_dir="snapshot_send/$dataset"
-	echo "Export destination is $target, to_export is $to_export"
 	
 	#make the target dir according to dataset, send to it, compress and encrypt
 	mkdir -p snapshot_send
@@ -190,13 +188,42 @@ export_snap()
 		xz -z $target_dir/$target_file && \
 		openssl enc -aes-256-cbc -in $target_dir/$target_file.xz -out $target_dir/$target_file.xz.enc
 
+	#output the result if success
+	if [ $? -eq 0 ];
+	then
+		echo "Successfully export ID $id in $dataset to $target_dir/$target_name "
+	fi
+
 	#remove the unnecessary file
 	rm -f $target_dir/$target_file.xz
 }
 
-delete_snap()
+import_snap()
 {
+	#check if the file to be imported or the dataset exists
+	target_file=$1
+	dataset=$2
+	check_dataset $dataset
+	if ! [ -e $target_file ];
+	then
+		error "$target_file , No such file to import"
+	fi
 
+	#decrypt, remove '.enc' then decompress and finally import to the specified dataset
+	timestamp=`date +"%Y-%m-%d_%H:%M:%S"`
+	to_do=$(echo $target_file | cut -d '.' -f 1)
+	openssl enc -d -aes-256-cbc -in $to_do.xz.enc -out $to_do.xz &&\
+		xz -d $to_do.xz
+
+	#delete the snap before receive it
+	delete_snap $dataset
+	zfs receive -F "$dataset@$timestamp" < $to_do
+	
+	#output the result if success
+	if [ $? -eq 0 ];
+	then
+		echo "Successfully import $target_file to $dataset in snapshot with name $dataset@$timestamp "
+	fi
 }
 
 error()
@@ -233,7 +260,11 @@ error()
 			;;
 
 		--import)
+			#          $1		$2										$3
+			#./zbackup --import snapshot_send/mypool/public/timstamp.xz	mypool/public -->import the snapshot with specified sent file in another pool
+			import_snap $2 $3
 			;;
+
 
 		'')
 			error "Missing argument!!"
