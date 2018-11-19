@@ -1,10 +1,21 @@
 #!/bin/sh
-# Learn here: https://www.freebsd.org/doc/zh_CN/articles/rc-scripting/article.html#rcng-args
+# Learn here: https://www.freebsd.org/doc/zh_CN/articles/rc-scripting/article.html#rcng-argsi Parti 4-6 
 # PROVIDE: ftp_watchd
 # REQUIRE: NETWORKING SERVERS pure-ftpd
 # KEYWORD: 
-. /etc/rc.subr              #function used by system cell scripts
-name=ftp_watchd             #used for service ftp_watchd start stop restart... etc
-rc_var=ftd_watchd_enable    #
+. /etc/rc.subr                              #function used by system cell scripts
+name=ftp_watchd                             #used for service ftp_watchd start stop restart... etc
+rcvar=ftd_watchd_enable     
 
-run_rc_command "$1"         #last command of rc
+ftp_watchd_enable=${ftp_watchd_enable:-"no"}                    #default switch for such variable namd of this var must be same in the rc.conf
+ftp_watchd_command=${ftp_watchd_command:-"echo 'HI' >> tmp/hi"} #name of this var must be same in the rc.conf
+
+pidfile="/var/run/${name}.pid"
+uploadscript=${uploadscript:-"/home/ftp/uploadscript"}
+command=/usr/local/sbin/pure-uploadscript                       #the command to run daemon see man pure-uploadscript
+command_args=" -B -r ${uploadscript} -p ${pidfile} "            #argument for the command mentioned above
+
+echo "#!/bin/sh" > ${uploadscript}
+echo ${ftp_watchd_command} >> ${uploadscript}
+
+run_rc_command "$1"                         #last command of rc
