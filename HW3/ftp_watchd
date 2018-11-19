@@ -1,0 +1,10 @@
+#!/bin/sh
+# Learn here: https://www.freebsd.org/doc/zh_CN/articles/rc-scripting/article.html#rcng-args
+# PROVIDE: ftp_watchd
+# REQUIRE: NETWORKING SERVERS pure-ftpd
+# KEYWORD: 
+. /etc/rc.subr              #function used by system cell scripts
+name=ftp_watchd             #used for service ftp_watchd start stop restart... etc
+rc_var=ftd_watchd_enable    #
+
+run_rc_command "$1"         #last command of rc
