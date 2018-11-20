@@ -214,7 +214,18 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
     sudo pure-pw mkdb
     sudo service pure-ftpd restart
     ```
-
+* Lazy bag （懶人包）
+Do this for problem1 testing (report or PR if bug happens)
+```sh
+#!bin/sh
+sudo chmod 751 hidden/
+sudo chmod 755 public/
+sudo chmod 773 upload/
+sudo chmod 755 hidden/treasure
+touch public/anony_can_dl_this_public
+touch hidden/treasure/anony_can_see_this_treasure
+touch hidden/anony_cant_see_this_hidden
+```
 #### Verifications
 * Can’t download or delete form “/home/ftp/upload” (5%)
     In your FileZilla, you should see the following error msg: 
