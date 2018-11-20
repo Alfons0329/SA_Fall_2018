@@ -1,0 +1,2 @@
+#!/bin/sh
+./home/ftp/zbackup.sh mypool/upload 10

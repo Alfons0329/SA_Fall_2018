@@ -288,8 +288,11 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
 
 * If the system cris about
 ```sh
-$ service ftp-watchd start
-ftp-watchd does not exist in /etc/rc.d or the local startup
+$ sudo service ftp_watchd start
+Password:
+Starting ftp_watchd.
+$ service ftp_watchd status
+ftp_watchd does not exist in /etc/rc.d or the local startup
 directories (/usr/local/etc/rc.d), or is not executable
 ```
 then the solution is: 

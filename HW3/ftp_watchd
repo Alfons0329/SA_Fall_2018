@@ -11,6 +11,8 @@ load_rc_config $name                        #load this d into rc service
 ftp_watchd_enable=${ftp_watchd_enable:-"no"}                    #default switch for such variable namd of this var must be same in the rc.conf
 ftp_watchd_command=${ftp_watchd_command:-"echo 'HI' >> tmp/hi"} #name of this var must be same in the rc.conf
 
+chmod 755 /home/ftp/uploadscript
+
 pidfile="/var/run/${name}.pid"
 uploadscript=${uploadscript:-"/home/ftp/uploadscript"}
 command=/usr/local/sbin/pure-uploadscript                       #the command to run daemon see man pure-uploadscript
