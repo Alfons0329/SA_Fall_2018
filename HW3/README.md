@@ -283,3 +283,13 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
     mypool/hidden@second      0      -    23K  -
     mypool/hidden@third       0      -    23K  -
     ```
+* For the implementation of zbackup.sh please check [here](zbackup.sh)
+#### Prob3. RC service
+
+* If the system cris about
+```sh
+$ service ftp-watchd start
+ftp-watchd does not exist in /etc/rc.d or the local startup
+directories (/usr/local/etc/rc.d), or is not executable
+```
+then the solution is: 
