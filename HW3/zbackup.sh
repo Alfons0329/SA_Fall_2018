@@ -51,13 +51,15 @@ create_snap()
 	dataset=$1 #what the name for back up
 	rot_cnt=$2 #rotation count
 
+	#check if the dataset is illegal
+	check_dataset $dataset
 	#check if the rotate count number is illegal
 	check_id $rot_cnt
 
 	#adjust the rotate count, if not specified rotate count, just set it as 20
 	if [ -z $rot_cnt ] ; 
 	then 
-		rotate_cnt=20; 
+		rot_cnt=20; 
 	fi
 
 	#illegal rotate count, quit
@@ -106,19 +108,35 @@ create_snap()
 list_snap()
 {
 	dataset=$1
-	id=$2
 
-	check_id $id
-	check_dataset $dataset
-
-	#if specified id, list the id of specified dataset, otherwise, list all of specified dataset
-	if [ -z $id ];
+	#if specified dataset, list all of the specified dataset, otherwise, list all the snapshots in all dataset
+	if [ -z $dataset ];
 	then
 		printf "%s\t\t%s\t\t%s\t\n" "ID" "Dataset" "Time"
-		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", ++cnt, $2, $3)} '
+		for cnt in 1 2 3;
+		do
+			
+			case $cnt in
+				1)
+					dataset="mypool/hidden"
+					;;
+				2)
+					
+					dataset="mypool/public"
+					;;
+				3)
+					dataset="mypool/upload"
+					;;
+				*)
+					;;
+			esac
+
+			zfs list -rt snapshot | grep $dataset@ | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 1) { printf("%d@\t%s\t\n", cnt-1, $1); } } ' | awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", NR, $2, $3)} '
+		done
 	else
+		check_dataset $dataset
 		printf "%s\t\t%s\t\t%s\t\n" "ID" "Dataset" "Time"
-		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%dTHID\t%s\t%s\t\n", ++cnt, $2, $3)} ' | grep $id"THID" | sed s/THID//
+		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", ++cnt, $2, $3)} '
 	fi
 
 }
@@ -165,7 +183,7 @@ export_snap()
 {
 	dataset=$1
 	id=$2
-	
+
 	#id default to 1
 	if [ -z $id ];
 	then
@@ -174,12 +192,12 @@ export_snap()
 
 	check_id $id
 	check_dataset $dataset
-	
+
 	#get the export data with specified id, cut the format of dataset@date without detailed time 
 	to_export=$(zfs list -rt snapshot $dataset | awk -v to_exp_id=$id ' BEGIN{ cnt=0 }{ ++cnt; if(cnt == to_exp_id + 1) { printf("%s", $1); } } ')
 	target_dir=$(echo $to_export | cut -d '_' -f 1)
 	target_dir="snapshot_send/$dataset"
-	
+
 	#make the target dir according to dataset, send to it, compress and encrypt
 	mkdir -p snapshot_send
 	mkdir -p $target_dir
@@ -218,7 +236,7 @@ import_snap()
 	#delete the snap before receive it
 	delete_snap $dataset
 	zfs receive -F "$dataset@$timestamp" < $to_do
-	
+
 	#output the result if success
 	if [ $? -eq 0 ];
 	then
@@ -241,9 +259,9 @@ error()
 
 		--list)
 			#          $1     $2            $3
+			#./zbackup --list 				   --> list all the snapshots in all dataset
 			#./zbackup --list mypool/public    --> list all the snapshots in specified dataset
-			#./zbackup --list mypool/public 2  --> list the snapshot with specified ID in specified dataset
-			list_snap $2 $3
+			list_snap $2 
 			;;
 
 		--delete)
