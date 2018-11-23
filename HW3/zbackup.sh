@@ -131,12 +131,12 @@ list_snap()
 					;;
 			esac
 
-			zfs list -rt snapshot | grep $dataset@ | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 1) { printf("%d@\t%s\t\n", cnt-1, $1); } } ' | awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", NR, $2, $3)} '
+			zfs list -t snapshot | grep $dataset@ | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 1) { printf("%d@\t%s\t\n", cnt-1, $1); } } ' | awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", NR, $2, $3)} '
 		done
 	else
 		check_dataset $dataset
 		printf "%s\t\t%s\t\t%s\t\n" "ID" "Dataset" "Time"
-		zfs list -rt snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", ++cnt, $2, $3)} '
+		zfs list -t snapshot $dataset | awk 'BEGIN{ cnt=0 }{ ++cnt; if(cnt >= 2) { printf("%d@\t%s\t\n", cnt-1, $1); } } '| awk ' BEGIN { FS="@"; cnt=0 } { printf("%d\t%s\t%s\t\n", ++cnt, $2, $3)} '
 	fi
 
 }
