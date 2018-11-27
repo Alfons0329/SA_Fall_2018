@@ -157,6 +157,7 @@
 
 ### Prob 1. FTP
 
+Self check list
 ```
 Anonymous Login
 • Chrooted (/home/ftp) (5%)
@@ -215,17 +216,17 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
     sudo service pure-ftpd restart
     ```
 * Lazy bag （懶人包）
-Do this for problem1 testing (report or PR if bug happens)
-```sh
-#!bin/sh
-sudo chmod 751 hidden/
-sudo chmod 755 public/
-sudo chmod 773 upload/
-sudo chmod 755 hidden/treasure
-touch public/anony_can_dl_this_public
-touch hidden/treasure/anony_can_see_this_treasure
-touch hidden/anony_cant_see_this_hidden
-```
+    Do this for problem1 testing (report or PR if bug happens)
+    ```sh
+    #!bin/sh
+    sudo chmod 751 hidden/
+    sudo chmod 755 public/
+    sudo chmod 773 upload/
+    sudo chmod 755 hidden/treasure
+    touch public/anony_can_dl_this_public
+    touch hidden/treasure/anony_can_see_this_treasure
+    touch hidden/anony_cant_see_this_hidden
+    ```
 #### Verifications
 * Can’t download or delete form “/home/ftp/upload” (5%)
     In your FileZilla, you should see the following error msg: 
@@ -281,29 +282,61 @@ touch hidden/anony_cant_see_this_hidden
     mypool/hidden         23K  7.27G    23K  /home/ftp/hidden/
     mypool/public         23K  7.27G    23K  /home/ftp/public/
     mypool/upload         23K  7.27G    23K  /home/ftp/upload/
+    ```
 
-    # check the compression type has been set up right
+    * check the compression type has been set up right
+    ```sh
     $ zfs get all mypool/hidden | grep compression
     mypool/hidden  compression           gzip                   local
     ```
-* The newer snapshot is, the closer to the end of command `zfs list -t snapshot`
+    
+    * check the mirror has been set up right
     ```sh
-    $ zfs list -t  snapshot
-    NAME                   USED  AVAIL  REFER  MOUNTPOINT
-    mypool/hidden@first       0      -    23K  -
-    mypool/hidden@second      0      -    23K  -
-    mypool/hidden@third       0      -    23K  -
+    $ zpool status
+    pool: mypool
+    state: ONLINE
+    scan: none requested
+    config:
+
+    NAME        STATE     READ WRITE CKSUM
+    mypool      ONLINE       0     0     0
+    mirror-0  ONLINE       0     0     0
+    ada1p1  ONLINE       0     0     0
+    ada1p2  ONLINE       0     0     0
+
+    errors: No known data errors
+
+    pool: zroot
+    state: ONLINE
+    scan: none requested
+    config:
+
+    NAME        STATE     READ WRITE CKSUM
+    zroot       ONLINE       0     0     0
+    ada0p3    ONLINE       0     0     0
+
+    errors: No known data errors
     ```
+    
+    *
+* The newer snapshot is, the closer to the end of command `zfs list -t snapshot`
+```sh
+$ zfs list -t  snapshot
+NAME                   USED  AVAIL  REFER  MOUNTPOINT
+mypool/hidden@first       0      -    23K  -
+mypool/hidden@second      0      -    23K  -
+mypool/hidden@third       0      -    23K  -
+```
 * For the implementation of zbackup.sh please check [here](zbackup.sh)
 #### Prob3. RC service
 
 * If the system cris about
-```sh
-$ sudo service ftp_watchd start
-Password:
-Starting ftp_watchd.
-$ service ftp_watchd status
-ftp_watchd does not exist in /etc/rc.d or the local startup
-directories (/usr/local/etc/rc.d), or is not executable
-```
-then the solution is: 
+    ```sh
+    $ sudo service ftp_watchd start
+    Password:
+    Starting ftp_watchd.
+    $ service ftp_watchd status
+    ftp_watchd does not exist in /etc/rc.d or the local startup
+    directories (/usr/local/etc/rc.d), or is not executable
+    ```
+    then the solution is: 
