@@ -219,7 +219,7 @@ ftp-vip (same permission as sysadm, but this is the virtual user in pure-db)
     Do this for problem1 testing (report or PR if bug happens)
     ```sh
     #!bin/sh
-    sudo chmod 755 hidden/
+    sudo chmod 751 hidden/
     sudo chmod 755 public/
     sudo chmod 773 upload/
     sudo chmod 755 hidden/treasure
