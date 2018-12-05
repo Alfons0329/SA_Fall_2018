@@ -15,7 +15,7 @@
     WITH_THREADS=yes
     WITH_SUEXEC=yes
     ```
-* Vulnerable port tree problem
+* Trouble shooting: Vulnerable port tree problem
     ```
     1 problem(s) in the installed packages found.
     => Please update your ports tree and try again.
@@ -44,4 +44,13 @@
     ```
 ## Prob1. Virtual Host
 
- 
+* Get a domain
+    * Visit [here](https://www.nctucs.net) to apply a domain if you are student in CS NCTU
+    * Create hosts where hosts to be your domain name and record to be your IP address
+    * then put your $domain_name in `/usr/local/etc/apacheXX/httpd.conf`
+        ```
+        ServerName: www.example.com:80 #case sensitive
+        ```
+    * Use the IP address or local address for it (if extern IP should you use the bridge mode)
+    * The local IP is easier for this homework
+* Visit [here](https://vannilabetter.blogspot.com/2017/12/freebsd-apachephp.html?m=1&fbclid=IwAR0uqICO3YzKjq37YPKgO4BIAJyy0h3bpEkroF_NADtx6RiQb4svQemsoik) for more information 
