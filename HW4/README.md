@@ -121,8 +121,17 @@
 * Visit [here](http://linux.vbird.org/linux_server/0360apache.php#www_adv_htaccess) for more information
 
 
-### Reverse Proxy
-* Decomment the following module
+### Prob4. Reverse Proxy
+* Decomment the following module in `/usr/local/etc/apache24/httpd.conf`
+    ```
+    LoadModule watchdog_module
+    LoadModule proxy_module
+    LoadModule proxy_http_module
+    LoadModule proxy_balancer_module
+    LoadModule proxy_hcheck_module
+    LoadModule lbmethod:q_bytraffic_module
+    ```
+Also do not forget to decomment `slotmem_shm_module`
 * Add this to your `/usr/local/etc/apache24/httpd.conf`
 
     What in httpd.conf should be like this (create a `proxy balancer` object)
@@ -139,4 +148,54 @@
     In the above, any requests which start with the /reverse path with be proxied to the specified backend, otherwise it will be handled locally.
 
 * Trouble shooting, please refer to `/var/log/httpd-error.log` to check what error occurred
+
+### Prob4. Disguise Server Token
+
+* First, install modesecurity in `/usr/ports/www/mod_security`
+    ```sh
+    make install clean
+    ```
+* Trboule shooting: Manually install perl if ceris about dependency
+    ```
+    env: /usr/local/bin/perl5.26.3: No such file or directory
+    Error code 127
+    ```
+    Download perl [here](http://www.cpan.org/src/)
+
+    ```sh
+    sudo wget https://www.cpan.org/src/5.0/perl-5.26.3.tar.gz
+    sudo ./Config -Dprefix=$HOME/localperl
+    sudo make test
+    sudo make install
+    sudo ln -s /home/ftp/localperl/bin/perl5.26.3 /usr/local/bin/perl5.26.3
+    ```
+
+    **I STILL FAILED TO INSTALL, SO I USE PORT FOR ELTERNATIVE**
+
+    ```sh
+    pkg install www/mod_security
+    ```
+
+* Decomment last 3 lines these in `/usr/local/etc/apache24/modules.d/280_mod_security.conf`
+* Check if success by `curl -Ilk $IP_of_your_domain`
+    * Success: Server name is disguised like
+    ```
+    $ curl -Ilk 192.168.0.115
+    HTTP/1.1 200 OK
+    Date: Thu, 06 Dec 2018 07:04:04 GMT
+    Server: Some other server
+    Last-Modified: Wed, 05 Dec 2018 16:25:37 GMT
+    ETag: "50-57c48d5083f7a"
+    Accept-Ranges: bytes
+    Content-Length: 80
+    Content-Type: text/html
+    ```
+    * Failed: Server name shows something like Apache version
+* Visit [here](http://bojack.pixnet.net/blog/post/31610515-%E3%80%90freebsd%E3%80%91%E5%9C%A8-apache-%E4%B8%8A%E9%9D%A2%E5%AE%89%E8%A3%9D-modsecutiry-%28open-sourc) for more information
+
+
+### Prob5. HTTPS and Redirect
+* Just visit [here](https://blog.csdn.net/ithomer/article/details/50433363) for all the tutorial* Check if success by `curl -Ilk $Your_domain`
+    * Success, sees 302 HTTP redirect to HTTPS web page
+    * Failed, no 302
 
