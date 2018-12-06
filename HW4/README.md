@@ -64,7 +64,7 @@
         Require all granted
         </Directory>
         ```
-* Config the `/etc/apache24/extra/httpd-vhosts.conf`
+* Config the `/usr/local/etc/apache24/extra/httpd-vhosts.conf`
     ```
     <VirtualHost *:80>
    	#ServerAdmin webmaster@dummy-host.example.com
@@ -97,10 +97,7 @@
 * Write a HTML for it to access (the normal, simpliest HTML is ok)
 
 ### Prob3. htaccess
-* Change config to be like this
-    ```sh
-    sudo vim /usr/local/etc/apache24/httpd.conf
-    ```
+* Add this to your `/usr/local/etc/apache24/httpd.conf`
     
     What in httpd.conf should be like this (create another `dir object`)
     ```
@@ -122,3 +119,24 @@
     Adding password for user admin
     ```
 * Visit [here](http://linux.vbird.org/linux_server/0360apache.php#www_adv_htaccess) for more information
+
+
+### Reverse Proxy
+* Decomment the following module
+* Add this to your `/usr/local/etc/apache24/httpd.conf`
+
+    What in httpd.conf should be like this (create a `proxy balancer` object)
+    ```
+    <Proxy balancer://myset>
+    BalancerMember http://sahw4-loadbalance1.nctucs.net/ #balancer1 for this HW
+    BalancerMember http://sahw4-loadbalance2.nctucs.net/ #balancer2 for this HW
+    ProxySet lbmethod=bytraffic #balance by traffic
+    </Proxy>
+
+    ProxyPass "/reverse/"  "balancer://myset/" #request to reverse are proxied according to this scheme
+    ProxyPassReverse "/reverse/"  "balancer://myset/" #request to reverse are proxied according to this scheme
+    ```
+    In the above, any requests which start with the /reverse path with be proxied to the specified backend, otherwise it will be handled locally.
+
+* Trouble shooting, please refer to `/var/log/httpd-error.log` to check what error occurred
+
