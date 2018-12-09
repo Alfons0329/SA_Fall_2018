@@ -1,4 +1,4 @@
-# System Administration HW3 Writeups
+# System Administration HW4 Writeups
 
 ## Apache server
 ### Install Apache on FreeBSD
@@ -149,7 +149,7 @@ Also do not forget to decomment `slotmem_shm_module`
 
 * Trouble shooting, please refer to `/var/log/httpd-error.log` to check what error occurred
 
-### Prob4. Disguise Server Token
+### Prob5. Disguise Server Token
 
 * First, install modesecurity in `/usr/ports/www/mod_security`
     ```sh
@@ -194,8 +194,33 @@ Also do not forget to decomment `slotmem_shm_module`
 * Visit [here](http://bojack.pixnet.net/blog/post/31610515-%E3%80%90freebsd%E3%80%91%E5%9C%A8-apache-%E4%B8%8A%E9%9D%A2%E5%AE%89%E8%A3%9D-modsecutiry-%28open-sourc) for more information
 
 
-### Prob5. HTTPS and Redirect
+### Prob6. HTTPS and Redirect
 * Just visit [here](https://blog.csdn.net/ithomer/article/details/50433363) for all the tutorial* Check if success by `curl -Ilk $Your_domain`
     * Success, sees 302 HTTP redirect to HTTPS web page
     * Failed, no 302
+* I put my certificate under `/usr/local/etc/apache24/certificate.crt` for convenience
+* I put my key under `/usr/local/etc/apache24/key.key` for convenience
 
+## nginx server
+
+### Install nginx on FreeBSD
+* Install the nginx server
+    ```sh
+    cd /usr/ports/www/nginx
+    sudo make install clean
+    ```
+* Select `headers more` to hide server token
+
+### Prob1. Virtual Host
+* Add the these to your `/usr/local/etc/nginx/nginx.conf`
+```
+
+```
+
+### Prob2. Indexing
+* Use the same content as Apache is fine
+
+
+### Prob3. htaccess
+
+    
