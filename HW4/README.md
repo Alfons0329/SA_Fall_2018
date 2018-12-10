@@ -180,7 +180,7 @@ Also do not forget to decomment `slotmem_shm_module`
 * Check if success by `curl -Ilk $IP_of_your_domain`
     * Success: Server name is disguised like
     ```
-    $ curl -Ilk 192.168.0.115
+    $ curl -Ilk $your_IP
     HTTP/1.1 200 OK
     Date: Thu, 06 Dec 2018 07:04:04 GMT
     Server: Some other server
@@ -202,7 +202,18 @@ Also do not forget to decomment `slotmem_shm_module`
 * I put my key under `/usr/local/etc/apache24/key.key` for convenience
 
 ## nginx server
-
+## Read this first
+`Some unexpected error may occurred, so I write the trouble shooting strategy in the comment of config file such as`
+`Please CTRL+F searching "nginx-tbst" for each solution`
+    ```
+    #reverse proxy and load balance THIS SHOULD BE IN THE SERVER CONTEXT BLOCK SAME AS YOUR DOMAIN METHOD, OTHERWISE ERROR 404 or 403 MAY OCCURR
+    location /reverse/
+    {
+    root /usr/local/www/apache24/data; 
+    proxy_pass http://back/;
+    }
+    ```
+`This paragraph shows the possible reason result in 404 or 403 error in webpage`
 ### Install nginx on FreeBSD
 * Install the nginx server
     ```sh
@@ -213,14 +224,138 @@ Also do not forget to decomment `slotmem_shm_module`
 
 ### Prob1. Virtual Host
 * Add the these to your `/usr/local/etc/nginx/nginx.conf`
-```
+    
+    ```
+	#for domain to get in
+	server 
+	{
+		listen 80;
+		server_name $your_domain;
 
-```
+		location / #decent from apache24/data (root of webpage)
+		{
+			types {}
+			default_type text/html;
+			root /usr/local/www/apache24/data; 
+		}
+	}
+	
+	#for IP to get in
+	server 
+	{
+		listen 80;
+		server_name $your_IP;
+
+		location /
+		{
+			root /usr/local/www2/apache24/data;
+		}
+	}
+    ```
 
 ### Prob2. Indexing
-* Use the same content as Apache is fine
-
+* Use the same content as Apache is fine, no need to write anything new
 
 ### Prob3. htaccess
+* Add the these to your `/usr/local/etc/nginx/nginx.conf`
+    ```
+    #htaccess
+    location /public/admin/
+    {
+        auth_basic "Protect by htaccess, please provide user account and password" ;
+        auth_basic_user_file /var/www/apache.passwd; 
+        root /usr/local/www/apache24/data; 
+        #--------------nginx-tbst-----------------------#
+        # Note NOT: root /usr/local/www/apache24/data/public/admin; !!! Just same as the last one since
+        # the serching path is root/location so root/location for this is procted as htaccess 
+    }
 
+    ```
+### Prob4. Reverse Proxy
+* Add the these to your `/usr/local/etc/nginx/nginx.conf`
+    ```
+    #THIS SHOULD BE OUT THE SERVER CONTEXT BLOCK SAME OF YOUR DOMAIN METHOD
+    upstream back	
+	{
+		#server http://sahw4-loadbalance1.nctucs.net/ weight=1; NO NEED TO WRITE HTTP SINCE proxy pass will add in the prefix
+		server sahw4-loadbalance1.nctucs.net weight=1 ; 
+        #--------------nginx-tbst-----------------------#
+		#server http://sahw4-loadbalance2.nctucs.net/ weight=1; NO NEED TO WRITE HTTP SINCE proxy pass will add in the prefix
+		server sahw4-loadbalance2.nctucs.net weight=1 ;
+	}
+
+    #--------------nginx-tbst-----------------------#
+    #reverse proxy and load balance THIS SHOULD BE IN THE SERVER CONTEXT BLOCK SAME AS YOUR DOMAIN METHOD, OTHERWISE ERROR 404 or 403 MAY OCCURR
+    location /reverse/
+    {
+        root /usr/local/www/apache24/data; 
+        proxy_pass http://back/;
+    }
+    ```
+		
+### Prob5. Disguise Server Token
+* Step 1. Install the `headers_more_module` from github [here](https://github.com/openresty/headers-more-nginx-module#installation)
+* Install 
+    ```sh
+    wget 'http://nginx.org/download/nginx-1.13.6.tar.gz'
+    tar -xzvf nginx-1.13.6.tar.gz
+    cd nginx-1.13.6/
+
+    # Here we assume you would install you nginx under /opt/nginx/.
+    ./configure --prefix=/opt/nginx \
+        --add-module=/path/to/headers-more-nginx-module
+
+    make
+    make install
+    ```
+* Step 3. add these to your `/usr/local/etc/nginx/nginx.conf`
+
+    ```
+    #for disguise the server
+    more_set_headers 'Server: Some other server';
+    ```
+### Prob6. HTTPS and Redirect
+* Add these to your `/usr/local/etc/nginx/nginx.conf`, both domain and IP method context
+`The certificate and key can be the same as that in Apache (same path and file will be fine)`   
+    ```
+    #In 
+    more_set_headers 'Server: Some other server';
+
+    #for HTTPS and redirect
+    listen 443 ssl; 
+
+    #the path of certificate and key
+    ssl_certificate /usr/local/etc/apache24/certificate.crt;
+    ssl_certificate_key /usr/local/etc/apache24/key.key;
+
+    #enhance the security
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ```
+
+* Add these to your `/usr/local/etc/nginx/nginx.conf`, both domain method context
+
+    ```
+    #In domain method context    
+    #redirect
+    #--------------nginx-tbst-----------------------#
+    #rewrite ^(.*)$ https://$host$1 ; this gives ERR_TOO_MANY_REDIRECTS
+    if ($scheme = http)
+    {
+        return 301 https://$your_domain$request_uri;
+    }
+    ```
+
+* Add these to your `/usr/local/etc/nginx/nginx.conf`, IP method context
     
+    ```
+    #In IP method context
+    #redirect
+    #--------------nginx-tbst-----------------------#
+    #rewrite ^(.*)$ https://$host$1 ; this gives ERR_TOO_MANY_REDIRECTS
+    if ($scheme = http)
+    {
+        return 301 https://$your_IP$request_uri;
+    }
+    ```
+
