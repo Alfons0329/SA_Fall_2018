@@ -5,7 +5,7 @@
 # Homeworks
 * FreeBSD Installation [Spec](https://people.cs.nctu.edu.tw/~wangth/course/sysadm/slides/hw1.pdf)
 
-* Shell sciprt programming [HW2 Repo](HW2/), [Spec](https://people.cs.nctu.edu.tw/~wangth/course/sysadm/slides/hw2_en.pdf)
+* Shell sciprt programming [HW2 Repo](HW2_shell_only/), [Spec](https://people.cs.nctu.edu.tw/~wangth/course/sysadm/slides/hw2_en.pdf)
     *  2-1. Using only ONE LINE command to list the top 5 big files in system, calculate #of directories #of file and sum of file size
     *  2-2. Using Shell script to crawl the class JSON file from school course registration system, use awk, sed to parse it and use dialog to make one course registration system similar to that in school
 
